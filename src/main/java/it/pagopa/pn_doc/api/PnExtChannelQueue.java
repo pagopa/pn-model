@@ -6,13 +6,17 @@ import it.pagopa.pn_doc.model.notification.response.NotificationResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class PnDeliveryRest {
+public class PnExtChannelQueue {
 
-    @PostMapping(RestApiConstants.SENDER_NOTIFICATIONS_PATH )
-    public NotificationResponse receiveNotification(
-            @RequestHeader(name = RestApiConstants.PA_ID_HEADER ) String paId,
+    @PostMapping("coda_ingresso_extch" )
+    public void receiveNotification(
             @RequestBody Notification notification
     ) {
+        //
+    }
+
+    @GetMapping("coda_ingresso_extch" )
+    public Notification receiveNotification( ) {
         return null;
     }
 }

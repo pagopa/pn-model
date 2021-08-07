@@ -1,0 +1,307 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CodePipeline for pn-model
+Parameters:
+  ProductName:
+    Description: Name of the Project
+    Type: String
+    Default: pn
+  BranchName:
+    Description: Name of the Project
+    Type: String
+    Default: main
+  ModelRepoName:
+    Description: Name of the Github Repository infra
+    Type: String
+    Default: pagopa/pn-model
+  CodeArtifactDeploymentStackName:
+    Description: Used for maven repository access
+    Type: String
+    Default: pn-main-01
+  CrossAccountCondition:
+    Description: Conditionally creates the resources for cross account access
+    Type: String
+    Default: false
+  
+Conditions:
+  AddCodeBuildResource: !Equals [ !Ref CrossAccountCondition, true ]
+
+
+Resources:
+
+  PipeLineRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub ${ProductName}-${BranchName}-model-pipeline-role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          -
+            Effect: Allow
+            Principal:
+              Service:
+                - codepipeline.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: /
+  PipelinePolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: !Sub ${ProductName}-${BranchName}-model-pipeline-policy
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: PipelineCodeBuildInteractions
+            Effect: Allow
+            Action:
+              - codebuild:StartBuild
+              - codebuild:BatchGetBuilds
+            Resource:
+              - !GetAtt CodeBuildProject.Arn
+          
+          # Accedere alla connessione github
+          - Sid: GithubAccessAssumeRole
+            Effect: Allow
+            Action:
+              - sts:AssumeRole
+            Resource:
+              - !Sub arn:aws:iam::${AWS::AccountId}:role/${ProductName}-${BranchName}-from-github-to-s3-role
+
+          # Accesso al bucket artefatti della pipeline
+          - Sid: ArtifactBucketCryptKey
+            Effect: Allow
+            Action:
+              - kms:Decrypt
+            Resource: { "Fn::ImportValue": {"Fn::Sub": "${ProductName}-${BranchName}-CMK-arn"}}
+          - Sid: ArtifactBucketAccess
+            Effect: Allow
+            Action:
+              - s3:PutObject
+              - s3:GetBucketPolicy
+              - s3:GetObject
+              - s3:ListBucket
+            Resource:
+             - !Join ['',['arn:aws:s3:::', { "Fn::ImportValue": {"Fn::Sub": "${ProductName}-${BranchName}-build-artifacts-buket-name"}}, '/*']]
+             - !Join ['',['arn:aws:s3:::', { "Fn::ImportValue": {"Fn::Sub": "${ProductName}-${BranchName}-build-artifacts-buket-name"}} ]]
+      Roles:
+        -
+          !Ref PipeLineRole
+  
+  CodeBuildRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub ${ProductName}-${BranchName}-model-codebuild-role
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - 
+            Effect: Allow
+            Principal:
+              Service:
+                - "codebuild.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+  CodeBuildPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: !Sub ${ProductName}-${BranchName}-model-codebuild-policy
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          # Logging is mandatory
+          - Sid: BuildLogToCloudWatch
+            Effect: Allow
+            Action:
+              - logs:CreateLogGroup
+              - logs:CreateLogStream
+              - logs:PutLogEvents
+            Resource:
+              - "*"
+                      
+          # Access to artifacts bucket
+          - Sid: AccessArtifactBucket
+            Effect: Allow
+            Action:
+              - s3:PutObject
+              - s3:GetBucketPolicy
+              - s3:GetObject
+              - s3:ListBucket
+            Resource:
+             - !Join ['',['arn:aws:s3:::', { "Fn::ImportValue": {"Fn::Sub": "${ProductName}-${BranchName}-build-artifacts-buket-name"}}, '/*']]
+             - !Join ['',['arn:aws:s3:::', { "Fn::ImportValue": {"Fn::Sub": "${ProductName}-${BranchName}-build-artifacts-buket-name"}} ]]
+          - Sid: AccessArtifactBucketCryptKey
+            Effect: Allow
+            Action:
+              - kms:Decrypt
+            Resource: { "Fn::ImportValue": {"Fn::Sub": "${ProductName}-${BranchName}-CMK-arn"}}
+          
+          # Access to maven artifact repository
+          - Sid: BearerTokenPolicy
+            Effect: Allow 
+            Action:
+              - sts:GetServiceBearerToken 
+            Resource: "*" 
+            Condition:
+              StringEquals:
+                  'sts:AWSServiceName': codeartifact.amazonaws.com
+          - Sid: CodeArtifactPolicy
+            Effect: Allow
+            Action:
+              - codeartifact:GetAuthorizationToken
+            Resource:
+              - Fn::Join:
+                  - "/"
+                  - - !Sub "arn:aws:codeartifact:${AWS::Region}:${AWS::AccountId}:domain"
+                    - Fn::ImportValue: !Sub "${CodeArtifactDeploymentStackName}-CodeArtifactDomainName"
+          - Sid: CodeArtifactPackage
+            Effect: Allow
+            Action:
+              - codeartifact:PublishPackageVersion
+              - codeartifact:PutPackageMetadata
+              - codeartifact:ReadFromRepository
+            Resource:
+              - Fn::Join:
+                  - "/"
+                  - - !Sub "arn:aws:codeartifact:${AWS::Region}:${AWS::AccountId}:package"
+                    - Fn::ImportValue: !Sub "${CodeArtifactDeploymentStackName}-CodeArtifactDomainName"
+                    - Fn::ImportValue: !Sub "${CodeArtifactDeploymentStackName}-CodeArtifactRepositoryName"
+                    - "*"
+          - Sid: CodeArtifactRepository
+            Effect: Allow
+            Action: 
+              - codeartifact:ReadFromRepository
+              - codeartifact:GetRepositoryEndpoint
+            Resource: 
+              - Fn::Join:
+                  - "/"
+                  - - !Sub "arn:aws:codeartifact:${AWS::Region}:${AWS::AccountId}:repository"
+                    - Fn::ImportValue: !Sub "${CodeArtifactDeploymentStackName}-CodeArtifactDomainName"
+                    - Fn::ImportValue: !Sub "${CodeArtifactDeploymentStackName}-CodeArtifactRepositoryName"
+      Roles:
+        - !Ref CodeBuildRole
+  
+  CodeBuildProject:
+    Type: 'AWS::CodeBuild::Project'
+    Properties:
+      Name: !Sub ${ProductName}-${BranchName}-model
+      ServiceRole: !GetAtt CodeBuildRole.Arn
+      Source: 
+        Type: CODEPIPELINE
+        BuildSpec: |
+          version: 0.2
+          phases:
+            pre_build:
+              commands:
+                - echo $SETTINGS > maven-deploy-settings.xml
+                - cat maven-deploy-settings.xml
+                - export REPOSITORY_TOKEN=$( aws codeartifact get-authorization-token --domain $CODEARTIFACT_DOMAIN_NAME --query authorizationToken --output text )
+            build:
+              commands:
+                - echo "Build"
+                - ./mvnw --settings maven-deploy-settings.xml clean install
+                - ls target
+                - echo "Deploy"
+                - ./mvnw --settings maven-deploy-settings.xml -DaltDeploymentRepository=pn-codeartifact::default::https://${CODEARTIFACT_DOMAIN_FULL}/maven/${CODEARTIFACT_REPO}/ deploy
+          artifacts:
+            files:
+              - 'target/**'
+      Artifacts:
+        Type: CODEPIPELINE
+      Environment:
+        ComputeType: BUILD_GENERAL1_SMALL
+        Type: LINUX_CONTAINER
+        Image: "aws/codebuild/amazonlinux2-x86_64-standard:3.0"
+        EnvironmentVariables: 
+          - Name: CODEARTIFACT_DOMAIN_NAME
+            Type: PLAINTEXT 
+            Value:
+              Fn::ImportValue: !Sub "${CodeArtifactDeploymentStackName}-CodeArtifactDomainName"
+          - Name: CODEARTIFACT_DOMAIN_FULL
+            Type: PLAINTEXT 
+            Value:
+              Fn::Join:
+                - ''
+                - - Fn::ImportValue: !Sub "${CodeArtifactDeploymentStackName}-CodeArtifactDomainName"
+                  - !Sub '-${AWS::AccountId}.d.codeartifact.${AWS::Region}.${AWS::URLSuffix}'
+          - Name: CODEARTIFACT_REPO 
+            Type: PLAINTEXT 
+            Value:
+              Fn::ImportValue: !Sub "${CodeArtifactDeploymentStackName}-CodeArtifactRepositoryName" 
+          - Name: SETTINGS
+            Type: PLAINTEXT
+            Value: |
+              <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                        http://maven.apache.org/xsd/settings-1.0.0.xsd">
+                <profiles>
+                  <profile>
+                    <id>pn-codeartifact</id>
+                    <activation>
+                      <activeByDefault>true</activeByDefault>
+                    </activation>
+                    <repositories>
+                      <repository>
+                        <id>pn-codeartifact</id>
+                        <url>https://${env.CODEARTIFACT_DOMAIN_FULL}/maven/${env.CODEARTIFACT_REPO}/</url>
+                      </repository>
+                    </repositories>
+                  </profile>
+                </profiles>
+
+                <servers>
+                  <server>
+                    <id>pn-codeartifact</id>
+                    <username>aws</username>
+                    <password>${env.REPOSITORY_TOKEN}</password>
+                  </server>
+                </servers>
+              </settings>
+
+  ModelPipeline:
+    Type: AWS::CodePipeline::Pipeline
+    Properties:
+      RoleArn: !GetAtt PipeLineRole.Arn
+      Name: !Sub '${ProductName}-${BranchName}-model'
+      Stages:
+        - Name: Source
+          Actions:
+            - Name: AppCode
+              ActionTypeId:
+                Category: Source
+                Owner: AWS
+                Version: 1
+                Provider: CodeStarSourceConnection
+              Configuration:
+                ConnectionArn: { "Fn::ImportValue": {"Fn::Sub": "${ProductName}-${BranchName}-github-connection"}} 
+                FullRepositoryId: !Ref ModelRepoName
+                BranchName: !Ref BranchName
+              OutputArtifacts:
+                - Name: SCCheckoutArtifact
+              RunOrder: 1
+              #RoleArn: !Sub arn:aws:iam::${DevAccount}:role/ToolsAcctCodePipelineCodeCommitRole
+              RoleArn:
+                  Fn::If:
+                  - AddCodeBuildResource
+                  - !Sub arn:aws:iam::${AWS::AccountId}:role/${ProductName}-${BranchName}-from-github-to-s3-role
+                  - !Ref AWS::NoValue
+        - Name: BuildAndDeployToMavenRepository
+          Actions:
+            - Name: CodeBuildModel
+              ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Version: 1
+                Provider: CodeBuild
+              Configuration:
+                ProjectName: !Ref CodeBuildProject
+                PrimarySource: SCCheckoutArtifact
+              InputArtifacts:
+                - Name: SCCheckoutArtifact
+              RunOrder: 1
+      ArtifactStore:
+        Type: S3
+        Location: { "Fn::ImportValue": {"Fn::Sub": "${ProductName}-${BranchName}-build-artifacts-buket-name"}}
+        EncryptionKey:
+          Id:  { "Fn::ImportValue": {"Fn::Sub": "${ProductName}-${BranchName}-CMK-arn"}}
+          Type: KMS
+
