@@ -1,8 +1,6 @@
 package it.pagopa.pn_doc.api;
 
-import it.pagopa.pn.api.RestApiConstants;
-import it.pagopa.pn_doc.model.notification.Notification;
-import it.pagopa.pn_doc.model.notification.response.NotificationResponse;
+import it.pagopa.pn.api.dto.notification.Notification;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
