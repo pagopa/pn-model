@@ -2,12 +2,12 @@ package it.pagopa.pn.api.dto.notification.timeline;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import it.pagopa.pn.api.dto.notification.address.DigitalAddress;
-import lombok.Builder;
-import lombok.Value;
+import lombok.*;
 
 import java.util.List;
 
-@Value
+@NoArgsConstructor
+@Getter
 @Builder(builderMethodName = "sendFeedbackBuilder" )
 public class SendDigitalFeedbackDetails extends SendDigitalDetails {
 

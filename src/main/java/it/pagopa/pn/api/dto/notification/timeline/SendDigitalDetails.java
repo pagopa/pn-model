@@ -2,14 +2,12 @@ package it.pagopa.pn.api.dto.notification.timeline;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import it.pagopa.pn.api.dto.notification.address.DigitalAddress;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Value;
+import lombok.*;
 import lombok.experimental.NonFinal;
 
-@Value
-@NonFinal
+@NoArgsConstructor
 @AllArgsConstructor
+@Getter
 @Builder(builderMethodName = "sendBuilder", toBuilder = true)
 public class SendDigitalDetails {
 

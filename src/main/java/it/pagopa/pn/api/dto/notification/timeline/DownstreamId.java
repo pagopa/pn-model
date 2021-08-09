@@ -1,10 +1,11 @@
 package it.pagopa.pn.api.dto.notification.timeline;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
-import lombok.Value;
+import lombok.*;
 
-@Value
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
 @Builder(toBuilder = true)
 public class DownstreamId {
 

@@ -3,12 +3,13 @@ package it.pagopa.pn.api.dto.notification.timeline;
 import io.swagger.v3.oas.annotations.media.Schema;
 import it.pagopa.pn.api.dto.notification.NotificationAttachment;
 import it.pagopa.pn.api.dto.notification.NotificationRecipient;
-import lombok.Builder;
-import lombok.Value;
+import lombok.*;
 
 import java.util.List;
 
-@Value
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
 @Builder(toBuilder = true)
 public class ReceivedDetails {
 
@@ -21,7 +22,9 @@ public class ReceivedDetails {
     @Schema( name = "f24Digests", description = "Codici di controllo dei moduli di pagamento F24 inviati dalla PA")
     private F24Digests f24Digests;
 
-    @Value
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
     @Builder(toBuilder = true)
     public static class F24Digests {
 
