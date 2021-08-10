@@ -1,13 +1,15 @@
 package it.pagopa.pn.api.dto.events;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
-import lombok.Value;
+import lombok.*;
 
 import java.time.Instant;
 
-@Value
-@Builder( toBuilder = true )
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Builder(toBuilder = true)
+@EqualsAndHashCode
 public class StandardEventHeader {
 
     @Schema( name = "publisher", description = "L'applicazione che ha creato l'evento")

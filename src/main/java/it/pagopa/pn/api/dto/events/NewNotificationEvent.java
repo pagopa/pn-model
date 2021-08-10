@@ -1,12 +1,10 @@
 package it.pagopa.pn.api.dto.events;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
-import lombok.Value;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
 
-import java.time.Instant;
-
+@NoArgsConstructor
+@EqualsAndHashCode
 public class NewNotificationEvent extends GenericEvent<StandardEventHeader, NewNotificationEvent.Payload> {
 
     public NewNotificationEvent( GenericEvent<StandardEventHeader, NewNotificationEvent.Payload> s ) {
@@ -17,8 +15,11 @@ public class NewNotificationEvent extends GenericEvent<StandardEventHeader, NewN
         super(header, payload);
     }
 
-    @Value
-    @Builder( toBuilder = true )
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Builder(toBuilder = true)
+    @EqualsAndHashCode
     public static class Payload {
 
         @Schema( name = "paId", description = "Codice IPA della PA mittente")

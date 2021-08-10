@@ -1,12 +1,11 @@
 package it.pagopa.pn.api.dto.events;
 
-import lombok.Builder;
-import lombok.Value;
-import lombok.experimental.NonFinal;
+import lombok.*;
 
-@Value
-@NonFinal
-@Builder( toBuilder = true )
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Builder(toBuilder = true)
 public class GenericEvent<H extends StandardEventHeader, P> {
 
     private H header;
