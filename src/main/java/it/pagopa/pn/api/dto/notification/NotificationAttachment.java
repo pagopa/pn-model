@@ -1,5 +1,6 @@
 package it.pagopa.pn.api.dto.notification;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
@@ -21,6 +22,9 @@ public class NotificationAttachment {
     @Schema( name = "body", description = "corpo dell'allegato" )
     @JsonView(value = { NotificationJsonViews.New.class })
     private String body;
+
+    @JsonIgnore
+    private String savedVersionId;
 
     @NoArgsConstructor
     @AllArgsConstructor
