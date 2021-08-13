@@ -4,16 +4,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 @NoArgsConstructor
-@EqualsAndHashCode
-public class NewNotificationEvent extends GenericEvent<StandardEventHeader, NewNotificationEvent.Payload> {
+@AllArgsConstructor
+@Getter
+@Builder(toBuilder = true)
+public class NewNotificationEvent implements GenericEvent<StandardEventHeader, NewNotificationEvent.Payload> {
 
-    public NewNotificationEvent( GenericEvent<StandardEventHeader, NewNotificationEvent.Payload> s ) {
-        this( s.getHeader(), s.getPayload() );
-    }
+    private StandardEventHeader header;
+    private Payload payload;
 
-    NewNotificationEvent(StandardEventHeader header, Payload payload) {
-        super(header, payload);
-    }
 
     @NoArgsConstructor
     @AllArgsConstructor

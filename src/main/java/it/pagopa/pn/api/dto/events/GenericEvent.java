@@ -1,14 +1,8 @@
 package it.pagopa.pn.api.dto.events;
 
-import lombok.*;
+public interface GenericEvent<H extends StandardEventHeader, P> {
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Builder(toBuilder = true)
-public class GenericEvent<H extends StandardEventHeader, P> {
+    H getHeader();
 
-    private H header;
-
-    private P payload;
+    P getPayload();
 }
