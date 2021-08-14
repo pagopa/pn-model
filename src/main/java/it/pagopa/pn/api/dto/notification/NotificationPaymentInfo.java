@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Builder(toBuilder = true)
+@EqualsAndHashCode
 public class NotificationPaymentInfo {
 
     @Schema( name = "iuv", description = "Identificativo Univoco del Versamento" )
@@ -26,6 +27,7 @@ public class NotificationPaymentInfo {
     @AllArgsConstructor
     @Getter
     @Builder( toBuilder = true )
+    @EqualsAndHashCode
     public static class F24 {
 
         @Schema( name = "flatRate", description = "Modulo F24 per spese di notifica forfettarie" )

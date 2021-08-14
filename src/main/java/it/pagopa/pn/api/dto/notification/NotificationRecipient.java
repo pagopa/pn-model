@@ -11,6 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Builder(toBuilder = true)
+@EqualsAndHashCode
 public class NotificationRecipient {
 
     @Schema( name = "fc", description = "Codice Fiscale del destinatario")

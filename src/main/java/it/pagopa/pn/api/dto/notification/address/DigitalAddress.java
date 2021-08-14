@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Builder(toBuilder = true)
+@EqualsAndHashCode
 public class DigitalAddress {
 
     @Schema( name = "type", description = "tipo di indirizzo PEC, REM, SERCQ, ..." )

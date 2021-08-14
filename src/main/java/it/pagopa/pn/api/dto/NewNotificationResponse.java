@@ -1,11 +1,13 @@
 package it.pagopa.pn.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
-import lombok.Value;
+import lombok.*;
 
-@Value
-@Builder( toBuilder = true )
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Builder(toBuilder = true)
+@EqualsAndHashCode
 public class NewNotificationResponse {
 
     @Schema( name = "iun", description = "Identificativo Univoco Notifica con cui la notifica appena inviata verrà identificata nel processo di notificazione")

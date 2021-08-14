@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Builder(toBuilder = true)
+@EqualsAndHashCode
 public class PhysicalAddress {
 
     @Schema( name = "at", description = "Campo \"presso\" dell'indirizzo")

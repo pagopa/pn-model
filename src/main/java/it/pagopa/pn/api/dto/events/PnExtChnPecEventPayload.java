@@ -1,15 +1,13 @@
 package it.pagopa.pn.api.dto.events;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Builder(toBuilder = true)
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class PnExtChnPecEventPayload {
 
     public static final String PN_EXTCHN_PEC_EVENT_CALLBACK_URL = "callbackUrl";

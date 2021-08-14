@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Builder(toBuilder = true)
+@EqualsAndHashCode
 public class NotificationSender {
 
     @Schema( name = "paId", description = "Identificativo IPA della PA")

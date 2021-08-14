@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Builder(toBuilder = true)
+@EqualsAndHashCode
 public class NotificationAttachment {
 
     @Schema( name = "digests", description = "codice di controllo del allegato" )

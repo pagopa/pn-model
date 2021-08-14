@@ -1,10 +1,7 @@
 package it.pagopa.pn.api.dto.events;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.Instant;
 
@@ -12,6 +9,7 @@ import java.time.Instant;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class PnExtChnProgressStatusEventPayload {
 
     /**
@@ -28,6 +26,9 @@ public class PnExtChnProgressStatusEventPayload {
     public static final String PN_EXTCHN_PROGRESSSTATUS_EVENT_DATA_STATO = "dataStato";
     public static final String PN_EXTCHN_PROGRESSSTATUS_EVENT_TENTATIVO = "tentativo";
     public static final String PN_EXTCHN_PROGRESSSTATUS_EVENT_CANALE = "canale";
+
+    public static final String PN_EXTCHN_PROGRESSSTATUS_EVENT_STATUS_OK = "OK";
+    public static final String PN_EXTCHN_PROGRESSSTATUS_EVENT_STATUS_FAIL = "FAIL";
 
     @JsonProperty(PnExtChnProgressStatusEventPayload.PN_EXTCHN_PROGRESSSTATUS_EVENT_CODICE_ATTO)
     private String codiceAtto;
