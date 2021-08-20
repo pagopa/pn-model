@@ -7,6 +7,8 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Builder(toBuilder = true)
+@EqualsAndHashCode
+@ToString
 public class NotificationPathChooseDetails {
 
     @Schema( name = "fc", description = "codice fiscale destinatario")

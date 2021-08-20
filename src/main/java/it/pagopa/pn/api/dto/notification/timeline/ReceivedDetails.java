@@ -11,6 +11,8 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Builder(toBuilder = true)
+@EqualsAndHashCode
+@ToString
 public class ReceivedDetails {
 
     @Schema( name = "recipients", description = "informazioni sui destinatari")
@@ -26,6 +28,8 @@ public class ReceivedDetails {
     @AllArgsConstructor
     @Getter
     @Builder(toBuilder = true)
+    @EqualsAndHashCode
+    @ToString
     public static class F24Digests {
 
         @Schema( name = "flatRate", description = "codice di controllo del F24 per spese di notifica forfettarie")

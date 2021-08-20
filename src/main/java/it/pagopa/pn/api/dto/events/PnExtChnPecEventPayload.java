@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 public class PnExtChnPecEventPayload {
 
     public static final String PN_EXTCHN_PEC_EVENT_CALLBACK_URL = "callbackUrl";

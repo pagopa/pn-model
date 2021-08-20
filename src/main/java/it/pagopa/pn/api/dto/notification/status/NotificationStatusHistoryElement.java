@@ -12,6 +12,7 @@ import java.time.Instant;
 @Getter
 @Builder(toBuilder = true)
 @EqualsAndHashCode
+@ToString
 public class NotificationStatusHistoryElement {
 
     @Schema( name = "status", description = "Stato di avanzamento del processo di notifica")

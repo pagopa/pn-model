@@ -9,6 +9,7 @@ import lombok.*;
 @Getter
 @Builder(toBuilder = true)
 @EqualsAndHashCode
+@ToString
 public class NewNotificationEvent implements GenericEvent<StandardEventHeader, NewNotificationEvent.Payload> {
 
     @JsonProperty( PN_EVENT_HEADER )
@@ -23,6 +24,7 @@ public class NewNotificationEvent implements GenericEvent<StandardEventHeader, N
     @Getter
     @Builder(toBuilder = true)
     @EqualsAndHashCode
+    @ToString
     public static class Payload {
 
         public static final String PN_NEW_NOTIFICATION_EVENT_PAID = "paId";

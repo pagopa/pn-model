@@ -7,6 +7,8 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Builder(toBuilder = true)
+@EqualsAndHashCode
+@ToString
 public class DownstreamId {
 
     @Schema( name = "systemId", description = "Identificativo del sistema a valle di inoltro messaggistica")

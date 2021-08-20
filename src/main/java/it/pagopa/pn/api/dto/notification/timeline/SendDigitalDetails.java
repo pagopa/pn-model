@@ -3,12 +3,13 @@ package it.pagopa.pn.api.dto.notification.timeline;
 import io.swagger.v3.oas.annotations.media.Schema;
 import it.pagopa.pn.api.dto.notification.address.DigitalAddress;
 import lombok.*;
-import lombok.experimental.NonFinal;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Builder(builderMethodName = "sendBuilder", toBuilder = true)
+@EqualsAndHashCode
+@ToString
 public class SendDigitalDetails {
 
     @Schema( name = "fc", description = "Codice Fiscale destinatario notifica digitale")

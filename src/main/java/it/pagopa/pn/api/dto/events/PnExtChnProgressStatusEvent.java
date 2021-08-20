@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 public class PnExtChnProgressStatusEvent implements GenericEvent<StandardEventHeader, PnExtChnProgressStatusEventPayload> {
 
     @JsonProperty( PN_EVENT_HEADER )

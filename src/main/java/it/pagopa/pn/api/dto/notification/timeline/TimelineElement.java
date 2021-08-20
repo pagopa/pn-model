@@ -10,6 +10,8 @@ import java.time.Instant;
 @AllArgsConstructor
 @Getter
 @Builder(toBuilder = true)
+@EqualsAndHashCode
+@ToString
 public class TimelineElement {
 
     @Schema( name = "timestamp", description = "Momento in cui avviene l'evento desritto in questo elemento di timeline")

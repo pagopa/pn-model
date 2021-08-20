@@ -10,6 +10,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 public class PnExtChnProgressStatusEventPayload {
 
     /**

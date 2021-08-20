@@ -9,6 +9,7 @@ import lombok.*;
 @Getter
 @Builder(toBuilder = true)
 @EqualsAndHashCode
+@ToString
 public class NotificationPaymentInfo {
 
     @Schema( name = "iuv", description = "Identificativo Univoco del Versamento" )
