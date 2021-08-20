@@ -11,6 +11,7 @@ import java.time.Instant;
 @Getter
 @Builder(toBuilder = true)
 @EqualsAndHashCode
+@ToString
 public class StandardEventHeader {
 
     public static final String PN_EVENT_HEADER_PUBLISHER = "publisher";

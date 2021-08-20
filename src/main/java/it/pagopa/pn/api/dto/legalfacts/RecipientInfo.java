@@ -1,14 +1,15 @@
 package it.pagopa.pn.api.dto.legalfacts;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Value;
+import lombok.*;
 import lombok.experimental.NonFinal;
 
-@Value
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
 @Builder(toBuilder = true)
+@EqualsAndHashCode
+@ToString
 public class RecipientInfo {
 
     @Schema(name = "denomination", description = "Denominazione di un destinatario")

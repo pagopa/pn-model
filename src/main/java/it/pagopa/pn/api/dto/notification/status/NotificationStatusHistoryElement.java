@@ -12,13 +12,14 @@ import java.time.Instant;
 @Getter
 @Builder(toBuilder = true)
 @EqualsAndHashCode
+@ToString
 public class NotificationStatusHistoryElement {
 
-    @Schema( name = "status", description = "Stato di avanzamento del processo di notifica")
+    @Schema( description = "Stato di avanzamento del processo di notifica")
     @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
     private NotificationStatus status;
 
-    @Schema( name = "activeFrom", description = "data e roa di raggiungimento dello stato di avanzamento")
+    @Schema( description = "data e roa di raggiungimento dello stato di avanzamento")
     @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
     private Instant activeFrom;
 }
