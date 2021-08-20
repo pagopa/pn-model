@@ -17,18 +17,18 @@ import javax.validation.constraints.NotNull;
 @ToString
 public class NotificationAttachment {
 
-    @Schema( name = "digests", description = "codice di controllo del allegato" )
+    @Schema( description = "codice di controllo del allegato" )
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
     @NotNull(groups = { NotificationJsonViews.New.class })
     @Valid
     private Digests digests;
 
-    @Schema( name = "contentType", description = "tipo di contenuto dell'allegato" )
+    @Schema( description = "tipo di contenuto dell'allegato" )
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
     @NotBlank(groups = { NotificationJsonViews.New.class })
     private String contentType;
 
-    @Schema( name = "body", description = "corpo dell'allegato" )
+    @Schema( description = "corpo dell'allegato" )
     @JsonView(value = { NotificationJsonViews.New.class })
     @NotBlank(groups = { NotificationJsonViews.New.class })
     private String body;
@@ -44,7 +44,7 @@ public class NotificationAttachment {
     @ToString
     public static class Digests {
 
-        @Schema( name = "sha256", description = "Digest \"sha256\" della codifica binaria dell'allegato" )
+        @Schema( description = "Digest \"sha256\" della codifica binaria dell'allegato" )
         @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
         @NotBlank(groups = { NotificationJsonViews.New.class })
         private String sha256;

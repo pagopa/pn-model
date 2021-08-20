@@ -21,23 +21,23 @@ import javax.validation.constraints.Pattern;
 @ToString
 public class NotificationRecipient {
 
-    @Schema( name = "fc", description = "Codice Fiscale del destinatario")
+    @Schema( description = "Codice Fiscale del destinatario")
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class})
     @NotBlank(groups = { NotificationJsonViews.New.class })
-    private String fc;
+    private String taxId;
 
-    @Schema( name = "denomination", description = "Nome e cognome / ragione sociale")
+    @Schema( description = "Nome e cognome / ragione sociale")
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class})
     @NotBlank(groups = { NotificationJsonViews.New.class })
     private String denomination;
 
-    @Schema( name = "digitalDomicile", description = "indirizzo digitale del destinatario")
+    @Schema( description = "indirizzo digitale del destinatario")
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class})
     @NotNull(groups = { NotificationJsonViews.New.class })
     @Valid
     private DigitalAddress digitalDomicile;
 
-    @Schema( name = "physicalAddress", description = "indirizzo fisico del destinatario")
+    @Schema( description = "indirizzo fisico del destinatario")
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class})
     private PhysicalAddress physicalAddress;
 

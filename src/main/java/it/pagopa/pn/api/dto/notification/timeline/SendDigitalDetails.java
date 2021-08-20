@@ -12,16 +12,16 @@ import lombok.*;
 @ToString
 public class SendDigitalDetails {
 
-    @Schema( name = "fc", description = "Codice Fiscale destinatario notifica digitale")
-    private String fc;
+    @Schema( description = "Codice Fiscale destinatario notifica digitale")
+    private String taxId;
 
-    @Schema( name = "address", description = "indirizzo di invio della notifica")
+    @Schema( description = "indirizzo di invio della notifica")
     private DigitalAddress address;
 
-    @Schema( name = "retryNumber", description = "numero del tentativo")
+    @Schema( description = "numero del tentativo")
     private Integer retryNumber;
 
-    @Schema( name = "downstreamId", description = "identificativo del messaggio nel sistema a valle")
+    @Schema( description = "identificativo del messaggio nel sistema a valle")
     private DownstreamId downstreamId;
 
 }

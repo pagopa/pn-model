@@ -14,12 +14,12 @@ import javax.validation.constraints.NotBlank;
 @ToString
 public class NotificationSender {
 
-    @Schema( name = "paId", description = "Identificativo IPA della PA")
+    @Schema( description = "Identificativo IPA della PA")
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Received.class})
     @NotBlank(groups = { NotificationJsonViews.New.class })
     private String paId;
 
-    @Schema( name = "paDenomination", description = "Denominazione IPA della PA mittente")
+    @Schema( description = "Denominazione IPA della PA mittente")
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Received.class})
     private String paDenomination;
 

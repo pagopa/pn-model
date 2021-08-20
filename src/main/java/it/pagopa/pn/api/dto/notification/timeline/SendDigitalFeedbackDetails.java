@@ -20,7 +20,7 @@ public class SendDigitalFeedbackDetails extends SendDigitalDetails {
     }
 
     public SendDigitalFeedbackDetails( SendDigitalDetails sdd, List<String> errors) {
-        super( sdd.getFc(), sdd.getAddress(), sdd.getRetryNumber(), sdd.getDownstreamId() );
+        super( sdd.getTaxId(), sdd.getAddress(), sdd.getRetryNumber(), sdd.getDownstreamId() );
         this.errors = errors;
     }
 
@@ -29,7 +29,7 @@ public class SendDigitalFeedbackDetails extends SendDigitalDetails {
         this.errors = errors;
     }
 
-    @Schema( name = "errors", description = "Lista errori, vuota in caso di successo")
+    @Schema( description = "Lista errori, vuota in caso di successo")
     private List<String> errors;
 
 }
