@@ -10,7 +10,7 @@ import lombok.*;
 @Builder(builderMethodName = "sendBuilder", toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class SendDigitalDetails {
+public class SendDigitalDetails implements TimelineElementDetails {
 
     @Schema( description = "Codice Fiscale destinatario notifica digitale")
     private String taxId;

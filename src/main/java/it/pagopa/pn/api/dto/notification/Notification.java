@@ -28,7 +28,7 @@ import java.util.List;
 public class Notification {
 
     @Schema( description = "L'Identificativo Univoco Notifica assegnato da PN")
-    @JsonView(value = { NotificationJsonViews.Sent.class })
+    @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
     private String iun;
 
     @Schema( description = "Numero di protocollo che la PA mittente assegna alla notifica stessa" )

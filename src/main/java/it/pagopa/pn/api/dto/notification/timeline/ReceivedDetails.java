@@ -13,7 +13,7 @@ import java.util.List;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class ReceivedDetails {
+public class ReceivedDetails implements TimelineElementDetails {
 
     @Schema( description = "informazioni sui destinatari")
     private List<NotificationRecipient> recipients;
