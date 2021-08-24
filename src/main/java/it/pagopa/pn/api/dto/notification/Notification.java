@@ -1,7 +1,6 @@
 package it.pagopa.pn.api.dto.notification;
 
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,6 +13,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.Instant;
 import java.util.List;
 
 @NoArgsConstructor
@@ -40,6 +40,11 @@ public class Notification {
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
     @NotBlank( groups = { NotificationJsonViews.New.class })
     private String subject;
+
+    @Schema( description = "Momento di ricezione della notifica da parte di PN" )
+    @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
+    private Instant sentAt;
+
 
     @Schema( description = "IUN della notifica rettificata da questa notifica" )
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
