@@ -3,8 +3,6 @@ package it.pagopa.pn.api.dto.legalfacts;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
-import java.util.List;
-
 /**
  * https://docs.google.com/document/d/1wJ2TGGOoFDMlFqEf9VpraKC8yKn3Nrr24Z1kNeMBbPw
  * 2. Attestazione (lett. c)

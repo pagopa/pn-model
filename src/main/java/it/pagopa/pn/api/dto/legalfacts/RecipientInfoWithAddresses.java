@@ -2,7 +2,6 @@ package it.pagopa.pn.api.dto.legalfacts;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 @NoArgsConstructor
 @AllArgsConstructor
