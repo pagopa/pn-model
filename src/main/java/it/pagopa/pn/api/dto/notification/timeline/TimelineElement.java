@@ -15,6 +15,8 @@ import java.time.Instant;
 @ToString
 public class TimelineElement {
 
+    // - Today (2021-08-25) this entity is planned to be used only as child of Notification.
+    //   This field is not useful because it is a repetition of the notification iun.
     @JsonIgnore
     private String iun;
 
