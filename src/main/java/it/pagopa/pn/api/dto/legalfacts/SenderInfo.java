@@ -11,9 +11,9 @@ import lombok.*;
 @ToString
 public class SenderInfo {
 
-    @Schema(name = "paDenomination", description = "Denominazione della PA mittente")
+    @Schema( description = "Denominazione della PA mittente")
     private String paDenomination;
 
-    @Schema(name = "paCf", description = "Codice Fiscale della PA mittente")
-    private String paCf;
+    @Schema( description = "Codice Fiscale della PA mittente")
+    private String paTaxId;
 }

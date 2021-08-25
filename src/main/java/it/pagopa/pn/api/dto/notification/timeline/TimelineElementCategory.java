@@ -4,7 +4,8 @@ public enum TimelineElementCategory {
     RECEIVED_ACK( ReceivedDetails.class ),
     NOTIFICATION_PATH_CHOOSE( NotificationPathChooseDetails.class ),
     SEND_DIGITAL_DOMICILE( SendDigitalDetails.class ),
-    SEND_DIGITAL_DOMICILE_FEEDBACK( SendDigitalFeedbackDetails.class );
+    SEND_DIGITAL_DOMICILE_FEEDBACK( SendDigitalFeedbackDetails.class ),
+    WAIT_FOR_RECIPIENT_TIMEOUT( WaitForRecipientTimeoutDetails.class );
 
     private final Class< ? extends TimelineElementDetails> detailsJavaClass;
 

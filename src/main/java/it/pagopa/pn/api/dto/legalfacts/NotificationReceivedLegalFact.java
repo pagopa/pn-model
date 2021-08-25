@@ -17,19 +17,19 @@ import java.util.List;
 @ToString
 public class NotificationReceivedLegalFact {
 
-    @Schema( name = "iun", description = "IUN della notifica di cui quest atto attesta l'affidamento a PN")
+    @Schema( description = "IUN della notifica di cui quest atto attesta l'affidamento a PN")
     private String iun;
 
-    @Schema( name = "date", description = "Data di affidamento: perfezionamento per mittente")
-    private Integer date;
+    @Schema( description = "Data di affidamento: perfezionamento per mittente")
+    private String date;
 
-    @Schema( name = "digests", description = "elenco dei codici di identificazione degli allegati digitali")
+    @Schema( description = "elenco dei codici di identificazione degli allegati digitali")
     private List<String> digests;
 
-    @Schema( name = "sender", description = "Dati del mittente")
+    @Schema( description = "Dati del mittente")
     private SenderInfo sender;
 
-    @Schema( name = "recipient", description = "Dati del destinatario")
+    @Schema( description = "Dati del destinatario")
     private RecipientInfoWithAddresses recipient;
 
 

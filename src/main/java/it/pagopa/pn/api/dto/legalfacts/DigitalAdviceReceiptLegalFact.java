@@ -15,20 +15,20 @@ import lombok.*;
 @ToString
 public class DigitalAdviceReceiptLegalFact {
 
-    @Schema( name = "iun", description = "IUN della notifica di cui quest atto attesta l'affidamento a PN")
+    @Schema( description = "IUN della notifica di cui quest atto attesta l'affidamento a PN")
     private String iun;
 
-    @Schema( name = "date", description = "Data in cui il sistema di messaggistica conferma il recapito o l'impossibilità di recapitare il messaggio")
+    @Schema( description = "Data in cui il sistema di messaggistica conferma il recapito o l'impossibilità di recapitare il messaggio")
     private Integer date;
 
-    @Schema( name = "outcome", description = "Indica se il recapito digitale è stato possibile oppure no")
+    @Schema( description = "Indica se il recapito digitale è stato possibile oppure no")
     private OkOrFail outcome;
 
 
-    @Schema( name = "recipient", description = "Dati del destinatario")
+    @Schema( description = "Dati del destinatario")
     private RecipientInfo recipient;
 
-    @Schema( name = "digitalAddress", description = "Rappresentazione in stringa dell'indirizzo digitale")
+    @Schema( description = "Rappresentazione in stringa dell'indirizzo digitale")
     private String digitalAddress;
 
     public enum OkOrFail {

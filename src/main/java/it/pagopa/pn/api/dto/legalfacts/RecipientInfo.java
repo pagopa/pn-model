@@ -11,10 +11,10 @@ import lombok.*;
 @ToString
 public class RecipientInfo {
 
-    @Schema(name = "denomination", description = "Denominazione di un destinatario")
+    @Schema( description = "Denominazione di un destinatario")
     protected String denomination;
 
-    @Schema(name = "cf", description = "Codice fiscale di un destinatario")
-    protected String cf;
+    @Schema( description = "Codice fiscale di un destinatario")
+    protected String taxId;
 
 }
