@@ -9,7 +9,7 @@ import lombok.*;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class NotificationPathChooseDetails {
+public class NotificationPathChooseDetails implements TimelineElementDetails {
 
     @Schema( description = "codice fiscale destinatario")
     String taxId;
