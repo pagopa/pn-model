@@ -11,15 +11,15 @@ import lombok.*;
 @ToString
 public class RecipientInfoWithAddresses {
 
-    @Schema(name = "denomination", description = "Denominazione di un destinatario")
+    @Schema( description = "Denominazione di un destinatario")
     private String denomination;
 
-    @Schema(name = "cf", description = "Codice fiscale di un destinatario")
-    private String cf;
+    @Schema( description = "Codice fiscale di un destinatario")
+    private String taxId;
 
-    @Schema(name = "digitalDomicile", description = "Rappresentazione in stringa del domicilio digitale destnatario")
+    @Schema( description = "Rappresentazione in stringa del domicilio digitale destnatario")
     private String digitalDomicile;
 
-    @Schema(name = "physicalDomicile", description = "domicilio fisico del destinatario")
+    @Schema( description = "domicilio fisico del destinatario")
     private String physicalDomicile;
 }

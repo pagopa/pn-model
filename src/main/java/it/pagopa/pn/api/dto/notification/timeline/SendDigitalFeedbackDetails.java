@@ -9,7 +9,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Builder(builderMethodName = "sendFeedbackBuilder" )
-@EqualsAndHashCode
+@EqualsAndHashCode( callSuper = true )
 @ToString
 public class SendDigitalFeedbackDetails extends SendDigitalDetails {
 

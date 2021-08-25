@@ -16,13 +16,13 @@ import lombok.*;
 @ToString
 public class NotificationViewedLegalFact {
 
-    @Schema( name = "iun", description = "IUN della notifica di cui quest atto attesta l'affidamento a PN")
+    @Schema( description = "IUN della notifica di cui quest atto attesta l'affidamento a PN")
     private String iun;
 
-    @Schema( name = "date", description = "Data di affidamento: perfezionamento per mittente")
+    @Schema( description = "Data di affidamento: perfezionamento per mittente")
     private Integer date;
 
-    @Schema( name = "recipient", description = "Dati del destinatario")
+    @Schema( description = "Dati del destinatario")
     private RecipientInfo recipient;
 
 }

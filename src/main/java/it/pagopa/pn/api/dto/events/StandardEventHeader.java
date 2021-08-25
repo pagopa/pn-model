@@ -28,9 +28,9 @@ public class StandardEventHeader {
     @JsonProperty( PN_EVENT_HEADER_EVENT_ID )
     private String eventId;
 
-    @Schema( name = PN_EVENT_HEADER_EVENT_TYPE, description = "")
+    @Schema( name = PN_EVENT_HEADER_EVENT_TYPE, description = "Tipo dell'evento: definisce il payload")
     @JsonProperty( PN_EVENT_HEADER_EVENT_TYPE )
-    private EventType eventType;
+    private String eventType;
 
     @Schema( name = PN_EVENT_HEADER_IUN, description = "Un messaggio è sempre collegato a una notifica")
     private String iun;

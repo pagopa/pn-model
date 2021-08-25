@@ -1,6 +1,6 @@
 package it.pagopa.pn.api.dto.events;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 @Builder(toBuilder = true)
@@ -11,52 +11,36 @@ import lombok.*;
 @ToString
 public class PnExtChnPecEventPayload {
 
-    public static final String PN_EXTCHN_PEC_EVENT_CALLBACK_URL = "callbackUrl";
-    public static final String PN_EXTCHN_PEC_EVENT_CODICE_ATTO = "codiceAtto";
-    public static final String PN_EXTCHN_PEC_EVENT_NUMERO_CRONOLOGICO = "numeroCronologico";
-    public static final String PN_EXTCHN_PEC_EVENT_PARTE_ISTANTE = "parteIstante";
-    public static final String PN_EXTCHN_PEC_EVENT_PROCURATORE = "procuratore";
-    public static final String PN_EXTCHN_PEC_EVENT_UFFICIALE_GIUDIZIARIO = "ufficialeGiudiziario";
-    public static final String PN_EXTCHN_PEC_EVENT_IUN = "iun";
-    public static final String PN_EXTCHN_PEC_EVENT_PA_MITTENTE = "paMittente";
-    public static final String PN_EXTCHN_PEC_EVENT_PEC_MITTENTE = "pecMittente";
-    public static final String PN_EXTCHN_PEC_EVENT_DESTINATARIO = "destinatario";
-    public static final String PN_EXTCHN_PEC_EVENT_CODICE_FISCALE = "codiceFiscale";
-    public static final String PN_EXTCHN_PEC_EVENT_PEC = "pec";
+    @Schema( description = "Codice opaco utilizzato dal software client per correlare la risposta alla richiesta" )
+    private String requestCorrelationId;
 
-    @JsonProperty(PnExtChnPecEventPayload.PN_EXTCHN_PEC_EVENT_CALLBACK_URL)
-    private String callbackUrl;
-
-    @JsonProperty(PnExtChnPecEventPayload.PN_EXTCHN_PEC_EVENT_CODICE_ATTO)
-    private String codiceAtto;
-
-    @JsonProperty(PnExtChnPecEventPayload.PN_EXTCHN_PEC_EVENT_NUMERO_CRONOLOGICO)
-    private String numeroCronologico;
-
-    @JsonProperty(PnExtChnPecEventPayload.PN_EXTCHN_PEC_EVENT_PARTE_ISTANTE)
-    private String parteIstante;
-
-    @JsonProperty(PnExtChnPecEventPayload.PN_EXTCHN_PEC_EVENT_PROCURATORE)
-    private String procuratore;
-
-    @JsonProperty(PnExtChnPecEventPayload.PN_EXTCHN_PEC_EVENT_UFFICIALE_GIUDIZIARIO)
-    private String ufficialeGiudiziario;
-
-    @JsonProperty(PnExtChnPecEventPayload.PN_EXTCHN_PEC_EVENT_IUN)
+    @Schema( description = "Identificativo univoco della richiesta" )
     private String iun;
 
-    @JsonProperty(PnExtChnPecEventPayload.PN_EXTCHN_PEC_EVENT_PA_MITTENTE)
-    private String paMittente;
+    @Schema( description = "Identificativo del mittente")
+    private String senderId;
 
-    @JsonProperty(PnExtChnPecEventPayload.PN_EXTCHN_PEC_EVENT_PEC_MITTENTE)
-    private String pecMittente;
+    @Schema( description = "Nome del mittente, solitamente la denominaziome della Pubblica Amministrazione")
+    private String senderDenomination;
 
-    @JsonProperty(PnExtChnPecEventPayload.PN_EXTCHN_PEC_EVENT_DESTINATARIO)
-    private String destinatario;
+    @Schema( description = "Opzionale: Indirizzo pec del mittente da utilizzare nel campo Replay-To")
+    private String senderPecAddress;
 
-    @JsonProperty(PnExtChnPecEventPayload.PN_EXTCHN_PEC_EVENT_CODICE_FISCALE)
-    private String codiceFiscale;
+    @Schema( description = "Denominazione del destinatario: nome e cognome o ragione sociale")
+    private String recipientDenomination;
 
-    @JsonProperty(PnExtChnPecEventPayload.PN_EXTCHN_PEC_EVENT_PEC)
-    private String pec;
+    @Schema( description = "Codice fiscale del destinatario")
+    private String recipientTaxId;
+
+    @Schema( description = "Indirizzo PEC del destinatario")
+    private String pecAddress;
+
+
+    // FIXME: tradurre in inglese
+    private String codiceAtto;
+    private String numeroCronologico;
+    private String parteIstante;
+    private String procuratore;
+    private String ufficialeGiudiziario;
+
 }
