@@ -3,7 +3,8 @@ package it.pagopa.pn.api.dto.events;
 public enum EventType implements IEventType {
     NEW_NOTIFICATION( PnDeliveryNewNotificationEvent.class ),
     SEND_PEC_REQUEST( PnExtChnPecEvent.class ),
-    SEND_PEC_RESPONSE( PnExtChnProgressStatusEvent.class );
+    SEND_PEC_RESPONSE( PnExtChnProgressStatusEvent.class ),
+    SEND_COURTESY_EMAIL ( PnExtChnEmailEvent.class );
 
     private final Class<?> eventClass;
 

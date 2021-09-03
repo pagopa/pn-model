@@ -1,15 +1,23 @@
 package it.pagopa.pn.api.dto.notification;
 
 
-import com.fasterxml.jackson.annotation.JsonView;
-import io.swagger.v3.oas.annotations.media.Schema;
-import it.pagopa.pn.api.dto.notification.address.DigitalAddress;
-import it.pagopa.pn.api.dto.notification.address.PhysicalAddress;
-import lombok.*;
+import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import it.pagopa.pn.api.dto.notification.address.DigitalAddress;
+import it.pagopa.pn.api.dto.notification.address.PhysicalAddress;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,5 +46,9 @@ public class NotificationRecipient {
     @Schema( description = "indirizzo fisico del destinatario")
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class})
     private PhysicalAddress physicalAddress;
+    
+    @Schema( description = "indirizzo recapito digitale del destinatario")
+    @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class})
+    private List<DigitalAddress> courtesyAdresses;
 
 }
