@@ -1,5 +1,7 @@
 package it.pagopa.pn.api.dto.notification.timeline;
 
+import java.util.List;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import it.pagopa.pn.api.dto.notification.address.DigitalAddress;
 import it.pagopa.pn.api.dto.notification.address.PhysicalAddress;
@@ -30,5 +32,8 @@ public class NotificationPathChooseDetails implements TimelineElementDetails {
 
     @Schema( description = "L'indirizzo digitale presente nei registri nazionali")
     DigitalAddress general;
+    
+    @Schema( description = "Elenco recapiti digitali del destinatario")
+    List<DigitalAddress> courtesyAddresses;
 
 }

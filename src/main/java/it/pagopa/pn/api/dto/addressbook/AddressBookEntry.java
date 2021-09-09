@@ -1,7 +1,15 @@
 package it.pagopa.pn.api.dto.addressbook;
 
+import java.util.List;
+
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import it.pagopa.pn.api.dto.notification.address.DigitalAddress;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,4 +25,6 @@ public class AddressBookEntry {
     @Schema( description = "Indirizzi digitali utilizzabili per la persona indicata dal TaxId" )
     private DigitalAddresses digitalAddresses;
 
+    @Schema( description = "Indirizzi recapito digitale utilizzabili per la persona indicata dal TaxId" )
+    private List<DigitalAddress> courtesyAddresses;
 }
