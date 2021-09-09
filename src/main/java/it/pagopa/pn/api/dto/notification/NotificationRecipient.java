@@ -46,9 +46,5 @@ public class NotificationRecipient {
     @Schema( description = "indirizzo fisico del destinatario")
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class})
     private PhysicalAddress physicalAddress;
-    
-    @Schema( description = "indirizzo recapito digitale del destinatario")
-    @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class})
-    private List<DigitalAddress> courtesyAdresses;
 
 }
