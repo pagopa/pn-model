@@ -1,6 +1,7 @@
 package it.pagopa.pn.api.dto.legalfacts;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import it.pagopa.pn.api.dto.notification.address.DigitalAddress;
 import it.pagopa.pn.api.dto.notification.address.DigitalAddressType;
 import lombok.*;
 
@@ -28,12 +29,9 @@ public class DigitalAdviceReceiptLegalFact {
     @Schema( description = "Dati del destinatario")
     private RecipientInfo recipient;
 
-    @Schema( description = "Rappresentazione in stringa dell'indirizzo digitale")
-    private String digitalAddress;
+    @Schema( description = "Domicilio digitale a cui si è tentata la spedizione")
+    private DigitalAddress digitalAddress;
     
-    @Schema( description = "Rappresentazione tipologia dell'indirizzo digitale")
-    private DigitalAddressType digitalAddressType;
-
     public enum OkOrFail {
         OK,
         FAIL
