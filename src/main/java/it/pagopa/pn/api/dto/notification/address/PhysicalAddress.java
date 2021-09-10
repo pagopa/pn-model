@@ -3,8 +3,6 @@ package it.pagopa.pn.api.dto.notification.address;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.fasterxml.jackson.annotation.JsonView;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -57,23 +55,26 @@ public class PhysicalAddress {
 		
 		standardAddressString.add( recipientDenomination );
 		
-		if ( StringUtils.isNotBlank( at ) ) {
+		if ( isNotBlank( at ) ) {
 			standardAddressString.add( at );
 		}
 		
-		if ( StringUtils.isNotBlank( addressDetails ) ) {
+		if ( isNotBlank( addressDetails ) ) {
 			standardAddressString.add( addressDetails );
 		}
 		
-		standardAddressString.add( address ); 
+		standardAddressString.add( address );
+		standardAddressString.add( zip + " " + municipality + " " + province );
 		
-		standardAddressString.add( String.join(" ",  zip, municipality, province ) ); 
-		
-		if ( StringUtils.isNotBlank( foreignState ) ) {
+		if ( isNotBlank( foreignState ) ) {
 			standardAddressString.add( foreignState );
 		}
 		
 		return standardAddressString;
 	}
+
+	private boolean isNotBlank( String str) {
+	    return str != null && !str.isBlank();
+    }
 
 }
