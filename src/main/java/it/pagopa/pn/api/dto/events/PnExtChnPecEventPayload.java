@@ -35,12 +35,4 @@ public class PnExtChnPecEventPayload {
     @Schema( description = "Indirizzo PEC del destinatario")
     private String pecAddress;
 
-
-    // FIXME: tradurre in inglese
-    private String codiceAtto;
-    private String numeroCronologico;
-    private String parteIstante;
-    private String procuratore;
-    private String ufficialeGiudiziario;
-
 }
