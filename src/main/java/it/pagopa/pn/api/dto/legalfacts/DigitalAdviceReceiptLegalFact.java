@@ -1,6 +1,7 @@
 package it.pagopa.pn.api.dto.legalfacts;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import it.pagopa.pn.api.dto.notification.address.DigitalAddressType;
 import lombok.*;
 
 /**
@@ -19,17 +20,19 @@ public class DigitalAdviceReceiptLegalFact {
     private String iun;
 
     @Schema( description = "Data in cui il sistema di messaggistica conferma il recapito o l'impossibilità di recapitare il messaggio")
-    private Integer date;
+    private String date;
 
     @Schema( description = "Indica se il recapito digitale è stato possibile oppure no")
     private OkOrFail outcome;
-
 
     @Schema( description = "Dati del destinatario")
     private RecipientInfo recipient;
 
     @Schema( description = "Rappresentazione in stringa dell'indirizzo digitale")
     private String digitalAddress;
+    
+    @Schema( description = "Rappresentazione tipologia dell'indirizzo digitale")
+    private DigitalAddressType digitalAddressType;
 
     public enum OkOrFail {
         OK,
