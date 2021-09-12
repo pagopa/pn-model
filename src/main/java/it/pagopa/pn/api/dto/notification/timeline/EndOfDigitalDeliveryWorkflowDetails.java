@@ -17,12 +17,9 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class SendCourtesyDetails implements TimelineElementDetails {
+public class EndOfDigitalDeliveryWorkflowDetails implements TimelineElementDetails {
 
     @Schema( description = "Codice Fiscale destinatario notifica digitale")
     private String taxId;
-
-    @Schema( description = "Indirizzi di invio della notifica di cortesia")
-    private List<DigitalAddress> addresses;
 
 }

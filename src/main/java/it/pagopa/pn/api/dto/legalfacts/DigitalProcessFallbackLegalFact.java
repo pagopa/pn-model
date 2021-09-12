@@ -19,7 +19,7 @@ public class DigitalProcessFallbackLegalFact {
     private String iun;
 
     @Schema( description = "Data in cui il sistema di messaggistica conferma il recapito o l'impossibilità di recapitare il messaggio")
-    private Integer date;
+    private String date;
 
     @Schema( description = "Dati del destinatario")
     private RecipientInfo recipient;

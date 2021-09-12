@@ -1,9 +1,18 @@
 package it.pagopa.pn.api.dto.notification.address;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonView;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import it.pagopa.pn.api.dto.notification.NotificationJsonViews;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,6 +45,36 @@ public class PhysicalAddress {
     @Schema( description = "Provincia in cui si trova l'indirizzo")
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
     private String province;
+    
+    @Schema( description = "Denominazione paese estero")
+    @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
+    private String foreignState;
 
+	public List<String> toStandardAddressString( String recipientDenomination ) {
+		List<String> standardAddressString = new ArrayList<>();
+		
+		standardAddressString.add( recipientDenomination );
+		
+		if ( isNotBlank( at ) ) {
+			standardAddressString.add( at );
+		}
+		
+		if ( isNotBlank( addressDetails ) ) {
+			standardAddressString.add( addressDetails );
+		}
+		
+		standardAddressString.add( address );
+		standardAddressString.add( zip + " " + municipality + " " + province );
+		
+		if ( isNotBlank( foreignState ) ) {
+			standardAddressString.add( foreignState );
+		}
+		
+		return standardAddressString;
+	}
+
+	private boolean isNotBlank( String str) {
+	    return str != null && !str.isBlank();
+    }
 
 }
