@@ -1,7 +1,12 @@
 package it.pagopa.pn.api.dto.events;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Builder(toBuilder = true)
 @Getter
@@ -9,12 +14,9 @@ import lombok.*;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class PnExtChnPecEventPayload {
+public class PnExtChnEmailEventPayload {
 
-    @Schema( description = "Codice opaco utilizzato dal software client per correlare la risposta alla richiesta" )
-    private String requestCorrelationId;
-
-    @Schema( description = "Identificativo univoco della richiesta" )
+	@Schema( description = "Identificativo univoco della richiesta" )
     private String iun;
 
     @Schema( description = "Identificativo del mittente")
@@ -23,8 +25,8 @@ public class PnExtChnPecEventPayload {
     @Schema( description = "Nome del mittente, solitamente la denominaziome della Pubblica Amministrazione")
     private String senderDenomination;
 
-    @Schema( description = "Opzionale: Indirizzo pec del mittente da utilizzare nel campo Replay-To")
-    private String senderPecAddress;
+    @Schema( description = "Opzionale: Indirizzo email del mittente da utilizzare nel campo Replay-To")
+    private String senderEmailAddress;
 
     @Schema( description = "Denominazione del destinatario: nome e cognome o ragione sociale")
     private String recipientDenomination;
@@ -32,7 +34,6 @@ public class PnExtChnPecEventPayload {
     @Schema( description = "Codice fiscale del destinatario")
     private String recipientTaxId;
 
-    @Schema( description = "Indirizzo PEC del destinatario")
-    private String pecAddress;
-
+    @Schema( description = "Indirizzo email del destinatario")
+    private String emailAddress;
 }
