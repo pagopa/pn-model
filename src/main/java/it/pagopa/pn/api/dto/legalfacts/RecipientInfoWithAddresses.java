@@ -1,24 +1,27 @@
 package it.pagopa.pn.api.dto.legalfacts;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Value;
-import lombok.experimental.SuperBuilder;
+import it.pagopa.pn.api.dto.notification.address.DigitalAddress;
+import it.pagopa.pn.api.dto.notification.address.DigitalAddressType;
+import lombok.*;
 
-@Value
-@Builder( toBuilder = true )
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Builder(toBuilder = true)
+@EqualsAndHashCode
+@ToString
 public class RecipientInfoWithAddresses {
 
-    @Schema(name = "denomination", description = "Denominazione di un destinatario")
+    @Schema( description = "Denominazione di un destinatario")
     private String denomination;
 
-    @Schema(name = "cf", description = "Codice fiscale di un destinatario")
-    private String cf;
+    @Schema( description = "Codice fiscale di un destinatario")
+    private String taxId;
 
-    @Schema(name = "digitalDomicile", description = "Rappresentazione in stringa del domicilio digitale destnatario")
-    private String digitalDomicile;
-
-    @Schema(name = "physicalDomicile", description = "domicilio fisico del destinatario")
+    @Schema( description = "Domicilio digitale del destnatario")
+    private DigitalAddress digitalDomicile;
+    
+    @Schema( description = "domicilio fisico del destinatario")
     private String physicalDomicile;
 }

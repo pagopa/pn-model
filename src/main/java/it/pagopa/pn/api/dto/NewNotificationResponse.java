@@ -8,6 +8,7 @@ import lombok.*;
 @Getter
 @Builder(toBuilder = true)
 @EqualsAndHashCode
+@ToString
 public class NewNotificationResponse {
 
     @Schema( name = "iun", description = "Identificativo Univoco Notifica con cui la notifica appena inviata verrà identificata nel processo di notificazione")
