@@ -1,9 +1,6 @@
 package it.pagopa.pn.api.dto.notification.timeline;
 
-import java.util.List;
-
 import io.swagger.v3.oas.annotations.media.Schema;
-import it.pagopa.pn.api.dto.notification.address.DigitalAddress;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
