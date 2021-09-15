@@ -4,6 +4,7 @@ package it.pagopa.pn.api.dto.notification;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.media.Schema;
+import it.pagopa.pn.api.dto.notification.annotation.ValidNotificationAttachment;
 import it.pagopa.pn.api.dto.notification.status.NotificationStatusHistoryElement;
 import it.pagopa.pn.api.dto.notification.timeline.TimelineElement;
 import it.pagopa.pn.api.dto.notification.status.NotificationStatus;
