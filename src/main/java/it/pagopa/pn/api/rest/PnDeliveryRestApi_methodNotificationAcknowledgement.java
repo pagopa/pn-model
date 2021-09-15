@@ -5,10 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-public interface PnDeliveryRestApi_methodDocumentAcknowledgement {
+public interface PnDeliveryRestApi_methodNotificationAcknowledgement {
 
-    @PostMapping( PnDeliveryRestConstants.SENDER_DOCUMENTACKNOWLEDGEMENT_PATH )
-    ResponseEntity<Resource> documentAcknowledgement(
+    @PostMapping( PnDeliveryRestConstants.NOTIFICATION_ACKNOWLEDGEMENT_PATH )
+    ResponseEntity<Resource> notificationAcknowledgement(
     		@PathVariable("iun") String iun,
     		@PathVariable("documentIndex") int documentIndex
     );

@@ -22,7 +22,7 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
     }
 
 	@Override
-	public ResponseEntity<Resource> documentAcknowledgement(String iun, int documentIndex) {
+	public ResponseEntity<Resource> notificationAcknowledgement(String iun, int documentIndex) {
 		return null;
 	}
 
