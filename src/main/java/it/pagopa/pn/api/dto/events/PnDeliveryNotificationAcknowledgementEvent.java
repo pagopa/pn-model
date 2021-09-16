@@ -25,5 +25,8 @@ public class PnDeliveryNotificationAcknowledgementEvent implements GenericEvent<
 
         @Schema( description = "Codice IUN notifica")
         private String iun;
+        
+        @Schema( description = "Indice del reicipient")
+        private int recipientIndex;
     }
 }
