@@ -3,6 +3,8 @@ package it.pagopa.pn.api.dto.notification;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.v3.oas.annotations.media.Schema;
+import it.pagopa.pn.api.constraints.CheckSha256;
+import it.pagopa.pn.api.constraints.IsBase64;
 import lombok.*;
 
 import javax.validation.Valid;
@@ -15,6 +17,7 @@ import javax.validation.constraints.NotNull;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
+@CheckSha256(groups = { NotificationJsonViews.New.class })
 public class NotificationAttachment {
 
     @Schema( description = "codice di controllo del allegato" )
@@ -31,6 +34,7 @@ public class NotificationAttachment {
     @Schema( description = "corpo dell'allegato" )
     @JsonView(value = { NotificationJsonViews.New.class })
     @NotBlank(groups = { NotificationJsonViews.New.class })
+    @IsBase64(groups = { NotificationJsonViews.New.class })
     private String body;
 
     @JsonIgnore
