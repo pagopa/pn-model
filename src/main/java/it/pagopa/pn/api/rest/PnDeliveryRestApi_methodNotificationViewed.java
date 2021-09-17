@@ -13,8 +13,8 @@ public interface PnDeliveryRestApi_methodNotificationViewed {
     ResponseEntity<Resource> notificationViewed(
     		@PathVariable("iun") String iun,
     		@PathVariable("documentIndex") int documentIndex,
-    		@RequestHeader(name = PnDeliveryRestConstants.USER_ID_HEADER ) String userId1,
-    		@RequestParam(name = PnDeliveryRestConstants.USER_ID_HEADER ) String userId2
+    		@RequestHeader(name = PnDeliveryRestConstants.USER_ID_HEADER, required = false ) String userId1,
+    		@RequestParam(name = PnDeliveryRestConstants.USER_ID_HEADER, required = false ) String userId2
     );
 
 }
