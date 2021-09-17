@@ -7,7 +7,9 @@ public enum TimelineElementCategory {
     SEND_DIGITAL_DOMICILE_FEEDBACK( SendDigitalFeedbackDetails.class ),
     WAIT_FOR_RECIPIENT_TIMEOUT( WaitForRecipientTimeoutDetails.class ),
     END_OF_DIGITAL_DELIVERY_WORKFLOW( EndOfDigitalDeliveryWorkflowDetails.class ),
-    NOTIFICATION_VIEWED( NotificationViewedDetails.class );
+    NOTIFICATION_VIEWED( NotificationViewedDetails.class ),
+    PAYMENT( null );
+
 
     private final Class< ? extends TimelineElementDetails> detailsJavaClass;
 
