@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
-public interface PnDeliveryRestApi_methodNotificationAcknowledgement {
+public interface PnDeliveryRestApi_methodNotificationViewed {
 
-    @PostMapping( PnDeliveryRestConstants.NOTIFICATION_ACKNOWLEDGEMENT_PATH )
-    ResponseEntity<Resource> notificationAcknowledgement(
+    @PostMapping( PnDeliveryRestConstants.NOTIFICATION_VIEWED_PATH )
+    ResponseEntity<Resource> notificationViewed(
     		@PathVariable("iun") String iun,
     		@PathVariable("documentIndex") int documentIndex,
     		@RequestHeader(name = PnDeliveryRestConstants.USER_ID_HEADER ) String userId1,

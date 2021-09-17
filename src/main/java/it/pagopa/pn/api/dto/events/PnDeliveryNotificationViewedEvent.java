@@ -9,7 +9,7 @@ import lombok.*;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class PnDeliveryNotificationAcknowledgementEvent implements GenericEvent<StandardEventHeader, PnDeliveryNotificationAcknowledgementEvent.Payload> {
+public class PnDeliveryNotificationViewedEvent implements GenericEvent<StandardEventHeader, PnDeliveryNotificationViewedEvent.Payload> {
 
     private StandardEventHeader header;
 
