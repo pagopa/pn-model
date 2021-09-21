@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 public interface PnDeliveryRestApi_methodGetSentNotification {
 
-	@GetMapping(PnDeliveryRestConstants.NOTIFICATION_RECEIVED_PATH)
+	@GetMapping(PnDeliveryRestConstants.NOTIFICATION_SENT_PATH)
     @JsonView(value = NotificationJsonViews.Sent.class )
     Notification getSentNotification(
             @RequestHeader(name = PnDeliveryRestConstants.PA_ID_HEADER ) String paId,
