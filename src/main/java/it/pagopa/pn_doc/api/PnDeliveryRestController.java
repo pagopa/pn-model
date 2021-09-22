@@ -1,17 +1,18 @@
 package it.pagopa.pn_doc.api;
 
-import it.pagopa.pn.api.dto.NotificationSearchRow;
-import it.pagopa.pn.api.dto.notification.status.NotificationStatus;
+import java.time.Instant;
+import java.util.List;
+
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.pagopa.pn.api.dto.LegalFactsRow;
 import it.pagopa.pn.api.dto.NewNotificationResponse;
+import it.pagopa.pn.api.dto.NotificationSearchRow;
 import it.pagopa.pn.api.dto.notification.Notification;
+import it.pagopa.pn.api.dto.notification.status.NotificationStatus;
 import it.pagopa.pn.api.rest.PnDeliveryRestApi;
-
-import java.time.Instant;
-import java.util.List;
 
 @RestController
 public class PnDeliveryRestController implements PnDeliveryRestApi {
@@ -37,7 +38,7 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
     }
 
 	@Override
-	public Notification getSentNotificationLegalFacts(String userId, String iun) {
+	public List<LegalFactsRow> getSentNotificationLegalFacts(String paId, String iun) {
 		return null;
 	}
 }
