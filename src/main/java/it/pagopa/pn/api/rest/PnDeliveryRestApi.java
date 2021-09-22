@@ -4,5 +4,6 @@ public interface PnDeliveryRestApi extends
         PnDeliveryRestApi_methodReceiveNotification,
         PnDeliveryRestApi_methodGetSentNotification,
         PnDeliveryRestApi_methodNotificationViewed,
-        PnDeliveryRestApi_methodSearchSentNotification
+        PnDeliveryRestApi_methodSearchSentNotification,
+        PnDeliveryRestApi_methodGetSentNotificationLegalFacts
 { }

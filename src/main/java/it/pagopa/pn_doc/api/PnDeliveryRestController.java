@@ -32,7 +32,12 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
 	}
 
     @Override
-    public List<NotificationSearchRow> getSentNotification(String senderId, Instant startDate, Instant endDate, String recipientId, NotificationStatus status, String subjectRegExp) {
+    public List<NotificationSearchRow> searchSentNotification(String senderId, Instant startDate, Instant endDate, String recipientId, NotificationStatus status, String subjectRegExp) {
         return null;
     }
+
+	@Override
+	public Notification getSentNotificationLegalFacts(String userId, String iun) {
+		return null;
+	}
 }
