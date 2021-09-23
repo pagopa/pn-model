@@ -1,7 +1,7 @@
 package it.pagopa.pn.api.dto.notification.timeline;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.v3.oas.annotations.media.Schema;
+import com.fasterxml.jackson.annotation.JsonView;
 import it.pagopa.pn.api.dto.notification.NotificationJsonViews;
 import lombok.*;
 
