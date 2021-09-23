@@ -20,7 +20,7 @@ public class NotificationViewedLegalFact {
     private String iun;
 
     @Schema( description = "Data di affidamento: perfezionamento per mittente")
-    private Integer date;
+    private String date;
 
     @Schema( description = "Dati del destinatario")
     private RecipientInfo recipient;

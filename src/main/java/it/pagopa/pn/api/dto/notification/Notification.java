@@ -65,6 +65,7 @@ public class Notification {
     @NotEmpty(groups = { NotificationJsonViews.New.class })
     private List< @NotNull(groups = { NotificationJsonViews.New.class }) @Valid NotificationRecipient> recipients ;
 
+    @Valid
     @Schema( description = "Documenti notificati e lettere di accompagnamento" )
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
     @NotEmpty(groups = { NotificationJsonViews.New.class })
@@ -72,6 +73,7 @@ public class Notification {
 
     @Schema( description = "Informazioni per effttuare il pagamento" )
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
+    @Valid
     private NotificationPaymentInfo payment;
 
     @Schema( description = "stato di avanzamento del processo di notifica")
