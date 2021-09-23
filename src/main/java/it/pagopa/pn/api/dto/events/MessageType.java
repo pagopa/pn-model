@@ -17,8 +17,8 @@ public class MessageType {
     /**
      * The inbound event message types
      */
-    public static final String PN_EXT_CHN_PEC = "PN-EXT_CHN-PEC";
-    public static final String PN_EXT_CHN_EMAIL = "PN-EXT_CHN-EMAIL";
+    public static final String PN_EXT_CHN_PEC = "SEND_PEC_REQUEST";
+    public static final String PN_EXT_CHN_EMAIL = "SEND_COURTESY_EMAIL";
 
     private static final Collection<String> messageTypes;
 
