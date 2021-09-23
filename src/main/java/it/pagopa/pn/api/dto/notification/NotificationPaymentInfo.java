@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
+import javax.validation.Valid;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -22,6 +24,7 @@ public class NotificationPaymentInfo {
 
     @Schema( description = "Moduli di pagamento F24" )
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
+    @Valid
     private F24 f24 ;
 
     @NoArgsConstructor
@@ -33,14 +36,17 @@ public class NotificationPaymentInfo {
 
         @Schema( description = "Modulo F24 per spese di notifica forfettarie" )
         @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
+        @Valid
         private NotificationAttachment flatRate;
 
         @Schema( description = "Modulo F24 per spese di notifica digitale" )
         @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
+        @Valid
         private NotificationAttachment digital;
 
         @Schema( description = "Modulo F24 per spese di notifica analogica" )
         @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
+        @Valid
         private NotificationAttachment analog;
     }
 }
