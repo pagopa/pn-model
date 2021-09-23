@@ -2,7 +2,9 @@ package it.pagopa.pn.api.dto.notification.timeline;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.v3.oas.annotations.media.Schema;
+import it.pagopa.pn.api.dto.notification.NotificationJsonViews;
 import lombok.*;
 
 import java.time.Instant;
@@ -20,15 +22,19 @@ public class TimelineElement {
     @JsonIgnore
     private String iun;
 
+    @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
     @Schema( description = "Insieme allo IUN della notifica definisce in maniera univoca l'elemento di timeline")
     private String elementId;
 
+    @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
     @Schema( description = "Momento in cui avviene l'evento desritto in questo elemento di timeline")
     private Instant timestamp;
 
+    @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
     @Schema( description = "tipo di evento registrato")
     private TimelineElementCategory category;
 
+    @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
     @Schema( description = "dettagli sull'evento: variano in base al \"eventCategory\"",
             oneOf = {
                 ReceivedDetails.class,
