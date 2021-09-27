@@ -12,4 +12,5 @@ public class PnDeliveryRestConstants {
     public static final String NOTIFICATION_SENT_LEGALFACTS_PATH = DELIVERY_PATH + "/notifications/sent/{iun}/legalfacts/";
     public static final String PA_ID_HEADER = "X-PagoPA-PN-PA"; 
     public static final String USER_ID_HEADER = "X-PagoPA-User-Id";
+    public static final String RECEIVER_NOTIFICATIONS_PATH = DELIVERY_PATH + "/notifications/received";
 }
