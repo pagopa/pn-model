@@ -28,7 +28,7 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
     }
 
 	@Override
-	public ResponseEntity<Resource> notificationViewed(String iun, int documentIndex, String userId1, String userId2) {
+	public ResponseEntity<Resource> getReceivedNotificationDocument(String iun, int documentIndex, String userId1 ) {
 		return null;
 	}
 
@@ -41,4 +41,29 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
 	public List<LegalFactsRow> getSentNotificationLegalFacts(String paId, String iun) {
 		return null;
 	}
+
+    @Override
+    public Notification getReceivedNotification(String userId, String iun) {
+        return null;
+    }
+
+    @Override
+    public List<LegalFactsRow> getReceivedNotificationLegalFacts(String userId, String iun) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Resource> getReceivedNotificationLegalFact(String userId, String iun, String legalFactId) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Resource> notificationViewed(String iun, int documentIndex, String paId) {
+        return null;
+    }
+
+    @Override
+    public List<NotificationSearchRow> searchReceivedNotification(String recipientId, Instant startDate, Instant endDate, String senderId, NotificationStatus status, String subjectRegExp) {
+        return null;
+    }
 }
