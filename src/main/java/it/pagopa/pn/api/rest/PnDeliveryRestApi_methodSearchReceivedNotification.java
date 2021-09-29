@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface PnDeliveryRestApi_methodSearchReceivedNotification {
 
-    @GetMapping(PnDeliveryRestConstants.NOTIFICATION_RECEIVED_PATH)
+    @GetMapping(PnDeliveryRestConstants.NOTIFICATIONS_RECEIVED_PATH)
     List<NotificationSearchRow> searchReceivedNotification(
             @RequestParam(name = "recipientId") String recipientId,
             @RequestParam(name = "startDate") Instant startDate,

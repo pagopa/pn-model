@@ -9,7 +9,7 @@ import java.time.Instant;
 import java.util.List;
 
 public interface PnDeliveryRestApi_methodSearchSentNotification {
-    @GetMapping(PnDeliveryRestConstants.SENDER_NOTIFICATIONS_PATH)
+    @GetMapping(PnDeliveryRestConstants.SEND_NOTIFICATIONS_PATH)
     List<NotificationSearchRow> searchSentNotification(
             @RequestParam(name = "senderId") String senderId,
             @RequestParam(name = "startDate") Instant startDate,
