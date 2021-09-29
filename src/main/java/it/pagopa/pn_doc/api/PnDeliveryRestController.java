@@ -4,6 +4,8 @@ import java.time.Instant;
 import java.util.List;
 
 import it.pagopa.pn.api.dto.legalfacts.LegalFactsListEntry;
+import it.pagopa.pn.api.dto.preload.PreloadRequest;
+import it.pagopa.pn.api.dto.preload.PreloadResponse;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +21,11 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
 
     @Override
     public NewNotificationResponse receiveNotification(String paId, Notification notification) {
+        return null;
+    }
+
+    @Override
+    public PreloadResponse presignedUploadRequest(String paId, PreloadRequest request) {
         return null;
     }
 
