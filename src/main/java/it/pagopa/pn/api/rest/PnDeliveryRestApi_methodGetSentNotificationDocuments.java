@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface PnDeliveryRestApi_methodGetSentNotificationDocuments {
 
     @GetMapping( PnDeliveryRestConstants.NOTIFICATION_SENT_DOCUMENTS_PATH)
-    ResponseEntity<Resource> notificationViewed(
+    ResponseEntity<Resource> getSentNotificationDocument(
     		@PathVariable("iun") String iun,
     		@PathVariable("documentIndex") int documentIndex,
     		@RequestHeader(name = PnDeliveryRestConstants.PA_ID_HEADER ) String paId

@@ -1,4 +1,4 @@
-package it.pagopa.pn.api.dto;
+package it.pagopa.pn.api.dto.legalfacts;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,8 +13,8 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class LegalFactsRow {
+public class LegalFactsListEntry {
     private String id;
-    private String type;
+    private LegalFactType type;
     private String taxId;
 }
