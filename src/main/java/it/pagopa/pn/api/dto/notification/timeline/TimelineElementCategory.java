@@ -10,7 +10,6 @@ public enum TimelineElementCategory {
     NOTIFICATION_VIEWED( NotificationViewedDetails.class ),
     PAYMENT( null );
 
-
     private final Class< ? extends TimelineElementDetails> detailsJavaClass;
 
     private TimelineElementCategory(Class<? extends TimelineElementDetails> detailsJavaClass) {

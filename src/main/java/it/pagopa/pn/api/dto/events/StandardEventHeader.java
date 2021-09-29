@@ -4,11 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
+import javax.validation.constraints.NotEmpty;
 import java.time.Instant;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
+@Data
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
@@ -30,9 +31,11 @@ public class StandardEventHeader {
 
     @Schema( name = PN_EVENT_HEADER_EVENT_TYPE, description = "Tipo dell'evento: definisce il payload")
     @JsonProperty( PN_EVENT_HEADER_EVENT_TYPE )
+    @NotEmpty
     private String eventType;
 
     @Schema( name = PN_EVENT_HEADER_IUN, description = "Un messaggio è sempre collegato a una notifica")
+    @NotEmpty
     private String iun;
 
     @Schema( name = PN_EVENT_HEADER_CREATED_AT, description = "Istante di creazione del messaggio")

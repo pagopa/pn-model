@@ -42,6 +42,7 @@ public class NotificationPathChooseDetails implements TimelineElementDetails {
     DigitalAddress general;
 
     @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
+
     @Schema( description = "Elenco recapiti digitali del destinatario")
     List<DigitalAddress> courtesyAddresses;
 
