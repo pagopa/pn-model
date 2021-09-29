@@ -3,11 +3,11 @@ package it.pagopa.pn_doc.api;
 import java.time.Instant;
 import java.util.List;
 
+import it.pagopa.pn.api.dto.legalfacts.LegalFactsListEntry;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.pagopa.pn.api.dto.LegalFactsRow;
 import it.pagopa.pn.api.dto.NewNotificationResponse;
 import it.pagopa.pn.api.dto.NotificationSearchRow;
 import it.pagopa.pn.api.dto.notification.Notification;
@@ -27,27 +27,48 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
         return null;
     }
 
-    @Override
-    public ResponseEntity<Resource> notificationViewed(String iun, int documentIndex, String userId1, String userId2) {
-        return null;
-    }
+	@Override
+	public ResponseEntity<Resource> getReceivedNotificationDocument(String iun, int documentIndex, String userId1 ) {
+		return null;
+	}
 
     @Override
     public List<NotificationSearchRow> searchSentNotification(String senderId, Instant startDate, Instant endDate, String recipientId, NotificationStatus status, String subjectRegExp) {
         return null;
     }
 
-	  @Override
-	  public List<LegalFactsRow> getSentNotificationLegalFacts(String paId, String iun) {
-		    return null;
-	  }
+	@Override
+    public Notification getReceivedNotification(String userId, String iun) {
+        return null;
+    }
+
+    @Override
+    public List<LegalFactsListEntry> getReceivedNotificationLegalFacts(String userId, String iun) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Resource> getReceivedNotificationLegalFact(String userId, String iun, String legalFactId) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Resource> getSentNotificationDocument(String iun, int documentIndex, String paId) {
+        return null;
+    }
+
     @Override
     public List<NotificationSearchRow> searchReceivedNotification(String recipientId, Instant startDate, Instant endDate, String senderId, NotificationStatus status, String subjectRegExp) {
         return null;
     }
 
     @Override
-    public List<LegalFactsRow> getSentNotificationLegalFacts(String paId, String iun) {
+    public List<LegalFactsListEntry> getSentNotificationLegalFacts(String paId, String iun) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Resource> getSentNotificationLegalFact(String paId, String iun, String legalFactId) {
         return null;
     }
 }

@@ -7,14 +7,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
-public interface PnDeliveryRestApi_methodNotificationViewed {
+public interface PnDeliveryRestApi_methodGetReceivedNotificationDocuments {
 
     @GetMapping( PnDeliveryRestConstants.NOTIFICATION_VIEWED_PATH )
-    ResponseEntity<Resource> notificationViewed(
+    ResponseEntity<Resource> getReceivedNotificationDocument(
     		@PathVariable("iun") String iun,
     		@PathVariable("documentIndex") int documentIndex,
-    		@RequestHeader(name = PnDeliveryRestConstants.USER_ID_HEADER, required = false ) String userId1,
-    		@RequestParam(name = PnDeliveryRestConstants.USER_ID_HEADER, required = false ) String userId2
+    		@RequestHeader(name = PnDeliveryRestConstants.USER_ID_HEADER, required = false ) String userId
     );
 
 }

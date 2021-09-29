@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 public interface PnDeliveryRestApi_methodReceiveNotification {
 
-    @PostMapping(PnDeliveryRestConstants.SENDER_NOTIFICATIONS_PATH )
+    @PostMapping(PnDeliveryRestConstants.SEND_NOTIFICATIONS_PATH )
     NewNotificationResponse receiveNotification(
             @RequestHeader(name = PnDeliveryRestConstants.PA_ID_HEADER ) String paId,
             @RequestBody @JsonView(value = NotificationJsonViews.New.class ) Notification notification
