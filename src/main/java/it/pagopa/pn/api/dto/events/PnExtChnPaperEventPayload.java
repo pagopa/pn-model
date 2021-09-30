@@ -5,12 +5,17 @@
  */
 package it.pagopa.pn.api.dto.events;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
@@ -30,6 +35,7 @@ public class PnExtChnPaperEventPayload {
     public static final String PN_EXTCHN_CART_EVENT_DOCUMENTO = "documento";
     public static final String PN_EXTCHN_CART_EVENT_MITTENTE = "mittente";
     public static final String PN_EXTCHN_CART_EVENT_DESTINATARIO = "destinatario";
+    public static final String PN_EXTCHN_CART_EVENT_AVVISO_RICEZIONE = "avvisoRicezione";
 
     @NotNull
     @NotEmpty
@@ -50,4 +56,10 @@ public class PnExtChnPaperEventPayload {
     @JsonProperty(PnExtChnPaperEventPayload.PN_EXTCHN_CART_EVENT_DESTINATARIO)
     private PnExtChnPaperEventPayloadReceiver destinatario;
     
+    @NotNull
+    @Valid
+    @JsonProperty(PnExtChnPaperEventPayload.PN_EXTCHN_CART_EVENT_AVVISO_RICEZIONE)
+    private PnExtChnPaperEventPayloadNotice avvisoRicezione;
+    
 }
+
