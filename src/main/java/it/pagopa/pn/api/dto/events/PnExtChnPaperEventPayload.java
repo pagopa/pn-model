@@ -5,12 +5,10 @@
  */
 package it.pagopa.pn.api.dto.events;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -23,31 +21,13 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class PnExtChnPaperEventPayload {
 
-    /**
-     * The event property names
-     */
-    public static final String PN_EXTCHN_CART_EVENT_CALLBACK_URL = "callbackUrl";
-    public static final String PN_EXTCHN_CART_EVENT_DOCUMENTO = "documento";
-    public static final String PN_EXTCHN_CART_EVENT_MITTENTE = "mittente";
-    public static final String PN_EXTCHN_CART_EVENT_DESTINATARIO = "destinatario";
+    @Schema( description = "Codice opaco utilizzato dal software client per correlare la risposta alla richiesta" )
+    private String requestCorrelationId;
 
-    @NotNull
+    @Schema( description = "Identificativo univoco della richiesta" )
     @NotEmpty
-    @JsonProperty(PnExtChnPaperEventPayload.PN_EXTCHN_CART_EVENT_CALLBACK_URL)
-    private String urlCallBack;
+    private String iun;
 
-    @Valid
-    @JsonProperty(PnExtChnPaperEventPayload.PN_EXTCHN_CART_EVENT_DOCUMENTO)
-    private PnExtChnPaperEventPayloadDocument documento;
-
-    @NotNull
-    @Valid
-    @JsonProperty(PnExtChnPaperEventPayload.PN_EXTCHN_CART_EVENT_MITTENTE)
-    private PnExtChnPaperEventPayloadSender mittente;
-
-    @NotNull
-    @Valid
-    @JsonProperty(PnExtChnPaperEventPayload.PN_EXTCHN_CART_EVENT_DESTINATARIO)
-    private PnExtChnPaperEventPayloadReceiver destinatario;
+    //TODO add fields...
     
 }
