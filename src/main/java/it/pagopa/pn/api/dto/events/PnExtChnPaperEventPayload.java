@@ -5,12 +5,10 @@
  */
 package it.pagopa.pn.api.dto.events;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+import io.swagger.v3.oas.annotations.media.Schema;
+import it.pagopa.pn.api.dto.notification.address.PhysicalAddress;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,38 +26,37 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PnExtChnPaperEventPayload {
 
-    /**
-     * The event property names
-     */
-    public static final String PN_EXTCHN_CART_EVENT_CALLBACK_URL = "callbackUrl";
-    public static final String PN_EXTCHN_CART_EVENT_DOCUMENTO = "documento";
-    public static final String PN_EXTCHN_CART_EVENT_MITTENTE = "mittente";
-    public static final String PN_EXTCHN_CART_EVENT_DESTINATARIO = "destinatario";
-    public static final String PN_EXTCHN_CART_EVENT_AVVISO_RICEZIONE = "avvisoRicezione";
+    @Schema( description = "Codice opaco utilizzato dal software client per correlare la risposta alla richiesta" )
+    private String requestCorrelationId;
 
-    @NotNull
+    @Schema( description = "Identificativo univoco della richiesta" )
     @NotEmpty
-    @JsonProperty(PnExtChnPaperEventPayload.PN_EXTCHN_CART_EVENT_CALLBACK_URL)
-    private String urlCallBack;
+    private String iun;
 
-    @Valid
-    @JsonProperty(PnExtChnPaperEventPayload.PN_EXTCHN_CART_EVENT_DOCUMENTO)
-    private PnExtChnPaperEventPayloadDocument documento;
-
-    @NotNull
-    @Valid
-    @JsonProperty(PnExtChnPaperEventPayload.PN_EXTCHN_CART_EVENT_MITTENTE)
-    private PnExtChnPaperEventPayloadSender mittente;
-
-    @NotNull
-    @Valid
-    @JsonProperty(PnExtChnPaperEventPayload.PN_EXTCHN_CART_EVENT_DESTINATARIO)
-    private PnExtChnPaperEventPayloadReceiver destinatario;
+    //TODO add fields...
+    /*
+     * i. 	Mittente -> Indirizzo Fisico
+     * ii 	Tipologia Comunicazione
+     * iii.	Livello Servizio
+     * iv. 	Denominazione Mittente
+     * 
+     */
     
-    @NotNull
-    @Valid
-    @JsonProperty(PnExtChnPaperEventPayload.PN_EXTCHN_CART_EVENT_AVVISO_RICEZIONE)
-    private PnExtChnPaperEventPayloadNotice avvisoRicezione;
+    @Schema( description = "Indirizzo fisico mittente" )
+    @NotEmpty
+    private PhysicalAddress senderAddress;
+    
+    @Schema( description = "Tipologia comunicazione" )
+    @NotEmpty
+    private String communicationType;		//TODO definire tipo
+    
+    @Schema( description = "Livello Servizio" )
+    @NotEmpty
+    private int serviceLevel;				//TODO definire tipo
+    
+    @Schema( description = "Denominazione Mittente" )
+    @NotEmpty
+    private String senderDenomination;		//TODO definire tipo
     
 }
 
