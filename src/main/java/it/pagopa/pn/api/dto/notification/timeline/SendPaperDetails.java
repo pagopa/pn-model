@@ -18,7 +18,7 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class ReceivedPaperDeliveredNoticeDetails implements TimelineElementDetails {
+public class SendPaperDetails implements TimelineElementDetails {
 
 	@JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
     @Schema( description = "indirizzo fisico di invio della notifica")

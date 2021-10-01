@@ -5,12 +5,12 @@ public enum TimelineElementCategory {
     NOTIFICATION_PATH_CHOOSE( NotificationPathChooseDetails.class ),
     SEND_DIGITAL_DOMICILE( SendDigitalDetails.class ),
     SEND_DIGITAL_DOMICILE_FEEDBACK( SendDigitalFeedbackDetails.class ),
-    SEND_DIGITAL_DOMICILE_FAILURE( SendDigitalFailure.class ),
+    SEND_DIGITAL_DOMICILE_FAILURE( SendDigitalFailureDetails.class ),
     WAIT_FOR_RECIPIENT_TIMEOUT( WaitForRecipientTimeoutDetails.class ),
     END_OF_DIGITAL_DELIVERY_WORKFLOW( EndOfDigitalDeliveryWorkflowDetails.class ),
     NOTIFICATION_VIEWED( NotificationViewedDetails.class ),
-    PAYMENT( null ),
-    RECEIVED_PAPER_DELIVERED_NOTICE( ReceivedPaperDeliveredNoticeDetails.class );
+    SEND_PAPER_FEEDBACK( SendPaperDetails.class ),
+    PAYMENT( null );
 
     private final Class< ? extends TimelineElementDetails> detailsJavaClass;
 

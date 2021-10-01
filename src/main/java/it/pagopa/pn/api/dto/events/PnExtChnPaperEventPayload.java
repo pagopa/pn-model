@@ -32,31 +32,22 @@ public class PnExtChnPaperEventPayload {
     @Schema( description = "Identificativo univoco della richiesta" )
     @NotEmpty
     private String iun;
-
-    //TODO add fields...
-    /*
-     * i. 	Mittente -> Indirizzo Fisico
-     * ii 	Tipologia Comunicazione
-     * iii.	Livello Servizio
-     * iv. 	Denominazione Mittente
-     * 
-     */
     
-    @Schema( description = "Indirizzo fisico mittente" )
+    @Schema( description = "Indirizzo fisico destinatario" )
     @NotEmpty
-    private PhysicalAddress senderAddress;
+    private PhysicalAddress destinationAddress;
     
     @Schema( description = "Tipologia comunicazione" )
     @NotEmpty
-    private String communicationType;		//TODO definire tipo
+    private String communicationType;
     
     @Schema( description = "Livello Servizio" )
     @NotEmpty
-    private int serviceLevel;				//TODO definire tipo
+    private String serviceLevel;
     
     @Schema( description = "Denominazione Mittente" )
     @NotEmpty
-    private String senderDenomination;		//TODO definire tipo
+    private String senderDenomination;
     
 }
 
