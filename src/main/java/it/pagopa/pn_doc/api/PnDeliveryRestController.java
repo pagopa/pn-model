@@ -35,7 +35,7 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
     }
 
 	@Override
-	public ResponseEntity<Resource> getReceivedNotificationDocument(String iun, int documentIndex, String userId1 ) {
+	public ResponseEntity<Resource> getReceivedNotificationDocument( String userId1, String iun, int documentIndex ) {
 		return null;
 	}
 
@@ -60,7 +60,7 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
     }
 
     @Override
-    public ResponseEntity<Resource> getSentNotificationDocument(String iun, int documentIndex, String paId) {
+    public ResponseEntity<Resource> getSentNotificationDocument(String paId, String iun, int documentIndex ) {
         return null;
     }
 
