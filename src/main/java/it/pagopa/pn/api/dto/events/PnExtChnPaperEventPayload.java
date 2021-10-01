@@ -39,15 +39,19 @@ public class PnExtChnPaperEventPayload {
     
     @Schema( description = "Tipologia comunicazione" )
     @NotEmpty
-    private String communicationType;
+    private CommunicationType communicationType;
     
     @Schema( description = "Livello Servizio" )
     @NotEmpty
-    private String serviceLevel;
+    private ServiceLevelType serviceLevel;
     
     @Schema( description = "Denominazione Mittente" )
     @NotEmpty
     private String senderDenomination;
+    
+    @Schema( description = "Denominazione Destinatario" )
+    @NotEmpty
+    private String recipientDenomination;
     
 }
 
