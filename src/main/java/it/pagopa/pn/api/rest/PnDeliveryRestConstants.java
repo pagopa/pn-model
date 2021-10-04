@@ -11,6 +11,7 @@ public class PnDeliveryRestConstants {
     private static final String DELIVERY_PATH = "delivery";
 
     public static final String SEND_NOTIFICATIONS_PATH = DELIVERY_PATH + "/notifications/sent";
+    public static final String ATTACHMENT_PRELOAD_REQUEST = DELIVERY_PATH + "/attachments/preload";
 
     public static final String NOTIFICATION_SENT_PATH = DELIVERY_PATH + "/notifications/sent/{iun}";
     public static final String NOTIFICATION_SENT_DOCUMENTS_PATH = DELIVERY_PATH + "/notifications/sent/{iun}/documents/{documentIndex}";

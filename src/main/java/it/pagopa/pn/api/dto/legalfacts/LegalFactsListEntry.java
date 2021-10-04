@@ -14,7 +14,9 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public class LegalFactsListEntry {
-    private String id;
+    private String iun;
+    private String legalFactId;
     private LegalFactType type;
     private String taxId;
+
 }

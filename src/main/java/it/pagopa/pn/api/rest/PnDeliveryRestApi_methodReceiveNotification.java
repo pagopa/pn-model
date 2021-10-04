@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonView;
 import it.pagopa.pn.api.dto.NewNotificationResponse;
 import it.pagopa.pn.api.dto.notification.Notification;
 import it.pagopa.pn.api.dto.notification.NotificationJsonViews;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
+import it.pagopa.pn.api.dto.preload.PreloadRequest;
+import it.pagopa.pn.api.dto.preload.PreloadResponse;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 public interface PnDeliveryRestApi_methodReceiveNotification {
 
@@ -15,5 +17,12 @@ public interface PnDeliveryRestApi_methodReceiveNotification {
             @RequestHeader(name = PnDeliveryRestConstants.PA_ID_HEADER ) String paId,
             @RequestBody @JsonView(value = NotificationJsonViews.New.class ) Notification notification
     );
+
+    @PostMapping( PnDeliveryRestConstants.ATTACHMENT_PRELOAD_REQUEST)
+    PreloadResponse presignedUploadRequest(
+            @RequestHeader(name = PnDeliveryRestConstants.PA_ID_HEADER ) String paId,
+            @RequestBody PreloadRequest request
+    );
+
 
 }

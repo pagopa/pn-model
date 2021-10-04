@@ -11,9 +11,9 @@ public interface PnDeliveryRestApi_methodGetReceivedNotificationDocuments {
 
     @GetMapping( PnDeliveryRestConstants.NOTIFICATION_VIEWED_PATH )
     ResponseEntity<Resource> getReceivedNotificationDocument(
+            @RequestHeader(name = PnDeliveryRestConstants.USER_ID_HEADER) String userId,
     		@PathVariable("iun") String iun,
-    		@PathVariable("documentIndex") int documentIndex,
-    		@RequestHeader(name = PnDeliveryRestConstants.USER_ID_HEADER, required = false ) String userId
+    		@PathVariable("documentIndex") int documentIndex
     );
 
 }
