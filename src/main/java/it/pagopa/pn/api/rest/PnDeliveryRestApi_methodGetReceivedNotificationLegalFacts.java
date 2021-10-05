@@ -17,7 +17,7 @@ public interface PnDeliveryRestApi_methodGetReceivedNotificationLegalFacts {
             @PathVariable( name = "iun") String iun
     );
 
-    @GetMapping(PnDeliveryRestConstants.NOTIFICATION_RECEIVED_LEGALFACTS_PATH + "{id}")
+    @GetMapping(PnDeliveryRestConstants.NOTIFICATION_RECEIVED_LEGALFACTS_PATH + "/{id}")
     ResponseEntity<Resource> getReceivedNotificationLegalFact(
             @RequestHeader(name = PnDeliveryRestConstants.USER_ID_HEADER ) String userId,
             @PathVariable( name = "iun") String iun,
