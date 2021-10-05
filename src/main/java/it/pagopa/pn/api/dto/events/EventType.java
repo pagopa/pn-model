@@ -6,7 +6,7 @@ public enum EventType implements IEventType {
     SEND_PEC_REQUEST( PnExtChnPecEvent.class ),
     SEND_PEC_RESPONSE( PnExtChnProgressStatusEvent.class ),
     SEND_COURTESY_EMAIL ( PnExtChnEmailEvent.class ),
-    SEND_PAPER_REQUEST( PnExtChnPaperEvent.class );
+    SEND_PAPER_REQUEST ( PnExtChnPaperEvent.class );
 
     private final Class<?> eventClass;
 

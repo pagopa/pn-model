@@ -5,10 +5,15 @@
  */
 package it.pagopa.pn.api.dto.events;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
 import javax.validation.constraints.NotEmpty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import it.pagopa.pn.api.dto.notification.address.PhysicalAddress;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
@@ -27,7 +32,26 @@ public class PnExtChnPaperEventPayload {
     @Schema( description = "Identificativo univoco della richiesta" )
     @NotEmpty
     private String iun;
-
-    //TODO add fields...
+    
+    @Schema( description = "Indirizzo fisico destinatario" )
+    @NotEmpty
+    private PhysicalAddress destinationAddress;
+    
+    @Schema( description = "Tipologia comunicazione" )
+    @NotEmpty
+    private CommunicationType communicationType;
+    
+    @Schema( description = "Livello Servizio" )
+    @NotEmpty
+    private ServiceLevelType serviceLevel;
+    
+    @Schema( description = "Denominazione Mittente" )
+    @NotEmpty
+    private String senderDenomination;
+    
+    @Schema( description = "Denominazione Destinatario" )
+    @NotEmpty
+    private String recipientDenomination;
     
 }
+
