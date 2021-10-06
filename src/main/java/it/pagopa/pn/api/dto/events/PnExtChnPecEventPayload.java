@@ -1,9 +1,17 @@
 package it.pagopa.pn.api.dto.events;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import java.time.Instant;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Builder(toBuilder = true)
 @Data
@@ -43,5 +51,9 @@ public class PnExtChnPecEventPayload {
     @Schema( description = "Indirizzo PEC del destinatario")
     @NotEmpty
     private String pecAddress;
+    
+    @Schema( description = "Data di invio messaggio")
+    @NotNull
+    private Instant shipmentDate;
 
 }
