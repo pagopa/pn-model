@@ -1,5 +1,9 @@
 package it.pagopa.pn.api.dto.events;
 
+import java.time.Instant;
+
+import javax.validation.constraints.NotEmpty;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,4 +40,7 @@ public class PnExtChnEmailEventPayload {
 
     @Schema( description = "Indirizzo email del destinatario")
     private String emailAddress;
+    
+    @Schema( description = "Data di invio")
+    private Instant shipmentDate;
 }
