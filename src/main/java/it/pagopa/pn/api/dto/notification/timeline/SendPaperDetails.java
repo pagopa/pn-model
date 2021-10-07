@@ -20,7 +20,11 @@ import lombok.ToString;
 @ToString
 public class SendPaperDetails implements TimelineElementDetails {
 
-	@JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
+    @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
+    @Schema( description = "Codice Fiscale destinatario notifica digitale")
+    private String taxId;
+
+    @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
     @Schema( description = "indirizzo fisico di invio della notifica")
     private PhysicalAddress address;
 

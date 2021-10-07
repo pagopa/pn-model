@@ -1,5 +1,9 @@
 package it.pagopa.pn.api.dto.events;
 
+import java.time.Instant;
+
+import javax.validation.constraints.NotEmpty;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
