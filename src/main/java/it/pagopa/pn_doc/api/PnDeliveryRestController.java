@@ -36,11 +36,6 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
     }
 
 	@Override
-	public ResponseEntity<Resource> getReceivedNotificationDocument( String userId1, String iun, int documentIndex, ServerHttpResponse response ) {
-		return null;
-	}
-
-    @Override
     public List<NotificationSearchRow> searchSentNotification(String senderId, Instant startDate, Instant endDate, String recipientId, NotificationStatus status, String subjectRegExp) {
         return null;
     }
@@ -61,11 +56,6 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
     }
 
     @Override
-    public ResponseEntity<Resource> getSentNotificationDocument(String paId, String iun, int documentIndex, ServerHttpResponse response ) {
-        return null;
-    }
-
-    @Override
     public List<NotificationSearchRow> searchReceivedNotification(String recipientId, Instant startDate, Instant endDate, String senderId, NotificationStatus status, String subjectRegExp) {
         return null;
     }
@@ -77,6 +67,16 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
 
     @Override
     public ResponseEntity<Resource> getSentNotificationLegalFact(String paId, String iun, String legalFactId) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Resource> getReceivedNotificationDocument(String userId, String iun, int documentIndex, ServerHttpResponse response) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Resource> getSentNotificationDocument(String paId, String iun, int documentIndex, ServerHttpResponse response) {
         return null;
     }
 }

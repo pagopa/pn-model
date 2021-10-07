@@ -1,11 +1,12 @@
 package it.pagopa.pn.api.dto.events;
 
-import java.time.Instant;
+import io.swagger.v3.oas.annotations.media.Schema;
+import it.pagopa.pn.api.dto.notification.address.PhysicalAddress;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.Instant;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,6 +28,10 @@ public class PnExtChnPecEventPayload {
     @Schema( description = "Identificativo univoco della richiesta" )
     @NotEmpty
     private String iun;
+
+    @Schema( description = "Indirizzo fisico destinatario" )
+    // @NotNull
+    private PhysicalAddress destinationAddress;
 
     @Schema( description = "Identificativo del mittente")
     @NotEmpty
