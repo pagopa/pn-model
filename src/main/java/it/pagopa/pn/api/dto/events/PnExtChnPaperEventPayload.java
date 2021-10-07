@@ -6,6 +6,7 @@
 package it.pagopa.pn.api.dto.events;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import it.pagopa.pn.api.dto.notification.address.PhysicalAddress;
@@ -34,15 +35,15 @@ public class PnExtChnPaperEventPayload {
     private String iun;
     
     @Schema( description = "Indirizzo fisico destinatario" )
-    @NotEmpty
+    @NotNull
     private PhysicalAddress destinationAddress;
     
     @Schema( description = "Tipologia comunicazione" )
-    @NotEmpty
+    @NotNull
     private CommunicationType communicationType;
     
     @Schema( description = "Livello Servizio" )
-    @NotEmpty
+    @NotNull
     private ServiceLevelType serviceLevel;
     
     @Schema( description = "Denominazione Mittente" )

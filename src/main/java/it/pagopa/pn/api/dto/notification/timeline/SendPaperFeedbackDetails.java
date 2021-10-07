@@ -22,17 +22,17 @@ public class SendPaperFeedbackDetails extends SendPaperDetails {
 
 
   public SendPaperFeedbackDetails( SendPaperDetails spd, List<String> errors) {
-	  super( spd.getTaxId(), spd.getAddress() );
+	  super( spd.getAddress() );
 	  this.errors = errors;
   }
 	
-    public SendPaperFeedbackDetails( String taxId, PhysicalAddress address, List<String> errors) {
-        super( taxId, address);
+    public SendPaperFeedbackDetails( PhysicalAddress address, List<String> errors) {
+        super(address);
         this.errors = errors;
     }
 
     public SendPaperFeedbackDetails( List<String> errors) {
-        super( null, null );
+        super( null );
         this.errors = errors;
     }
 

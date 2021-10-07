@@ -11,6 +11,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.Valid;
+
 /**
  *
  * @author GIANGR40
@@ -22,9 +24,11 @@ import lombok.NoArgsConstructor;
 public class PnExtChnPaperEvent implements GenericEvent<StandardEventHeader, PnExtChnPaperEventPayload> {
 
     @JsonProperty("header")
+    @Valid
     private StandardEventHeader header;
 
     @JsonProperty("payload")
+    @Valid
     private PnExtChnPaperEventPayload payload;
 
 }
