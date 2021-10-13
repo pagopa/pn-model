@@ -1,20 +1,28 @@
 package it.pagopa.pn.api.dto.notification;
 
 
-import com.fasterxml.jackson.annotation.JsonView;
-import io.swagger.v3.oas.annotations.ExternalDocumentation;
-import io.swagger.v3.oas.annotations.media.Schema;
-import it.pagopa.pn.api.dto.notification.status.NotificationStatusHistoryElement;
-import it.pagopa.pn.api.dto.notification.timeline.TimelineElement;
-import it.pagopa.pn.api.dto.notification.status.NotificationStatus;
-import lombok.*;
+import java.time.Instant;
+import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.time.Instant;
-import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import io.swagger.v3.oas.annotations.ExternalDocumentation;
+import io.swagger.v3.oas.annotations.media.Schema;
+import it.pagopa.pn.api.dto.events.ServiceLevelType;
+import it.pagopa.pn.api.dto.notification.status.NotificationStatus;
+import it.pagopa.pn.api.dto.notification.status.NotificationStatusHistoryElement;
+import it.pagopa.pn.api.dto.notification.timeline.TimelineElement;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -44,7 +52,6 @@ public class Notification {
     @Schema( description = "Momento di ricezione della notifica da parte di PN" )
     @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
     private Instant sentAt;
-
 
     @Schema( description = "IUN della notifica rettificata da questa notifica" )
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
@@ -87,5 +94,10 @@ public class Notification {
     @Schema( description = "elenco dettagliato di tutto ciò che è accaduto durrante il processo di notifica")
     @JsonView(value = { NotificationJsonViews.Sent.class })
     private List<TimelineElement> timeline;
+    
+    @Schema( description = "Tipologia comunicazione fisica" )
+    @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
+    @NotNull( groups = { NotificationJsonViews.New.class })
+    private ServiceLevelType physicalCommunicationType;
 
 }
