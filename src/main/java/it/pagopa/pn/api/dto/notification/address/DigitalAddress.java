@@ -24,7 +24,7 @@ public class DigitalAddress {
 
     @Schema( description = "account@domain" )
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
-    //@NotBlank(groups = { NotificationJsonViews.New.class })
+    @NotBlank(groups = { NotificationJsonViews.New.class })
     @Email(groups = { NotificationJsonViews.New.class })
     private String address;
 
