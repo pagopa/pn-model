@@ -37,7 +37,7 @@ public class NotificationRecipient {
 
     @Schema( description = "indirizzo digitale del destinatario")
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class})
-    @NotNull(groups = { NotificationJsonViews.New.class })
+    //@NotNull(groups = { NotificationJsonViews.New.class })
     @Valid
     private DigitalAddress digitalDomicile;
 
