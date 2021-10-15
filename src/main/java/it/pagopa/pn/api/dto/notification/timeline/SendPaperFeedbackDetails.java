@@ -21,20 +21,27 @@ import lombok.ToString;
 public class SendPaperFeedbackDetails extends SendPaperDetails {
 
 
-  public SendPaperFeedbackDetails( SendPaperDetails spd, List<String> errors) {
+  public SendPaperFeedbackDetails( SendPaperDetails spd, PhysicalAddress newAddress, List<String> errors) {
 	  super( spd.getTaxId(), spd.getAddress() );
+      this.newAddress = newAddress;
 	  this.errors = errors;
   }
 	
-    public SendPaperFeedbackDetails( String taxId, PhysicalAddress address, List<String> errors) {
+    public SendPaperFeedbackDetails( String taxId, PhysicalAddress address, PhysicalAddress newAddress, List<String> errors) {
         super( taxId, address);
+        this.newAddress = newAddress;
         this.errors = errors;
     }
 
-    public SendPaperFeedbackDetails( List<String> errors) {
+    public SendPaperFeedbackDetails(PhysicalAddress newAddress, List<String> errors) {
         super( null, null );
+        this.newAddress = newAddress;
         this.errors = errors;
     }
+
+    @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
+    @Schema( description = "Indirizzo fisico scoperto durante fase di consegna")
+    private PhysicalAddress newAddress;
 
     @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
     @Schema( description = "Lista errori, vuota in caso di successo")
