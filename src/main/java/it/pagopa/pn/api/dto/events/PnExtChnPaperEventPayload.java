@@ -10,21 +10,18 @@ import javax.validation.constraints.NotNull;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import it.pagopa.pn.api.dto.notification.address.PhysicalAddress;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  *
  * @author GIANGR40
  */
-@Builder
-@Getter
-@Setter
+@Builder(toBuilder = true)
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class PnExtChnPaperEventPayload {
 
     @Schema( description = "Codice opaco utilizzato dal software client per correlare la risposta alla richiesta" )

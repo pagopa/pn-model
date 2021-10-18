@@ -6,8 +6,8 @@ import lombok.*;
 import java.time.Instant;
 import java.util.List;
 
-@Builder( toBuilder = true )
-@Getter
+@Builder(toBuilder = true)
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
@@ -29,8 +29,8 @@ public class PnExtChnProgressStatusEventPayload {
     @Schema( description = "Dettagli sullo specifico stato" )
     private List<String> statusDetails;
 
-
-
+    @Schema( description = "Eventuale nuovo indirizzo del destinatario" )
+    private String newAddress;
 
     private String tipoInvio;
     private String codiceAtto;

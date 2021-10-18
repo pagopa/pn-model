@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.validation.Valid;
+
 @Builder
 @Getter
 @NoArgsConstructor
@@ -15,8 +17,10 @@ import lombok.ToString;
 @ToString
 public class PnExtChnEmailEvent implements GenericEvent<StandardEventHeader, PnExtChnEmailEventPayload> {
 
+    @Valid
     private StandardEventHeader header;
 
+    @Valid
     private PnExtChnEmailEventPayload payload;
 
 }
