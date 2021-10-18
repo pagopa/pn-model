@@ -7,8 +7,8 @@ import lombok.*;
 import java.time.Instant;
 import java.util.List;
 
-@Builder( toBuilder = true )
-@Getter
+@Builder(toBuilder = true)
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
