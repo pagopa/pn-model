@@ -8,7 +8,9 @@ public enum TimelineElementCategory {
     SEND_DIGITAL_DOMICILE_FAILURE( SendDigitalFailureDetails.class ),
     WAIT_FOR_RECIPIENT_TIMEOUT( WaitForRecipientTimeoutDetails.class ),
     END_OF_DIGITAL_DELIVERY_WORKFLOW( EndOfDigitalDeliveryWorkflowDetails.class ),
+    END_OF_ANALOG_DELIVERY_WORKFLOW( EndOfAnalogDeliveryWorkflowDetails.class ),
     NOTIFICATION_VIEWED( NotificationViewedDetails.class ),
+    SEND_PAPER( SendPaperDetails.class ),
     SEND_PAPER_FEEDBACK( SendPaperFeedbackDetails.class ),
     PAYMENT( null );
 

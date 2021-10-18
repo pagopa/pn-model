@@ -4,6 +4,7 @@ import java.util.List;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import it.pagopa.pn.api.dto.notification.address.DigitalAddress;
+import it.pagopa.pn.api.dto.notification.address.PhysicalAddress;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -27,4 +28,7 @@ public class AddressBookEntry {
 
     @Schema( description = "Indirizzi recapito digitale utilizzabili per la persona indicata dal TaxId" )
     private List<DigitalAddress> courtesyAddresses;
+
+    @Schema( description = "Indirizzo recapito analogico per la persona indicata dal TaxId")
+    private PhysicalAddress residentialAddress;
 }
