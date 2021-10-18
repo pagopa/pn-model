@@ -1,6 +1,7 @@
 package it.pagopa.pn.api.dto.events;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import it.pagopa.pn.api.dto.notification.address.PhysicalAddress;
 import lombok.*;
 
 import java.time.Instant;
@@ -29,8 +30,11 @@ public class PnExtChnProgressStatusEventPayload {
     @Schema( description = "Dettagli sullo specifico stato" )
     private List<String> statusDetails;
 
-    @Schema( description = "Eventuale nuovo indirizzo del destinatario" )
-    private String newAddress;
+    @Schema( description = "Indirizzo fisico scoperto dal postino in caso di irreperibilità parziale" )
+    private PhysicalAddress newPhysicalAddress;
+
+
+
 
     private String tipoInvio;
     private String codiceAtto;
