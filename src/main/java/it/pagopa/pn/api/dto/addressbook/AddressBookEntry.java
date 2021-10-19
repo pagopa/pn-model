@@ -1,5 +1,6 @@
 package it.pagopa.pn.api.dto.addressbook;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -31,4 +32,13 @@ public class AddressBookEntry {
 
     @Schema( description = "Indirizzo recapito analogico per la persona indicata dal TaxId")
     private PhysicalAddress residentialAddress;
+
+    public boolean checkAllNull() throws IllegalAccessException {
+        for (Field f : getClass().getDeclaredFields()) {
+            if (f.get(this) != null) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
