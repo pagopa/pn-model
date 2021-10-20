@@ -29,10 +29,6 @@ public class PnExtChnPecEventPayload {
     @NotEmpty
     private String iun;
 
-    @Schema( description = "Indirizzo fisico destinatario" )
-    // @NotNull
-    private PhysicalAddress destinationAddress;
-
     @Schema( description = "Identificativo del mittente")
     @NotEmpty
     private String senderId;
@@ -42,7 +38,6 @@ public class PnExtChnPecEventPayload {
     private String senderDenomination;
 
     @Schema( description = "Opzionale: Indirizzo pec del mittente da utilizzare nel campo Replay-To")
-    @NotEmpty
     private String senderPecAddress;
 
     @Schema( description = "Denominazione del destinatario: nome e cognome o ragione sociale")
