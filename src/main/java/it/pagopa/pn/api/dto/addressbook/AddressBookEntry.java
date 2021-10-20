@@ -1,6 +1,5 @@
 package it.pagopa.pn.api.dto.addressbook;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 import io.swagger.v3.oas.annotations.media.Schema;
