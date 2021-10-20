@@ -33,12 +33,10 @@ public class AddressBookEntry {
     @Schema( description = "Indirizzo recapito analogico per la persona indicata dal TaxId")
     private PhysicalAddress residentialAddress;
 
-    public boolean checkAllNull() throws IllegalAccessException {
-        for (Field f : getClass().getDeclaredFields()) {
-            if (f.get(this) != null) {
-                return false;
-            }
-        }
-        return true;
+    public boolean checkAllNull() {
+        return this.getTaxId() == null &&
+                this.getDigitalAddresses() == null &&
+                this.getCourtesyAddresses() == null &&
+                this.getResidentialAddress() == null;
     }
 }
