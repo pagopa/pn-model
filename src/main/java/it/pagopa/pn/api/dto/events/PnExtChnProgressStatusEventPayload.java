@@ -8,7 +8,7 @@ import java.time.Instant;
 import java.util.List;
 
 @Builder(toBuilder = true)
-@Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
@@ -33,8 +33,8 @@ public class PnExtChnProgressStatusEventPayload {
     @Schema( description = "Indirizzo fisico scoperto dal postino in caso di irreperibilità parziale" )
     private PhysicalAddress newPhysicalAddress;
 
-
-
+    @Schema( description = "Chiavi degli allegati" )
+    private List<String> attachmentKeys;
 
     private String tipoInvio;
     private String codiceAtto;

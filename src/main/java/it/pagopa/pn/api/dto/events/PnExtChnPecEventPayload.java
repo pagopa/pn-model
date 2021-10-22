@@ -1,7 +1,6 @@
 package it.pagopa.pn.api.dto.events;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import it.pagopa.pn.api.dto.notification.address.PhysicalAddress;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -9,13 +8,13 @@ import java.time.Instant;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Builder(toBuilder = true)
-@Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode

@@ -5,7 +5,7 @@ import lombok.*;
 import javax.validation.Valid;
 
 @Builder(toBuilder = true)
-@Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
