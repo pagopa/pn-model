@@ -17,7 +17,7 @@ import lombok.*;
  * @author GIANGR40
  */
 @Builder(toBuilder = true)
-@Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode

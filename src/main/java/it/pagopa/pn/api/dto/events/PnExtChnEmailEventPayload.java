@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.time.Instant;
 
 @Builder(toBuilder = true)
-@Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
