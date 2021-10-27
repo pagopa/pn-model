@@ -5,6 +5,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import it.pagopa.pn.api.dto.events.ServiceLevelType;
 import it.pagopa.pn.api.dto.notification.NotificationJsonViews;
 import it.pagopa.pn.api.dto.notification.address.PhysicalAddress;
 import lombok.Builder;
@@ -22,19 +23,19 @@ public class SendPaperFeedbackDetails extends SendPaperDetails {
 
 
   public SendPaperFeedbackDetails( SendPaperDetails spd, PhysicalAddress newAddress, List<String> errors) {
-	  super( spd.getTaxId(), spd.getAddress() );
+	  super( spd.getTaxId(), spd.getAddress(), spd.getServiceLevel());
       this.newAddress = newAddress;
 	  this.errors = errors;
   }
 	
-    public SendPaperFeedbackDetails( String taxId, PhysicalAddress address, PhysicalAddress newAddress, List<String> errors) {
-        super( taxId, address);
+    public SendPaperFeedbackDetails( String taxId, PhysicalAddress address, ServiceLevelType serviceLevel, PhysicalAddress newAddress, List<String> errors) {
+        super( taxId, address, serviceLevel);
         this.newAddress = newAddress;
         this.errors = errors;
     }
 
     public SendPaperFeedbackDetails(PhysicalAddress newAddress, List<String> errors) {
-        super( null, null );
+        super( null, null, null );
         this.newAddress = newAddress;
         this.errors = errors;
     }
