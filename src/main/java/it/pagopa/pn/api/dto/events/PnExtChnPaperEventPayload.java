@@ -50,6 +50,10 @@ public class PnExtChnPaperEventPayload {
     @Schema( description = "Denominazione Destinatario" )
     @NotEmpty
     private String recipientDenomination;
+
+    @Schema( description = "E' richiesta investigazione indirizzo fisico alternativo" )
+    @NotEmpty
+    private boolean investigation;
     
 }
 
