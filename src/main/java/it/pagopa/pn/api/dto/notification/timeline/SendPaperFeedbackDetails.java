@@ -23,19 +23,19 @@ public class SendPaperFeedbackDetails extends SendPaperDetails {
 
 
   public SendPaperFeedbackDetails( SendPaperDetails spd, PhysicalAddress newAddress, List<String> errors) {
-	  super( spd.getTaxId(), spd.getAddress(), spd.getServiceLevel());
+	  super( spd.getTaxId(), spd.getAddress(), spd.getServiceLevel(), spd.isInvestigation());
       this.newAddress = newAddress;
 	  this.errors = errors;
   }
 	
     public SendPaperFeedbackDetails( String taxId, PhysicalAddress address, ServiceLevelType serviceLevel, PhysicalAddress newAddress, List<String> errors) {
-        super( taxId, address, serviceLevel);
+        super( taxId, address, serviceLevel, false);
         this.newAddress = newAddress;
         this.errors = errors;
     }
 
     public SendPaperFeedbackDetails(PhysicalAddress newAddress, List<String> errors) {
-        super( null, null, null );
+        super( null, null, null, false );
         this.newAddress = newAddress;
         this.errors = errors;
     }

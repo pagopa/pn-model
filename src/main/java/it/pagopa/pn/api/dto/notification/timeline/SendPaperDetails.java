@@ -35,4 +35,9 @@ public class SendPaperDetails implements TimelineElementDetails {
     @Schema( description = "Livello Servizio" )
     @NotNull
     private ServiceLevelType serviceLevel;
+
+    @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
+    @Schema( description = "E' richiesta investigazione indirizzo fisico alternativo" )
+    @NotNull
+    private boolean investigation;
 }
