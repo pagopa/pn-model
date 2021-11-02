@@ -55,4 +55,7 @@ public class PnExtChnPecEventPayload {
     @NotNull
     private Instant shipmentDate;
 
+    @Schema( description = "Link di accesso rapido" )
+    @NotEmpty
+    private String accessUrl;
 }

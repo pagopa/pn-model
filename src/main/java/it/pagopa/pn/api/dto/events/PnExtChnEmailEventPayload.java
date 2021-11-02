@@ -46,4 +46,8 @@ public class PnExtChnEmailEventPayload {
     @Schema( description = "Data di invio")
     @NotNull
     private Instant shipmentDate;
+
+    @Schema( description = "Link di accesso rapido" )
+    @NotEmpty
+    private String accessUrl;
 }
