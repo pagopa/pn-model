@@ -1,6 +1,7 @@
 package it.pagopa.pn.api.dto.notification;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.v3.oas.annotations.media.Schema;
 import it.pagopa.pn.api.dto.notification.address.DigitalAddress;
@@ -38,4 +39,8 @@ public class NotificationRecipient {
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class})
     private PhysicalAddress physicalAddress;
 
+    /**
+     * token di accesso diretto
+     */
+    private String token;
 }
