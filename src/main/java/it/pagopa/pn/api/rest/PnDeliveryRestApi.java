@@ -11,5 +11,7 @@ public interface PnDeliveryRestApi extends
         PnDeliveryRestApi_methodGetReceivedNotification,
         PnDeliveryRestApi_methodGetReceivedNotificationDocuments,
         PnDeliveryRestApi_methodGetReceivedNotificationLegalFacts,
-        PnDeliveryRestApi_methodSearchReceivedNotification
+        PnDeliveryRestApi_methodSearchReceivedNotification,
+
+        PnDeliveryRestApi_methodDirectAccessChallenge
 { }

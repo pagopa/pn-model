@@ -2,8 +2,10 @@ package it.pagopa.pn_doc.api;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 import it.pagopa.pn.api.dto.legalfacts.LegalFactsListEntry;
+import it.pagopa.pn.api.dto.notification.directaccesstoken.DirectAccessToken;
 import it.pagopa.pn.api.dto.preload.PreloadRequest;
 import it.pagopa.pn.api.dto.preload.PreloadResponse;
 import org.springframework.core.io.Resource;
@@ -77,6 +79,11 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
 
     @Override
     public ResponseEntity<Resource> getSentNotificationDocument(String paId, String iun, int documentIndex, ServerHttpResponse response) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<DirectAccessToken> directAccessChallenge(String userSecret ,String token) {
         return null;
     }
 }
