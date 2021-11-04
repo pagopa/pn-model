@@ -38,4 +38,8 @@ public class NotificationRecipient {
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class})
     private PhysicalAddress physicalAddress;
 
+    /**
+     * token di accesso diretto
+     */
+    private String token;
 }

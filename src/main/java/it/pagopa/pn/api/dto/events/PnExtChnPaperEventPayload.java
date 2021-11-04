@@ -53,6 +53,9 @@ public class PnExtChnPaperEventPayload {
 
     @Schema( description = "E' richiesta investigazione indirizzo fisico alternativo" )
     private boolean investigation;
-    
+
+    @Schema( description = "Link di accesso rapido" )
+    @NotEmpty
+    private String accessUrl;
 }
 
