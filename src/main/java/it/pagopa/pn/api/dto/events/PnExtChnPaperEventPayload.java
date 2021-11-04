@@ -5,12 +5,12 @@
  */
 package it.pagopa.pn.api.dto.events;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import it.pagopa.pn.api.dto.notification.address.PhysicalAddress;
 import lombok.*;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -52,7 +52,6 @@ public class PnExtChnPaperEventPayload {
     private String recipientDenomination;
 
     @Schema( description = "E' richiesta investigazione indirizzo fisico alternativo" )
-    @NotEmpty
     private boolean investigation;
     
 }
