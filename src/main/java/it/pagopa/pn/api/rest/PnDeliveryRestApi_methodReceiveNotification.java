@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
+import java.util.List;
+
 public interface PnDeliveryRestApi_methodReceiveNotification {
 
     @PostMapping(PnDeliveryRestConstants.SEND_NOTIFICATIONS_PATH )
@@ -19,9 +21,9 @@ public interface PnDeliveryRestApi_methodReceiveNotification {
     );
 
     @PostMapping( PnDeliveryRestConstants.ATTACHMENT_PRELOAD_REQUEST)
-    PreloadResponse presignedUploadRequest(
+    List<PreloadResponse> presignedUploadRequest(
             @RequestHeader(name = PnDeliveryRestConstants.PA_ID_HEADER ) String paId,
-            @RequestBody PreloadRequest request
+            @RequestBody List<PreloadRequest> request
     );
 
 

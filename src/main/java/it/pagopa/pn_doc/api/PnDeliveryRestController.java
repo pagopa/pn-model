@@ -1,23 +1,21 @@
 package it.pagopa.pn_doc.api;
 
-import java.time.Instant;
-import java.util.List;
-import java.util.Optional;
-
+import it.pagopa.pn.api.dto.NewNotificationResponse;
+import it.pagopa.pn.api.dto.NotificationSearchRow;
 import it.pagopa.pn.api.dto.legalfacts.LegalFactsListEntry;
+import it.pagopa.pn.api.dto.notification.Notification;
 import it.pagopa.pn.api.dto.notification.directaccesstoken.DirectAccessToken;
+import it.pagopa.pn.api.dto.notification.status.NotificationStatus;
 import it.pagopa.pn.api.dto.preload.PreloadRequest;
 import it.pagopa.pn.api.dto.preload.PreloadResponse;
+import it.pagopa.pn.api.rest.PnDeliveryRestApi;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.pagopa.pn.api.dto.NewNotificationResponse;
-import it.pagopa.pn.api.dto.NotificationSearchRow;
-import it.pagopa.pn.api.dto.notification.Notification;
-import it.pagopa.pn.api.dto.notification.status.NotificationStatus;
-import it.pagopa.pn.api.rest.PnDeliveryRestApi;
+import java.time.Instant;
+import java.util.List;
 
 @RestController
 public class PnDeliveryRestController implements PnDeliveryRestApi {
@@ -28,7 +26,7 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
     }
 
     @Override
-    public PreloadResponse presignedUploadRequest(String paId, PreloadRequest request) {
+    public List<PreloadResponse> presignedUploadRequest(String paId, List<PreloadRequest> request) {
         return null;
     }
 
