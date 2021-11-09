@@ -28,7 +28,7 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
     }
 
     @Override
-    public ResponseEntity<List<PreloadResponse>> presignedUploadRequest(String paId, List<PreloadRequest> request) {
+    public List<PreloadResponse> presignedUploadRequest(String paId, List<PreloadRequest> request) {
         return null;
     }
 

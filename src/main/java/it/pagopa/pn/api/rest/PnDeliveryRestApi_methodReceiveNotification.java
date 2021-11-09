@@ -22,7 +22,7 @@ public interface PnDeliveryRestApi_methodReceiveNotification {
     );
 
     @PostMapping( PnDeliveryRestConstants.ATTACHMENT_PRELOAD_REQUEST)
-    ResponseEntity<List<PreloadResponse>> presignedUploadRequest(
+    List<PreloadResponse> presignedUploadRequest(
             @RequestHeader(name = PnDeliveryRestConstants.PA_ID_HEADER ) String paId,
             @RequestBody List<PreloadRequest> request
     );
