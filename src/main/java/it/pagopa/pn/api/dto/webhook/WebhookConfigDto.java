@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.util.Set;
 
 @Builder
 @Getter
@@ -15,6 +16,9 @@ import java.time.Instant;
 public class WebhookConfigDto {
     private String paId;
     private String url;
-    private Instant since;
+    private Instant startFrom;
     private boolean active;
+    private WebhookType type;
+    private boolean allNotifications;
+    private Set<String> notificationsElement;
 }
