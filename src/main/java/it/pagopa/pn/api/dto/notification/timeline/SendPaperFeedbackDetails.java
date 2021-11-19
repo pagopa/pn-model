@@ -22,21 +22,24 @@ import lombok.ToString;
 public class SendPaperFeedbackDetails extends SendPaperDetails {
 
 
-  public SendPaperFeedbackDetails( SendPaperDetails spd, PhysicalAddress newAddress, List<String> errors) {
+  public SendPaperFeedbackDetails( SendPaperDetails spd, PhysicalAddress newAddress, List<String> attachmentKeys, List<String> errors) {
 	  super( spd.getTaxId(), spd.getAddress(), spd.getServiceLevel(), spd.isInvestigation());
       this.newAddress = newAddress;
+      this.attachmentKeys = attachmentKeys;
 	  this.errors = errors;
   }
 	
-    public SendPaperFeedbackDetails( String taxId, PhysicalAddress address, ServiceLevelType serviceLevel, PhysicalAddress newAddress, List<String> errors) {
+    public SendPaperFeedbackDetails( String taxId, PhysicalAddress address, ServiceLevelType serviceLevel, PhysicalAddress newAddress, List<String> attachmentKeys, List<String> errors) {
         super( taxId, address, serviceLevel, false);
         this.newAddress = newAddress;
+        this.attachmentKeys = attachmentKeys;
         this.errors = errors;
     }
 
-    public SendPaperFeedbackDetails(PhysicalAddress newAddress, List<String> errors) {
+    public SendPaperFeedbackDetails(PhysicalAddress newAddress, List<String> attachmentKeys, List<String> errors) {
         super( null, null, null, false );
         this.newAddress = newAddress;
+        this.attachmentKeys = attachmentKeys;
         this.errors = errors;
     }
 
@@ -47,5 +50,9 @@ public class SendPaperFeedbackDetails extends SendPaperDetails {
     @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
     @Schema( description = "Lista errori, vuota in caso di successo")
     private List<String> errors;
+
+    @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
+    @Schema( description = "Chiavi dei documenti generati durante il processo di consegna cartacea" )
+    private List<String> attachmentKeys;
 
 }
