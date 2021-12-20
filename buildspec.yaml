@@ -7,14 +7,11 @@ phases:
     commands:
       - echo $SETTINGS > maven-deploy-settings.xml
       - cat maven-deploy-settings.xml
- #     - export REPOSITORY_TOKEN=$( aws codeartifact get-authorization-token --domain $CODEARTIFACT_DOMAIN_NAME --query authorizationToken --output text )
   build:
     commands:
       - echo "Build"
       - ./mvnw --settings maven-deploy-settings.xml -Dsmall.jar clean package
       - ls target
-#        - echo "Deploy"
-#        - ./mvnw --settings maven-deploy-settings.xml -Dsmall.jar -DaltDeploymentRepository=pn-codeartifact::default::https://${CODEARTIFACT_DOMAIN_FULL}/maven/${CODEARTIFACT_REPO}/ deploy
   post_build:
     commands:
       - echo "Sonar"
