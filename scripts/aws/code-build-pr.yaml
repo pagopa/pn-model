@@ -58,7 +58,7 @@ Resources:
         Webhook: true
         FilterGroups:
           - - Type: EVENT
-              Pattern: PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED, PUSH
+              Pattern: PUSH
 
   CodeBuildServiceRole:
     Type: AWS::IAM::Role
@@ -99,3 +99,8 @@ Resources:
                 Condition:
                   StringEquals:
                     'sts:AWSServiceName': codeartifact.amazonaws.com
+              - Sid: GitHubSecret
+                Effect: Allow
+                Action:
+                  - secretsmanager:GetSecretValue
+                Resource: "*"
