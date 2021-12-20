@@ -1,37 +1,21 @@
 version: 0.2
-  env:
-    secrets-manager:
-      SONAR_TOKEN: arn:aws:secretsmanager:eu-central-1:911845998067:secret:SonarCloud-7370vM:token
-  phases:
-    pre_build:
-      commands:
-        - echo $SETTINGS > maven-deploy-settings.xml
-        - cat maven-deploy-settings.xml
-   #     - export REPOSITORY_TOKEN=$( aws codeartifact get-authorization-token --domain $CODEARTIFACT_DOMAIN_NAME --query authorizationToken --output text )
-    build:
-      commands:
-        - echo "Build"
-        - ./mvnw --settings maven-deploy-settings.xml -Dsmall.jar clean package
-        - ls target
-#        - echo "Deploy"
-#        - ./mvnw --settings maven-deploy-settings.xml -Dsmall.jar -DaltDeploymentRepository=pn-codeartifact::default::https://${CODEARTIFACT_DOMAIN_FULL}/maven/${CODEARTIFACT_REPO}/ deploy
-    post_build:
-      commands:
-        - echo "Sonar"
-        - ./mvnw verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.organization=pagopa -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=pagopa_pn-model
-  artifacts:
-    files:
-      - 'target/**'
-
+env:
+  secrets-manager:
+    SONAR_TOKEN: arn:aws:secretsmanager:eu-central-1:911845998067:secret:SonarCloud-7370vM:token
 phases:
-  install:
-    runtime-versions:
-      java: corretto11
   pre_build:
     commands:
-      - pip3 install awscli --upgrade --user
-      # test some new changes
+      - echo $SETTINGS > maven-deploy-settings.xml
+      - cat maven-deploy-settings.xml
+ #     - export REPOSITORY_TOKEN=$( aws codeartifact get-authorization-token --domain $CODEARTIFACT_DOMAIN_NAME --query authorizationToken --output text )
   build:
     commands:
-      - export CODEARTIFACT_TOKEN=`aws codeartifact get-authorization-token --domain ${CODEARTIFACT_DOMAIN} --query authorizationToken --output text`
-      - mvn -s settings.xml clean package deploy
+      - echo "Build"
+      - ./mvnw --settings maven-deploy-settings.xml -Dsmall.jar clean package
+      - ls target
+#        - echo "Deploy"
+#        - ./mvnw --settings maven-deploy-settings.xml -Dsmall.jar -DaltDeploymentRepository=pn-codeartifact::default::https://${CODEARTIFACT_DOMAIN_FULL}/maven/${CODEARTIFACT_REPO}/ deploy
+  post_build:
+    commands:
+      - echo "Sonar"
+      - ./mvnw verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.organization=pagopa -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=pagopa_pn-model
