@@ -124,3 +124,8 @@ Resources:
                 Action:
                   - secretsmanager:GetSecretValue
                 Resource: "*"
+              - Sid: CodeArtifactGetAuthorizationTokenPolicy
+                Effect: Allow
+                Action:
+                  - codeartifact:GetAuthorizationToken
+                Resource: "*"
