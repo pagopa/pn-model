@@ -21,6 +21,21 @@ Resources:
         ComputeType: BUILD_GENERAL1_SMALL
         Image: aws/codebuild/standard:1.0
         EnvironmentVariables:
+          - Name: CODEARTIFACT_DOMAIN_NAME
+            Type: PLAINTEXT
+            Value:
+              Fn::ImportValue: !Sub "CodeArtifactDomainName"
+          - Name: CODEARTIFACT_DOMAIN_FULL
+            Type: PLAINTEXT
+            Value:
+              Fn::Join:
+                - ''
+                - - Fn::ImportValue: !Sub "CodeArtifactDomainName"
+                  - !Sub '-${AWS::AccountId}.d.codeartifact.${AWS::Region}.${AWS::URLSuffix}'
+          - Name: CODEARTIFACT_REPO
+            Type: PLAINTEXT
+            Value:
+              Fn::ImportValue: !Sub "CodeArtifactRepositoryName"
           - Name: SETTINGS
             Type: PLAINTEXT
             Value: |
