@@ -1,0 +1,101 @@
+---
+Description: PR Pipeline
+
+Resources:
+  CodeBuildSourceCredential:
+    Type: 'AWS::CodeBuild::SourceCredential'
+    Properties:
+      Token: '{{resolve:secretsmanager:github:SecretString:token}}'
+      ServerType: GITHUB
+      AuthType: PERSONAL_ACCESS_TOKEN
+  CodeBuildProject:
+    DependsOn: CodeBuildSourceCredential
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Name: !Sub "${AWS::StackName}-CodeBuild"
+      ServiceRole: !GetAtt CodeBuildServiceRole.Arn
+      Artifacts:
+        Type: NO_ARTIFACTS
+      Environment:
+        Type: LINUX_CONTAINER
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: aws/codebuild/standard:1.0
+        EnvironmentVariables:
+          - Name: SETTINGS
+            Type: PLAINTEXT
+            Value: |
+              <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                        http://maven.apache.org/xsd/settings-1.0.0.xsd">
+                <profiles>
+                  <profile>
+                    <id>pn-codeartifact</id>
+                    <activation>
+                      <activeByDefault>true</activeByDefault>
+                    </activation>
+                    <repositories>
+                      <repository>
+                        <id>pn-codeartifact</id>
+                        <url>https://${env.CODEARTIFACT_DOMAIN_FULL}/maven/${env.CODEARTIFACT_REPO}/</url>
+                      </repository>
+                    </repositories>
+                  </profile>
+                </profiles>
+              
+                <servers>
+                  <server>
+                    <id>pn-codeartifact</id>
+                    <username>aws</username>
+                    <password>${env.REPOSITORY_TOKEN}</password>
+                  </server>
+                </servers>
+              </settings>
+      Source:
+        Type: GITHUB
+        Location: https://github.com/pagopa/pn-model
+      Triggers:
+        Webhook: true
+        FilterGroups:
+          - - Type: EVENT
+              Pattern: PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED, PUSH
+
+  CodeBuildServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: ''
+            Effect: Allow
+            Principal:
+              Service:
+                - codebuild.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: CodePipelinePolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Sid: CloudWatchLogsPolicy
+                Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource:
+                  - "*"
+              - Sid: CodeCommitPolicy
+                Effect: Allow
+                Action:
+                  - codecommit:GitPull
+                Resource:
+                  - "*"
+              - Sid: BearerTokenPolicy
+                Effect: Allow
+                Action:
+                  - sts:GetServiceBearerToken
+                Resource: "*"
+                Condition:
+                  StringEquals:
+                    'sts:AWSServiceName': codeartifact.amazonaws.com
