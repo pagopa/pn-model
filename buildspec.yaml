@@ -11,7 +11,6 @@ phases:
     commands:
       - echo "Build"
       - ./mvnw --settings maven-deploy-settings.xml -Dsmall.jar clean package
-      - ls target
   post_build:
     commands:
       - echo "Sonar"
