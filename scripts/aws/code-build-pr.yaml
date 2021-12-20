@@ -1,6 +1,11 @@
 ---
+AWSTemplateFormatVersion: '2010-09-09'
 Description: PR Pipeline
-
+Parameters:
+  CodeArtifactDeploymentStackName:
+    Description: Used for maven repository access
+    Type: String
+    Default: pn-develop-bootstrap-step-01
 Resources:
   CodeBuildSourceCredential:
     Type: 'AWS::CodeBuild::SourceCredential'
@@ -24,18 +29,18 @@ Resources:
           - Name: CODEARTIFACT_DOMAIN_NAME
             Type: PLAINTEXT
             Value:
-              Fn::ImportValue: !Sub "CodeArtifactDomainName"
+              Fn::ImportValue: !Sub "${CodeArtifactDeploymentStackName}-CodeArtifactDomainName"
           - Name: CODEARTIFACT_DOMAIN_FULL
             Type: PLAINTEXT
             Value:
               Fn::Join:
                 - ''
-                - - Fn::ImportValue: !Sub "CodeArtifactDomainName"
+                - - Fn::ImportValue: !Sub "${CodeArtifactDeploymentStackName}-CodeArtifactDomainName"
                   - !Sub '-${AWS::AccountId}.d.codeartifact.${AWS::Region}.${AWS::URLSuffix}'
           - Name: CODEARTIFACT_REPO
             Type: PLAINTEXT
             Value:
-              Fn::ImportValue: !Sub "CodeArtifactRepositoryName"
+              Fn::ImportValue: !Sub "${CodeArtifactDeploymentStackName}-CodeArtifactRepositoryName"
           - Name: SETTINGS
             Type: PLAINTEXT
             Value: |
