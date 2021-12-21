@@ -8,7 +8,7 @@ phases:
       - echo $SETTINGS > maven-deploy-settings.xml
       - cat maven-deploy-settings.xml
       - export REPOSITORY_TOKEN=$( aws codeartifact get-authorization-token --domain $CODEARTIFACT_DOMAIN_NAME --query authorizationToken --output text )
-      - export BRANCH=$(git branch --show-current)
+      - export BRANCH=$(echo $CODEBUILD_WEBHOOK_TRIGGER | sed 's/branch\///')
   build:
     commands:
       - env
@@ -24,5 +24,5 @@ phases:
       - ./mvnw verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.organization=pagopa -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=pagopa_pn-model
 cache:
   paths:
-    - /root/.m2
-    - /root/.sonar
+    - $HOME/.m2
+    - $HOME/.sonar
