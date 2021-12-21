@@ -24,10 +24,6 @@ phases:
     commands:
       - echo "Sonar"
       - ./mvnw verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.organization=pagopa -Dsonar.branch.name=$BRANCH_NAME -Dsonar.branch.target=$BRANCH_TARGET -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=pagopa_pn-model
-  on-failure:
-
-reports:
-  - pn-model-junit-report:
 
 cache:
   paths:
