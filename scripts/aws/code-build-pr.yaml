@@ -66,7 +66,14 @@ Resources:
                     </repositories>
                   </profile>
                 </profiles>
-              
+                <mirrors>
+                  <mirror>
+                    <id>pn-codeartifact-mirror</id>
+                    <name>Maven Central Mirror</name>
+                    <url>https://${env.CODEARTIFACT_DOMAIN_FULL}/maven/${env.CODEARTIFACT_REPO}/</url>
+                    <mirrorOf>central</mirrorOf>
+                  </mirror>
+                </mirrors>
                 <servers>
                   <server>
                     <id>pn-codeartifact</id>
@@ -103,7 +110,7 @@ Resources:
                 - codebuild.amazonaws.com
             Action: sts:AssumeRole
       Policies:
-        - PolicyName: CodePipelinePolicy
+        - PolicyName: CodeBuildPolicy
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
@@ -115,14 +122,6 @@ Resources:
                   - logs:PutLogEvents
                 Resource:
                   - "*"
-              - Sid: BearerTokenPolicy
-                Effect: Allow
-                Action:
-                  - sts:GetServiceBearerToken
-                Resource: "*"
-                Condition:
-                  StringEquals:
-                    'sts:AWSServiceName': codeartifact.amazonaws.com
               - Sid: GitHubSecret
                 Effect: Allow
                 Action:
