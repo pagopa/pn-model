@@ -16,7 +16,7 @@ phases:
       - env
       - echo "Maven Build"
       - ./mvnw --settings maven-deploy-settings.xml -Dsmall.jar clean package
-      - if ($BRANCH_NAME='develop' || $BRANCH_NAME=='main'); then
+      - if [[ "$BRANCH_NAME" =~ ^(main|develop)$ ]]; then
       - echo "Deploy"
       - ./mvnw --settings maven-deploy-settings.xml -Dsmall.jar -DaltDeploymentRepository=pn-codeartifact::default::https://${CODEARTIFACT_DOMAIN_FULL}/maven/${CODEARTIFACT_REPO}/ deploy
       - fi
@@ -24,6 +24,11 @@ phases:
     commands:
       - echo "Sonar"
       - ./mvnw verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.organization=pagopa -Dsonar.branch.name=$BRANCH_NAME -Dsonar.branch.target=$BRANCH_TARGET -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=pagopa_pn-model
+  on-failure:
+
+reports:
+  - pn-model-junit-report:
+
 cache:
   paths:
     - $HOME/.m2
