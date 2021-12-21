@@ -3,8 +3,10 @@ env:
   shell: bash
   secrets-manager:
     SONAR_TOKEN: arn:aws:secretsmanager:eu-central-1:911845998067:secret:SonarCloud-7370vM:token
+
 phases:
   pre_build:
+    on-failure: ABORT
     commands:
       - echo $SETTINGS > maven-deploy-settings.xml
       - cat maven-deploy-settings.xml
@@ -13,6 +15,7 @@ phases:
       - export BRANCH_TARGET=$(echo $CODEBUILD_WEBHOOK_BASE_REF | sed 's/refs\/heads\///')
       - export PR_NUM=$(echo $CODEBUILD_WEBHOOK_TRIGGER | sed 's/pr\///')
   build:
+    on-failure: ABORT
     commands:
       - env
       - echo "Maven Build"
@@ -23,6 +26,7 @@ phases:
           ./mvnw --settings maven-deploy-settings.xml -Dsmall.jar -DaltDeploymentRepository=pn-codeartifact::default::https://${CODEARTIFACT_DOMAIN_FULL}/maven/${CODEARTIFACT_REPO}/ deploy
         fi
   post_build:
+    on-failure: ABORT
     commands:
       - echo "Sonar"
       - |
@@ -32,6 +36,7 @@ phases:
            SONAR_ADD_OPTS="-Dsonar.pullrequest.key=$PR_NUM -Dsonar.pullrequest.branch=$BRANCH_NAME -Dsonar.pullrequest.base=$BRANCH_TARGET"
         fi
       - ./mvnw verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar $SONAR_ADD_OPTS -Dsonar.organization=pagopa  -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=pagopa_pn-model
+
 #reports:
 #  - pn-model-junit-report:
 # junit/jacoco
