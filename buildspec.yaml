@@ -8,8 +8,8 @@ phases:
       - echo $SETTINGS > maven-deploy-settings.xml
       - cat maven-deploy-settings.xml
       - export REPOSITORY_TOKEN=$( aws codeartifact get-authorization-token --domain $CODEARTIFACT_DOMAIN_NAME --query authorizationToken --output text )
-      - export BRANCH_NAME=$(echo $CODEBUILD_WEBHOOK_HEAD_REF | sed 's/ref\/heads\///')
-      - export BRANCH_TARGET=$(echo $CODEBUILD_WEBHOOK_BASE_REF | sed 's/ref\/heads\///')
+      - export BRANCH_NAME=$(echo $CODEBUILD_WEBHOOK_HEAD_REF | sed 's/refs\/heads\///')
+      - export BRANCH_TARGET=$(echo $CODEBUILD_WEBHOOK_BASE_REF | sed 's/refs\/heads\///')
   build:
     commands:
       - env
