@@ -8,18 +8,27 @@ phases:
       - echo $SETTINGS > maven-deploy-settings.xml
       - cat maven-deploy-settings.xml
       - export REPOSITORY_TOKEN=$( aws codeartifact get-authorization-token --domain $CODEARTIFACT_DOMAIN_NAME --query authorizationToken --output text )
-      - export BRANCH_NAME=$(echo $CODEBUILD_WEBHOOK_TRIGGER | sed 's/branch\///')
+      - export BRANCH_NAME=$(echo $CODEBUILD_WEBHOOK_HEAD_REF | sed 's/ref\/heads\///')
+      - export BRANCH_TARGET=$(echo $CODEBUILD_WEBHOOK_BASE_REF | sed 's/ref\/heads\///')
   build:
     commands:
-      - env
-      - echo "Build"
+      - echo "CODEBUILD_WEBHOOK_EVENT: $CODEBUILD_WEBHOOK_EVENT"
+      - echo "CODEBUILD_WEBHOOK_TRIGGER: $CODEBUILD_WEBHOOK_TRIGGER"
+      - echo "CODEBUILD_SOURCE_VERSION: $CODEBUILD_SOURCE_VERSION"
+      - echo "CODEBUILD_WEBHOOK_BASE_REF: $CODEBUILD_WEBHOOK_BASE_REF"
+      - echo "CODEBUILD_WEBHOOK_HEAD_REF: $CODEBUILD_WEBHOOK_HEAD_REF"
+      - echo "CODEBUILD_RESOLVED_SOURCE_VERSION: $CODEBUILD_RESOLVED_SOURCE_VERSION"
+      - echo "CODEBUILD_BUILD_NUMBER: $CODEBUILD_BUILD_NUMBER"
+      - echo "Maven Build"
       - ./mvnw --settings maven-deploy-settings.xml -Dsmall.jar clean package
-#        - echo "Deploy"
-#        - ./mvnw --settings maven-deploy-settings.xml -Dsmall.jar -DaltDeploymentRepository=pn-codeartifact::default::https://${CODEARTIFACT_DOMAIN_FULL}/maven/${CODEARTIFACT_REPO}/ deploy
+      - if ($BRANCH_NAME='develop' || $BRANCH_NAME=='main'); then
+      - echo "Deploy"
+      - ./mvnw --settings maven-deploy-settings.xml -Dsmall.jar -DaltDeploymentRepository=pn-codeartifact::default::https://${CODEARTIFACT_DOMAIN_FULL}/maven/${CODEARTIFACT_REPO}/ deploy
+      - fi
   post_build:
     commands:
       - echo "Sonar"
-      - ./mvnw verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.organization=pagopa -Dsonar.branch.name=$BRANCH_NAME -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=pagopa_pn-model
+      - ./mvnw verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.organization=pagopa -Dsonar.branch.name=$BRANCH_NAME -Dsonar.branch.target=$BRANCH_TARGET -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=pagopa_pn-model
 cache:
   paths:
     - $HOME/.m2
