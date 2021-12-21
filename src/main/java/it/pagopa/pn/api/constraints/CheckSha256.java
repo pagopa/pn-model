@@ -14,7 +14,7 @@ public @interface CheckSha256 {
     String message() default "{it.pagopa.pn.validation.constraints.CheckSha256.message}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
-
+ssadf
     @Target({ ElementType.TYPE })
     @Retention(RetentionPolicy.RUNTIME)
     @Documented
