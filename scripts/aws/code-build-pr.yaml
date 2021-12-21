@@ -2,6 +2,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: PR Pipeline
 Parameters:
+  GitHubProjectName:
+    Description: Name of pagopa project name
+    Type: String
+    Default: pn-model
   CodeArtifactDeploymentStackName:
     Description: Used for maven repository access
     Type: String
@@ -73,7 +77,7 @@ Resources:
               </settings>
       Source:
         Type: GITHUB
-        Location: https://github.com/pagopa/pn-model
+        Location: !Sub 'https://github.com/pagopa/${GitHubProjectName}'
       Triggers:
         Webhook: true
         FilterGroups:
@@ -129,3 +133,15 @@ Resources:
                 Action:
                   - codeartifact:GetAuthorizationToken
                 Resource: "*"
+  CodeBuildNotifications:
+    Type: AWS::CodeStarNotifications::NotificationRule
+    Properties:
+      DetailType: FULL
+      Name: !Sub '${GitHubProjectName}-model-msg'
+      EventTypeIds:
+        - codebuild-project-build-state-failed
+      Resource: !Sub '${CodeBuildProject.Arn}'
+      Targets:
+        - TargetAddress:
+            !ImportValue 'build-msg-topic'
+          TargetType: SNS
