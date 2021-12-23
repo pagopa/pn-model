@@ -6,10 +6,14 @@ Parameters:
     Description: Name of pagopa project name
     Type: String
     Default: pn-model
-  CodeArtifactDeploymentStackName:
+  CodeArtifactDomainName:
     Description: Used for maven repository access
     Type: String
-    Default: pn-develop-bootstrap-step-01
+    Default: pn-develop-bootstrap-step-01-domain
+  CodeArtifactRepositoryName:
+    Description: Used for maven repository access
+    Type: String
+    Default: pn-develop-bootstrap-step-01-repo
 Resources:
   CodeBuildSourceCredential:
     Type: 'AWS::CodeBuild::SourceCredential'
@@ -32,19 +36,20 @@ Resources:
         EnvironmentVariables:
           - Name: CODEARTIFACT_DOMAIN_NAME
             Type: PLAINTEXT
-            Value:
-              Fn::ImportValue: !Sub "${CodeArtifactDeploymentStackName}-CodeArtifactDomainName"
+            Value: !Sub "${CodeArtifactDomainName}"
           - Name: CODEARTIFACT_DOMAIN_FULL
             Type: PLAINTEXT
             Value:
               Fn::Join:
                 - ''
-                - - Fn::ImportValue: !Sub "${CodeArtifactDeploymentStackName}-CodeArtifactDomainName"
+                - - !Sub "${CodeArtifactDomainName}"
                   - !Sub '-${AWS::AccountId}.d.codeartifact.${AWS::Region}.${AWS::URLSuffix}'
           - Name: CODEARTIFACT_REPO
             Type: PLAINTEXT
-            Value:
-              Fn::ImportValue: !Sub "${CodeArtifactDeploymentStackName}-CodeArtifactRepositoryName"
+            Value: !Sub "${CodeArtifactRepositoryName}"
+          - Name: GITHUB_PRJ_NAME
+            Type: PLAINTEXT
+            Value: !Sub "${GitHubProjectName}"
           - Name: SETTINGS
             Type: PLAINTEXT
             Value: |
@@ -77,6 +82,49 @@ Resources:
       Source:
         Type: GITHUB
         Location: !Sub 'https://github.com/pagopa/${GitHubProjectName}'
+        BuildSpec: |
+          version: 0.2
+          env:
+            shell: bash
+            secrets-manager:
+              SONAR_TOKEN: arn:aws:secretsmanager:eu-central-1:911845998067:secret:SonarCloud-7370vM:token
+          phases:
+            pre_build:
+              on-failure: ABORT
+              commands:
+                - echo $SETTINGS > maven-deploy-settings.xml
+                - cat maven-deploy-settings.xml
+                - export REPOSITORY_TOKEN=$( aws codeartifact get-authorization-token --domain $CODEARTIFACT_DOMAIN_NAME --query authorizationToken --output text )
+                - export BRANCH_NAME=$(echo $CODEBUILD_WEBHOOK_HEAD_REF | sed 's/refs\/heads\///')
+                - export BRANCH_TARGET=$(echo $CODEBUILD_WEBHOOK_BASE_REF | sed 's/refs\/heads\///')
+                - export PR_NUM=$(echo $CODEBUILD_WEBHOOK_TRIGGER | sed 's/pr\///')
+                - export CI_PROFILE="$CODEBUILD_CI"
+            build:
+              on-failure: ABORT
+              commands:
+                - env
+                - echo "Maven Build"
+                - ./mvnw --settings maven-deploy-settings.xml clean package
+                - |
+                  if [[ "$BRANCH_NAME" =~ ^(main|develop)$ ]]; then
+                    echo "Deploy"
+                    ./mvnw --settings maven-deploy-settings.xml -DaltDeploymentRepository=pn-codeartifact::default::https://${CODEARTIFACT_DOMAIN_FULL}/maven/${CODEARTIFACT_REPO}/ deploy
+                  fi
+            post_build:
+              on-failure: ABORT
+              commands:
+                - echo "Sonar"
+                - |
+                  if [[ "$CODEBUILD_WEBHOOK_EVENT" == "PUSH" ]]; then
+                     SONAR_ADD_OPTS="-Dsonar.branch.name=$BRANCH_NAME -Dsonar.branch.target=$BRANCH_TARGET"
+                  else 
+                     SONAR_ADD_OPTS="-Dsonar.pullrequest.key=$PR_NUM -Dsonar.pullrequest.branch=$BRANCH_NAME -Dsonar.pullrequest.base=$BRANCH_TARGET"
+                  fi
+                - ./mvnw verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar $SONAR_ADD_OPTS -Dsonar.organization=pagopa -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=pagopa_${GITHUB_PRJ_NAME}
+          cache:
+            paths:
+              - '/root/.m2/**/*'
+              - '/root/.sonar/**/*'
       Triggers:
         Webhook: true
         FilterGroups:
@@ -132,12 +180,12 @@ Resources:
                 Action:
                   - codeartifact:GetAuthorizationToken
                   - codeartifact:ReadFromRepository
-                Resource: "*"
+                Resource: !Sub 'arn:aws:codeartifact:${AWS::Region}:${AWS::AccountId}:repository/${CodeArtifactDomainName}/${CodeArtifactRepositoryName}'
   CodeBuildNotifications:
     Type: AWS::CodeStarNotifications::NotificationRule
     Properties:
       DetailType: FULL
-      Name: !Sub '${GitHubProjectName}-model-msg'
+      Name: !Sub '${GitHubProjectName}-msg'
       EventTypeIds:
         - codebuild-project-build-state-failed
       Resource: !Sub '${CodeBuildProject.Arn}'
