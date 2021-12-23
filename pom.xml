@@ -132,15 +132,4 @@
 			</build>
 		</profile>
 	</profiles>
-
-	<distributionManagement>
-		<repository>
-		  <id>pn-pn</id>
-		  <name>pn-pn</name>
-		  <url>https://pn-911845998067.d.codeartifact.eu-central-1.amazonaws.com/maven/pn/</url>
-		</repository>
-	</distributionManagement>
-	  
-	 
-
 </project>
