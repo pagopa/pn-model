@@ -225,7 +225,7 @@ Resources:
           - Name: CODEARTIFACT_REPO 
             Type: PLAINTEXT 
             Value:
-              Fn::ImportValue: !Sub "${CodeArtifactDeploymentStackName}-CodeArtifactRepositoryName" 
+              Fn::ImportValue: !Sub "${CodeArtifactDeploymentStackName}-CodeArtifactRepositoryName"
           - Name: SETTINGS
             Type: PLAINTEXT
             Value: |

@@ -60,11 +60,6 @@
 			<id>run</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
-				<!--
-				<property>
-					<name>fat.jar</name>
-				</property>
-				-->
 			</activation>
 
 			<dependencies>
@@ -100,7 +95,7 @@
 			<activation>
 				<activeByDefault>false</activeByDefault>
 				<property>
-					<name>small.jar</name>
+					<name>env.CI_PROFILE</name>
 				</property>
 			</activation>
 			<build>
@@ -137,15 +132,4 @@
 			</build>
 		</profile>
 	</profiles>
-
-	<distributionManagement>
-		<repository>
-		  <id>pn-pn</id>
-		  <name>pn-pn</name>
-		  <url>https://pn-911845998067.d.codeartifact.eu-central-1.amazonaws.com/maven/pn/</url>
-		</repository>
-	</distributionManagement>
-	  
-	 
-
 </project>
