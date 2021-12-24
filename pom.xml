@@ -95,7 +95,7 @@
 			<activation>
 				<activeByDefault>false</activeByDefault>
 				<property>
-					<name>CI_PROFILE</name>
+					<name>env.CI_PROFILE</name>
 				</property>
 			</activation>
 			<build>
