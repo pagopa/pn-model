@@ -12,9 +12,6 @@ import lombok.*;
 @ToString
 public class DigitalAddresses {
 
-    @Schema( description = "Indirizzo digitale di piattaforma" )
+    @Schema(description = "Indirizzo digitale di piattaforma")
     private DigitalAddress platform;
-
-    @Schema( description = "Indirizzo digitale generale" )
-    private DigitalAddress general;
 }

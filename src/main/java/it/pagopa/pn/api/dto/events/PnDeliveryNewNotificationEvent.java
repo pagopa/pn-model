@@ -10,7 +10,7 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 public class PnDeliveryNewNotificationEvent implements GenericEvent<StandardEventHeader, PnDeliveryNewNotificationEvent.Payload> {
-
+    //TODO OGGETTO IN INGRESSO
     private StandardEventHeader header;
 
     private Payload payload;
@@ -24,7 +24,7 @@ public class PnDeliveryNewNotificationEvent implements GenericEvent<StandardEven
     @ToString
     public static class Payload {
 
-        @Schema( description = "Codice IPA della PA mittente")
+        @Schema(description = "Codice IPA della PA mittente")
         private String paId;
     }
 }
