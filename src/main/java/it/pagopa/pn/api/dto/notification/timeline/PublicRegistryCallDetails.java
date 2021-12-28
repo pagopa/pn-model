@@ -20,8 +20,12 @@ public class PublicRegistryCallDetails implements TimelineElementDetails {
     @JsonIgnore
     @Schema(description = "Tipologia Domiciliazione")
     private DeliveryMode deliveryMode;
-    
+
     @JsonIgnore
     @Schema(description = "Fase in cui è avvenuta la richiesta")
     private ContactPhase contactPhase;
+
+    @JsonIgnore
+    @Schema(description = "Numero di tentativi di notificazione già effettuati")
+    private int sentAttemptMade;
 }

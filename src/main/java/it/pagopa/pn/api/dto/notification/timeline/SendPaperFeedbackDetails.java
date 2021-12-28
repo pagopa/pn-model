@@ -16,23 +16,24 @@ import java.util.List;
 @ToString
 public class SendPaperFeedbackDetails extends SendPaperDetails {
 
-
     public SendPaperFeedbackDetails(SendPaperDetails spd, PhysicalAddress newAddress, List<String> attachmentKeys, List<String> errors) {
-        super(spd.getTaxId(), spd.getAddress(), spd.getServiceLevel(), spd.isInvestigation());
+        super(spd.getTaxId(), spd.getAddress(), spd.getServiceLevel(), spd.getSentAttemptMade(), spd.isInvestigation());
         this.newAddress = newAddress;
         this.attachmentKeys = attachmentKeys;
         this.errors = errors;
     }
 
+    //TODO Da eliminare il tutto il sentAttemptMade a 0 è stato inserito solo per poter effettuare la build
     public SendPaperFeedbackDetails(String taxId, PhysicalAddress address, ServiceLevelType serviceLevel, PhysicalAddress newAddress, List<String> attachmentKeys, List<String> errors) {
-        super(taxId, address, serviceLevel, false);
+        super(taxId, address, serviceLevel, 0, false);
         this.newAddress = newAddress;
         this.attachmentKeys = attachmentKeys;
         this.errors = errors;
     }
-
+    
+    //TODO Da eliminare il tutto il sentAttemptMade a 0 è stato inserito solo per poter effettuare la build
     public SendPaperFeedbackDetails(PhysicalAddress newAddress, List<String> attachmentKeys, List<String> errors) {
-        super(null, null, null, false);
+        super(null, null, null, 0, false);
         this.newAddress = newAddress;
         this.attachmentKeys = attachmentKeys;
         this.errors = errors;

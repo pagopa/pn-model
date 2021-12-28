@@ -14,6 +14,7 @@ public enum TimelineElementCategory {
     WAIT_FOR_RECIPIENT_TIMEOUT(WaitForRecipientTimeoutDetails.class),
     SUCCESS_WORKFLOW(SuccessWorkflow.class),
     FAILURE_WORKFLOW(FailureWorkflow.class),
+    SEND_SIMPLE_REGISTERED_LETTER(SimpleRegisteredLetterDetails.class),
     END_OF_DIGITAL_DELIVERY_WORKFLOW(EndOfDigitalDeliveryWorkflowDetails.class),
     END_OF_ANALOG_DELIVERY_WORKFLOW(EndOfAnalogDeliveryWorkflowDetails.class),
     NOTIFICATION_VIEWED(NotificationViewedDetails.class),

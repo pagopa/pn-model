@@ -23,7 +23,7 @@ public class SendDigitalDetails implements TimelineElementDetails {
     private DigitalAddress address;
 
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
-    @Schema(description = "numero del tentativo")
+    @Schema(description = "numero dei tentativi effettuati")
     private Integer retryNumber;
 
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
