@@ -1,7 +1,7 @@
 package it.pagopa.pn.api.dto.notification.timeline;
 
 public enum TimelineElementCategory {
-    RECEIVED_ACK(ReceivedDetails.class),
+    REQUEST_ACCEPTED(ReceivedDetails.class),
     SEND_COURTESY_MESSAGE(NotificationPathChooseDetails.class),
     NOTIFICATION_PATH_CHOOSE(NotificationPathChooseDetails.class),
     GET_ADDRESS(GetAddressInfo.class),
@@ -12,8 +12,10 @@ public enum TimelineElementCategory {
     SEND_DIGITAL_DOMICILE_FEEDBACK(SendDigitalFeedbackDetails.class),
     SEND_DIGITAL_DOMICILE_FAILURE(SendDigitalFailureDetails.class),
     WAIT_FOR_RECIPIENT_TIMEOUT(WaitForRecipientTimeoutDetails.class),
-    SUCCESS_WORKFLOW(SuccessWorkflow.class),
-    FAILURE_WORKFLOW(FailureWorkflow.class),
+    DIGITAL_SUCCESS_WORKFLOW(DigitalSuccessWorkflow.class),
+    DIGITAL_FAILURE_WORKFLOW(DigitalFailureWorkflow.class),
+    ANALOG_SUCCESS_WORKFLOW(AnalogSuccessWorkflow.class),
+    ANALOG_FAILURE_WORKFLOW(AnalogFailureWorkflow.class),
     SEND_SIMPLE_REGISTERED_LETTER(SimpleRegisteredLetterDetails.class),
     END_OF_DIGITAL_DELIVERY_WORKFLOW(EndOfDigitalDeliveryWorkflowDetails.class),
     END_OF_ANALOG_DELIVERY_WORKFLOW(EndOfAnalogDeliveryWorkflowDetails.class),

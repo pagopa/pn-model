@@ -2,6 +2,16 @@ package it.pagopa.pn.api.dto.notification.timeline;
 
 public enum TimelineEventId {
 
+    REQUEST_ACCEPTED() {
+        @Override
+        public String buildEventId(EventId eventId) {
+            return String.format(
+                    "%s_request_accepted_%s",
+                    eventId.getIun(),
+                    eventId.getRecipientId()
+            );
+        }
+    },
     SEND_COURTESY_MESSAGE() {
         @Override
         public String buildEventId(EventId eventId) {
@@ -72,7 +82,18 @@ public enum TimelineEventId {
         }
     },
 
-    SUCCESS_WORKFLOW() {
+    DIGITAL_SUCCESS_WORKFLOW() {
+        @Override
+        public String buildEventId(EventId eventId) {
+            return String.format(
+                    "%s_digital_success_workflow%s",
+                    eventId.getIun(),
+                    eventId.getRecipientId()
+            );
+        }
+    },
+
+    DIGITAL_FAILURE_WORKFLOW() {
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
@@ -83,11 +104,22 @@ public enum TimelineEventId {
         }
     },
 
-    FAILURE_WORKFLOW() {
+    ANALOG_SUCCESS_WORKFLOW() {
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_success_workflow%s",
+                    "%s_analog_success_workflow%s",
+                    eventId.getIun(),
+                    eventId.getRecipientId()
+            );
+        }
+    },
+
+    ANALOG_FAILURE_WORKFLOW() {
+        @Override
+        public String buildEventId(EventId eventId) {
+            return String.format(
+                    "%s_analog_workflow%s",
                     eventId.getIun(),
                     eventId.getRecipientId()
             );
