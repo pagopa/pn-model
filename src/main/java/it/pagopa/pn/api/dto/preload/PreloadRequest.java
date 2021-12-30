@@ -10,4 +10,5 @@ import lombok.*;
 @ToString
 public class PreloadRequest {
     private String key;
+    private String contentType;
 }
