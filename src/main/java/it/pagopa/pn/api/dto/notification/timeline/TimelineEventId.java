@@ -16,7 +16,7 @@ public enum TimelineEventId {
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_send_courtesy_message%s_index%d",
+                    "%s_send_courtesy_message_%s_index_%d",
                     eventId.getIun(),
                     eventId.getRecipientId(),
                     eventId.getIndex()
@@ -27,7 +27,7 @@ public enum TimelineEventId {
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_get_address%s_source_%s_attempt%d",
+                    "%s_get_address%s_source_%s_attempt_%d",
                     eventId.getIun(),
                     eventId.getRecipientId(),
                     eventId.getSource(),
@@ -39,7 +39,7 @@ public enum TimelineEventId {
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_send_paper_feedback%s_attempt%d",
+                    "%s_send_paper_feedback_%s_attempt_%d",
                     eventId.getIun(),
                     eventId.getRecipientId(),
                     eventId.getIndex()
@@ -50,7 +50,7 @@ public enum TimelineEventId {
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_send_digital_domicile%source_%s_attempt%d",
+                    "%s_send_digital_domicile%s_source_%s_attempt_%d",
                     eventId.getIun(),
                     eventId.getRecipientId(),
                     eventId.getSource(),
@@ -63,7 +63,7 @@ public enum TimelineEventId {
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_send_simple_registered_letter%s",
+                    "%s_send_simple_registered_letter_%s",
                     eventId.getIun(),
                     eventId.getRecipientId()
             );
@@ -74,7 +74,7 @@ public enum TimelineEventId {
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_send_analog_domicile%s_attempt%d",
+                    "%s_send_analog_domicile_%s_attempt_%d",
                     eventId.getIun(),
                     eventId.getRecipientId(),
                     eventId.getIndex()
@@ -86,7 +86,7 @@ public enum TimelineEventId {
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_digital_success_workflow%s",
+                    "%s_digital_success_workflow_%s",
                     eventId.getIun(),
                     eventId.getRecipientId()
             );
@@ -97,7 +97,7 @@ public enum TimelineEventId {
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_success_workflow%s",
+                    "%s_digital_failure_workflow_%s",
                     eventId.getIun(),
                     eventId.getRecipientId()
             );
@@ -108,7 +108,7 @@ public enum TimelineEventId {
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_analog_success_workflow%s",
+                    "%s_analog_success_workflow_%s",
                     eventId.getIun(),
                     eventId.getRecipientId()
             );
@@ -119,12 +119,46 @@ public enum TimelineEventId {
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_analog_workflow%s",
+                    "%s_analog_failure_workflow_%s",
                     eventId.getIun(),
                     eventId.getRecipientId()
             );
         }
     },
+
+    NOTIFICATION_VIEWED() {
+        @Override
+        public String buildEventId(EventId eventId) {
+            return String.format(
+                    "%s_notification_viewed_%s",
+                    eventId.getIun(),
+                    eventId.getRecipientId()
+            );
+        }
+    },
+
+    COMPLETELY_UNREACHABLE() {
+        @Override
+        public String buildEventId(EventId eventId) {
+            return String.format(
+                    "%s_completely_unreachable_%s",
+                    eventId.getIun(),
+                    eventId.getRecipientId()
+            );
+        }
+    },
+
+    REFINEMENT() {
+        @Override
+        public String buildEventId(EventId eventId) {
+            return String.format(
+                    "%s_refinement_%s",
+                    eventId.getIun(),
+                    eventId.getRecipientId()
+            );
+        }
+    },
+
     ;
 
     public String buildEventId(EventId eventId) {

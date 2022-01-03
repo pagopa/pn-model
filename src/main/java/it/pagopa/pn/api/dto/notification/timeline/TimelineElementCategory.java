@@ -11,7 +11,7 @@ public enum TimelineElementCategory {
     SEND_DIGITAL_FEEDBACK_FAILURE(SendDigitalFeedbackFailure.class),
     SEND_DIGITAL_DOMICILE_FEEDBACK(SendDigitalFeedbackDetails.class),
     SEND_DIGITAL_DOMICILE_FAILURE(SendDigitalFailureDetails.class),
-    WAIT_FOR_RECIPIENT_TIMEOUT(WaitForRecipientTimeoutDetails.class),
+    REFINEMENT(RefinementDetails.class),
     DIGITAL_SUCCESS_WORKFLOW(DigitalSuccessWorkflow.class),
     DIGITAL_FAILURE_WORKFLOW(DigitalFailureWorkflow.class),
     ANALOG_SUCCESS_WORKFLOW(AnalogSuccessWorkflow.class),

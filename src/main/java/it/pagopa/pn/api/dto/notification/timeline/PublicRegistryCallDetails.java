@@ -6,6 +6,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import it.pagopa.pn.api.dto.notification.NotificationJsonViews;
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -15,6 +17,7 @@ import lombok.*;
 public class PublicRegistryCallDetails implements TimelineElementDetails {
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
     @Schema(description = "Codice Fiscale destinatario notifica digitale")
+    @NotNull
     private String taxId;
 
     @JsonIgnore
@@ -23,9 +26,12 @@ public class PublicRegistryCallDetails implements TimelineElementDetails {
 
     @JsonIgnore
     @Schema(description = "Fase in cui è avvenuta la richiesta")
+    @NotNull
     private ContactPhase contactPhase;
 
     @JsonIgnore
+    @NotNull
     @Schema(description = "Numero di tentativi di notificazione già effettuati")
+    @NotNull
     private int sentAttemptMade;
 }

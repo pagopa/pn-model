@@ -1,7 +1,8 @@
 package it.pagopa.pn.api.dto.notification.timeline;
 
-import it.pagopa.pn.api.dto.notification.address.DigitalAddressSource2;
+import it.pagopa.pn.api.dto.notification.address.DigitalAddressSource;
 import lombok.*;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,6 +13,6 @@ import lombok.*;
 public class EventId {
     private String iun;
     private String recipientId;
-    private DigitalAddressSource2 source;
+    private DigitalAddressSource source;
     private int index;
 }

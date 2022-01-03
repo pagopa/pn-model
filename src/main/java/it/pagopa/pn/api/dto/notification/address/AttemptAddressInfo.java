@@ -11,7 +11,7 @@ import java.time.Instant;
 @EqualsAndHashCode
 @ToString
 public class AttemptAddressInfo {
-    private DigitalAddressSource2 addressSource;
+    private DigitalAddressSource addressSource;
     private int sentAttemptMade;
     private Instant lastAttemptDate;
 }
