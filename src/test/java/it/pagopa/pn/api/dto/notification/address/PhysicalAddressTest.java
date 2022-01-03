@@ -19,7 +19,7 @@ public class PhysicalAddressTest {
         physicalAddress.setForeignState("Italia");
         physicalAddress.setZip("40069");
         List<String> stdAddress = physicalAddress.toStandardAddressString("Sig.");
-        List<String> expected = Arrays.asList("Sig.","Matteo Turra","Scala 1b","via Ugo Bassi, 7","40069 Zola Predosa BO","Italia");
+        List<String> expected = Arrays.asList("Sig.","Matteo Turra!","Scala 1b","via Ugo Bassi, 7","40069 Zola Predosa BO","Italia");
         assertEquals(expected.size(), expected.size());
         for (int i = 0; i < stdAddress.size(); i++) {
             assertEquals(stdAddress.get(i), expected.get(i));
