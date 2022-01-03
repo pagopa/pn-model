@@ -215,7 +215,7 @@
 									<outputDirectory>${project.reporting.outputDirectory}/jacoco</outputDirectory>
 								</configuration>
 							</execution>
-							<execution>
+							<!--<execution>
 								<id>check</id>
 								<phase>verify</phase>
 								<goals>
@@ -240,7 +240,7 @@
 									</rules>
 									<dataFile>${project.build.directory}/jacoco-output/merged.exec</dataFile>
 								</configuration>
-							</execution>
+							</execution>-->
 						</executions>
 					</plugin>
 					<plugin>
