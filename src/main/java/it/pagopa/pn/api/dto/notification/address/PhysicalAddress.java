@@ -51,7 +51,7 @@ public class PhysicalAddress {
 		standardAddressString.add( recipientDenomination );
 		
 		if ( isNotBlank( at ) ) {
-			standardAddressString.add( at  + "!");
+			standardAddressString.add( at );
 		}
 		
 		if ( isNotBlank( addressDetails ) ) {
