@@ -2,4 +2,4 @@
 ```
     ./mvnw clean install && ./mvnw -DCI_PROFILE clean install
 ```
-Test per build CI 2
+Test per build CI
