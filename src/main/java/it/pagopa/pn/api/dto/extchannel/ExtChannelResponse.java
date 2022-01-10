@@ -16,6 +16,7 @@ import java.util.List;
 public class ExtChannelResponse {
     private String iun;
     private String taxId;
+    private String eventId;
     private Instant notificationDate;
     private ExtChannelResponseStatus responseStatus;
     private List<String> errorList;
