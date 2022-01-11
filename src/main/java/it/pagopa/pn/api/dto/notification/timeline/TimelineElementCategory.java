@@ -2,7 +2,7 @@ package it.pagopa.pn.api.dto.notification.timeline;
 
 public enum TimelineElementCategory {
     REQUEST_ACCEPTED(ReceivedDetails.class),
-    SEND_COURTESY_MESSAGE(NotificationPathChooseDetails.class),
+    SEND_COURTESY_MESSAGE(SendCourtesyMessageDetails.class),
     NOTIFICATION_PATH_CHOOSE(NotificationPathChooseDetails.class),
     GET_ADDRESS(GetAddressInfo.class),
     PUBLIC_REGISTRY_CALL(PublicRegistryCallDetails.class),
