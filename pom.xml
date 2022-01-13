@@ -47,11 +47,6 @@
 			<id>run</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
-				<!--
-				<property>
-					<name>fat.jar</name>
-				</property>
-				-->
 			</activation>
 
 			<dependencies>
