@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.v3.oas.annotations.media.Schema;
 import it.pagopa.pn.api.dto.notification.NotificationJsonViews;
 import it.pagopa.pn.api.dto.notification.address.DigitalAddress;
+import it.pagopa.pn.api.dto.notification.address.DigitalAddressSource;
 import lombok.*;
 
 @NoArgsConstructor
@@ -21,6 +22,10 @@ public class SendDigitalDetails implements TimelineElementDetails {
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
     @Schema(description = "indirizzo di invio della notifica")
     private DigitalAddress address;
+
+    @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
+    @Schema(description = "sorgente indirizzo di invio della notifica")
+    private DigitalAddressSource addressSource;
 
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
     @Schema(description = "numero dei tentativi effettuati")

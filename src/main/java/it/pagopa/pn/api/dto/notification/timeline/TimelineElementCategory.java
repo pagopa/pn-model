@@ -23,6 +23,7 @@ public enum TimelineElementCategory {
     SEND_ANALOG_DOMICILE(SendPaperDetails.class),
     SEND_PAPER_FEEDBACK(SendPaperFeedbackDetails.class),
     PAYMENT(null),
+    SCHEDULE_DIGITAL_WORKFLOW(ScheduleDigitalWorkflow.class),
     COMPLETELY_UNREACHABLE(CompletlyUnreachableDetails.class);
 
     private final Class<? extends TimelineElementDetails> detailsJavaClass;

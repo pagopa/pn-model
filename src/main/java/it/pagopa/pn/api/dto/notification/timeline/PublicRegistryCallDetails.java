@@ -7,6 +7,7 @@ import it.pagopa.pn.api.dto.notification.NotificationJsonViews;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
+import java.time.Instant;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,4 +35,8 @@ public class PublicRegistryCallDetails implements TimelineElementDetails {
     @Schema(description = "Numero di tentativi di notificazione già effettuati")
     @NotNull
     private int sentAttemptMade;
+
+    @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
+    @Schema(description = "Data invio richiesta ai public registry")
+    private Instant sendDate;
 }

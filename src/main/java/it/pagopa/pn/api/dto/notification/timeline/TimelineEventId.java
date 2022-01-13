@@ -159,6 +159,17 @@ public enum TimelineEventId {
         }
     },
 
+    SCHEDULE_DIGITAL_WORKFLOW() {
+        @Override
+        public String buildEventId(EventId eventId) {
+            return String.format(
+                    "%s_schedule_digital_workflow_%s",
+                    eventId.getIun(),
+                    eventId.getRecipientId()
+            );
+        }
+    },
+
     ;
 
     public String buildEventId(EventId eventId) {
