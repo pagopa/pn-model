@@ -12,6 +12,10 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>pn-model</name>
 	<description>Modello dati Piattaforma Notifiche</description>
+
+	<properties>
+		<jacoco.min.line.cover.ratio>0.01</jacoco.min.line.cover.ratio>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -111,7 +115,6 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-jar-plugin</artifactId>
-						<version>3.2.0</version>
 						<executions>
 							<execution>
 								<id>default-jar</id>
