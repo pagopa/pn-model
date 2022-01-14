@@ -49,12 +49,13 @@ public enum TimelineEventId {
     SEND_DIGITAL_DOMICILE() {
         @Override
         public String buildEventId(EventId eventId) {
+            int sendAttempt = eventId.getIndex() + 1; //TODO Nell'invio verso external channel viene incrementato il numero di tentativi effettuati (in questo modo viene passato il tentativo che si sta effettuando) per preservare le logiche di extchannel attualmente presenti
             return String.format(
                     "%s_send_digital_domicile%s_source_%s_attempt_%d",
                     eventId.getIun(),
                     eventId.getRecipientId(),
                     eventId.getSource(),
-                    eventId.getIndex()
+                    sendAttempt
             );
         }
     },
@@ -73,11 +74,12 @@ public enum TimelineEventId {
     SEND_ANALOG_DOMICILE() {
         @Override
         public String buildEventId(EventId eventId) {
+            int sendAttempt = eventId.getIndex() + 1; //TODO Nell'invio verso external channel viene incrementato il numero di tentativi effettuati (in questo modo viene passato il tentativo che si sta effettuando) per preservare le logiche di extchannel attualmente presenti
             return String.format(
                     "%s_send_analog_domicile_%s_attempt_%d",
                     eventId.getIun(),
                     eventId.getRecipientId(),
-                    eventId.getIndex()
+                    sendAttempt
             );
         }
     },
