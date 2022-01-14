@@ -10,7 +10,7 @@ import java.time.Instant;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class AttemptAddressInfo {
+public class DigitalAddressInfo {
     private DigitalAddress address;
     private DigitalAddressSource addressSource;
     private int sentAttemptMade;
