@@ -172,6 +172,27 @@ public enum TimelineEventId {
         }
     },
 
+    SCHEDULE_ANALOG_WORKFLOW() {
+        @Override
+        public String buildEventId(EventId eventId) {
+            return String.format(
+                    "%s_schedule_analog_workflow_%s",
+                    eventId.getIun(),
+                    eventId.getRecipientId()
+            );
+        }
+    },
+
+    SCHEDULE_REFINEMENT_WORKFLOW() {
+        @Override
+        public String buildEventId(EventId eventId) {
+            return String.format(
+                    "%s_schedule_refinement_workflow_%s",
+                    eventId.getIun(),
+                    eventId.getRecipientId()
+            );
+        }
+    },
     ;
 
     public String buildEventId(EventId eventId) {
