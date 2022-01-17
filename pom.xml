@@ -2,29 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>it.pagopa.pn</groupId>
+	<parent>
+		<groupId>it.pagopa.pn</groupId>
+		<artifactId>pn-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath/>
+	</parent>
 	<artifactId>pn-model</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>pn-model</name>
 	<description>Modello dati Piattaforma Notifiche</description>
+
 	<properties>
-		<java.version>11</java.version>
+		<jacoco.min.line.cover.ratio>0.01</jacoco.min.line.cover.ratio>
 	</properties>
-
-	<dependencyManagement>
-		<dependencies>
-			<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies -->
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-dependencies</artifactId>
-				<version>2.5.2</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-
-
 	<dependencies>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -52,19 +43,24 @@
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
         </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
-
+ 
 	<profiles>
 		<profile>
 			<id>run</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
-				<!--
-				<property>
-					<name>fat.jar</name>
-				</property>
-				-->
 			</activation>
 
 			<dependencies>
@@ -100,7 +96,7 @@
 			<activation>
 				<activeByDefault>false</activeByDefault>
 				<property>
-					<name>small.jar</name>
+					<name>env.CI_PROFILE</name>
 				</property>
 			</activation>
 			<build>
@@ -117,6 +113,7 @@
 						</configuration>
 					</plugin>
 					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-jar-plugin</artifactId>
 						<executions>
 							<execution>
@@ -137,15 +134,4 @@
 			</build>
 		</profile>
 	</profiles>
-
-	<distributionManagement>
-		<repository>
-		  <id>pn-pn</id>
-		  <name>pn-pn</name>
-		  <url>https://pn-911845998067.d.codeartifact.eu-central-1.amazonaws.com/maven/pn/</url>
-		</repository>
-	</distributionManagement>
-	  
-	 
-
 </project>
