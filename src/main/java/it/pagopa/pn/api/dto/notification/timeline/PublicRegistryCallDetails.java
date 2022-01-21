@@ -1,6 +1,5 @@
 package it.pagopa.pn.api.dto.notification.timeline;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.v3.oas.annotations.media.Schema;
 import it.pagopa.pn.api.dto.notification.NotificationJsonViews;
@@ -21,16 +20,13 @@ public class PublicRegistryCallDetails implements TimelineElementDetails {
     @NotNull
     private String taxId;
 
-    @JsonIgnore
     @Schema(description = "Tipologia Domiciliazione")
     private DeliveryMode deliveryMode;
 
-    @JsonIgnore
     @Schema(description = "Fase in cui è avvenuta la richiesta")
     @NotNull
     private ContactPhase contactPhase;
 
-    @JsonIgnore
     @NotNull
     @Schema(description = "Numero di tentativi di notificazione già effettuati")
     @NotNull

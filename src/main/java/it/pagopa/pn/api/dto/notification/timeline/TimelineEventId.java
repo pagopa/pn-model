@@ -35,6 +35,19 @@ public enum TimelineEventId {
             );
         }
     },
+
+    SEND_DIGITAL_FEEDBACK() {
+        @Override
+        public String buildEventId(EventId eventId) {
+            return String.format(
+                    "%s_send_digital_feedback_%s_attempt_%d",
+                    eventId.getIun(),
+                    eventId.getRecipientId(),
+                    eventId.getIndex()
+            );
+        }
+    },
+
     SEND_PAPER_FEEDBACK() {
         @Override
         public String buildEventId(EventId eventId) {

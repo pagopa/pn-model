@@ -1,6 +1,5 @@
 package it.pagopa.pn.api.dto.extchannel;
 
-import it.pagopa.pn.api.dto.notification.address.DigitalAddress;
 import it.pagopa.pn.api.dto.notification.address.PhysicalAddress;
 import lombok.*;
 
@@ -15,14 +14,10 @@ import java.util.List;
 @ToString
 public class ExtChannelResponse {
     private String iun;
-    private String taxId;
     private String eventId;
     private Instant notificationDate;
     private ExtChannelResponseStatus responseStatus;
     private List<String> errorList;
-    private DigitalAddress digitalUsedAddress;
     private List<String> attachmentKeys;
-    private PhysicalAddress analogUsedAddress;
     private PhysicalAddress analogNewAddressFromInvestigation;
-
 }
