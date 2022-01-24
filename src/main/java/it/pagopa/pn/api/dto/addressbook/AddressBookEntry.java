@@ -7,6 +7,8 @@ import lombok.*;
 
 import java.util.List;
 
+
+@Deprecated
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -19,7 +21,7 @@ public class AddressBookEntry {
     private String taxId;
 
     @Schema(description = "Indirizzi digitali utilizzabili per la persona indicata dal TaxId")
-    private DigitalAddresses digitalAddresses; //TODO Valutare se eliminare ed utilizzzare un solo address cioè quello di piattaforma
+    private DigitalAddresses digitalAddresses;
 
     @Schema(description = "Indirizzi recapito digitale utilizzabili per la persona indicata dal TaxId")
     private List<DigitalAddress> courtesyAddresses;

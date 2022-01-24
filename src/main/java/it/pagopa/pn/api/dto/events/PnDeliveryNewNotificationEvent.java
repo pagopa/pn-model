@@ -10,6 +10,7 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 public class PnDeliveryNewNotificationEvent implements GenericEvent<StandardEventHeader, PnDeliveryNewNotificationEvent.Payload> {
+
     private StandardEventHeader header;
 
     private Payload payload;
