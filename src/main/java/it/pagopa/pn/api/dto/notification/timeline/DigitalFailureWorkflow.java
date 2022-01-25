@@ -11,10 +11,10 @@ import lombok.*;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class DigitalFailureWorkflow implements TimelineElementDetails {
+public class DigitalFailureWorkflow implements TimelineElementDetails { //NEW
 
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
     @Schema(description = "Codice Fiscale destinatario notifica digitale")
     private String taxId;
-    
+
 }

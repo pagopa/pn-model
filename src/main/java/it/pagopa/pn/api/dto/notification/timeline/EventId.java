@@ -10,7 +10,7 @@ import lombok.*;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class EventId {
+public class EventId {//NEW
     private String iun;
     private String recipientId;
     private DigitalAddressSource source;

@@ -1,6 +1,6 @@
 package it.pagopa.pn.api.dto.notification.timeline;
 
-public enum TimelineEventId {
+public enum TimelineEventId {//NEW
 
     REQUEST_ACCEPTED() {
         @Override
