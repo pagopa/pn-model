@@ -23,15 +23,15 @@ public class SendPaperFeedbackDetails extends SendPaperDetails {
         this.errors = errors;
     }
 
-    //TODO Da eliminare il tutto il sentAttemptMade a 0 è stato inserito solo per poter effettuare la build
+    //TODO Da eliminare quando verrò utilizzato il codice del refactoring il sentAttemptMade a 0 è stato inserito solo per poter effettuare la build
     public SendPaperFeedbackDetails(String taxId, PhysicalAddress address, ServiceLevelType serviceLevel, PhysicalAddress newAddress, List<String> attachmentKeys, List<String> errors) {
         super(taxId, address, serviceLevel, 0, false);
         this.newAddress = newAddress;
         this.attachmentKeys = attachmentKeys;
         this.errors = errors;
     }
-    
-    //TODO Da eliminare il tutto il sentAttemptMade a 0 è stato inserito solo per poter effettuare la build
+
+    //TODO Da eliminare quando verrò utilizzato il codice del refactoring il sentAttemptMade a 0 è stato inserito solo per poter effettuare la build
     public SendPaperFeedbackDetails(PhysicalAddress newAddress, List<String> attachmentKeys, List<String> errors) {
         super(null, null, null, 0, false);
         this.newAddress = newAddress;
