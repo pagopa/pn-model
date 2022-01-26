@@ -5,7 +5,7 @@ public enum NotificationStatus {
     DELIVERING,
     DELIVERED,
     VIEWED,
-    EFFECTIVE_DATE,//FIXME trovare un nome più esplicativo
+    EFFECTIVE_DATE,
     PAID,
     UNREACHABLE
 }
