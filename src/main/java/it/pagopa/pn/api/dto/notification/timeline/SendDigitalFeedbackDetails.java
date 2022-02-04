@@ -9,6 +9,7 @@ import lombok.*;
 
 import java.util.List;
 
+@Deprecated
 @NoArgsConstructor
 @Getter
 @Builder(builderMethodName = "sendFeedbackBuilder")
