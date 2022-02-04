@@ -7,14 +7,13 @@ import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Builder( toBuilder = true )
+@Builder(toBuilder = true)
 @EqualsAndHashCode
+@Getter
 @ToString
-public class WaitForRecipientTimeoutDetails implements TimelineElementDetails {
+public class ScheduleAnalogWorkflow implements TimelineElementDetails {//NEW
 
-    @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
-    @Schema( description = "Codice Fiscale destinatario notifica digitale")
+    @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
+    @Schema(description = "Codice Fiscale destinatario notifica digitale")
     private String taxId;
-
 }

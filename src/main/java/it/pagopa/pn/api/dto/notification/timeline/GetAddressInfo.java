@@ -2,12 +2,12 @@ package it.pagopa.pn.api.dto.notification.timeline;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.v3.oas.annotations.media.Schema;
-import it.pagopa.pn.api.dto.events.ServiceLevelType;
 import it.pagopa.pn.api.dto.notification.NotificationJsonViews;
-import it.pagopa.pn.api.dto.notification.address.PhysicalAddress;
+import it.pagopa.pn.api.dto.notification.address.DigitalAddressSource;
 import lombok.*;
 
-import javax.validation.constraints.NotNull;
+import java.time.Instant;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,26 +15,21 @@ import javax.validation.constraints.NotNull;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class SendPaperDetails implements TimelineElementDetails {
+public class GetAddressInfo implements TimelineElementDetails {//NEW
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
     @Schema(description = "Codice Fiscale destinatario notifica digitale")
     private String taxId;
 
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
-    @Schema(description = "indirizzo fisico di invio della notifica")
-    private PhysicalAddress address;
+    @Schema(description = "Sorgente indirizzo")
+    private DigitalAddressSource source;
 
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
-    @Schema(description = "Livello Servizio")
-    @NotNull
-    private ServiceLevelType serviceLevel;
+    @Schema(description = "Disponibilità indirizzo")
+    private boolean isAvailable;
 
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
-    @Schema(description = "numero dei tentativi effettuati")
-    private Integer sentAttemptMade;
+    @Schema(description = "Data tentativo")
+    private Instant attemptDate;
 
-    @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
-    @Schema(description = "E' richiesta investigazione indirizzo fisico alternativo")
-    @NotNull
-    private boolean investigation;
 }
