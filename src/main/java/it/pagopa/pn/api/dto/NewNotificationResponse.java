@@ -12,7 +12,7 @@ import lombok.*;
 public class NewNotificationResponse {
 
     @Schema( name = "iun", description = "Identificativo Univoco Notifica con cui la notifica appena inviata verrà identificata nel processo di notificazione")
-    private String iun;
+    private String notificationId;
 
     @Schema( name = "paNotificationId", description = "Identificativo inviato dalla pubblica amministrazione")
     private String paNotificationId;

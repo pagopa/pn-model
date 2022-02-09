@@ -6,9 +6,8 @@ public enum TimelineEventId {//NEW
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_request_accepted_%s",
-                    eventId.getIun(),
-                    eventId.getRecipientId()
+                    "%s_request_accepted",
+                    eventId.getIun()
             );
         }
     },
@@ -203,6 +202,16 @@ public enum TimelineEventId {//NEW
                     "%s_schedule_refinement_workflow_%s",
                     eventId.getIun(),
                     eventId.getRecipientId()
+            );
+        }
+    },
+
+    REQUEST_REFUSED() {
+        @Override
+        public String buildEventId(EventId eventId) {
+            return String.format(
+                    "%s_request_refused",
+                    eventId.getIun()
             );
         }
     },
