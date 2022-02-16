@@ -2,6 +2,7 @@ package it.pagopa.pn_doc.api;
 
 import it.pagopa.pn.api.dto.NewNotificationResponse;
 import it.pagopa.pn.api.dto.NotificationSearchRow;
+import it.pagopa.pn.api.dto.ResultPaginationDto;
 import it.pagopa.pn.api.dto.legalfacts.LegalFactsListEntry;
 import it.pagopa.pn.api.dto.notification.Notification;
 import it.pagopa.pn.api.dto.notification.directaccesstoken.DirectAccessToken;
@@ -36,7 +37,7 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
     }
 
 	@Override
-    public List<NotificationSearchRow> searchSentNotification(String senderId, Instant startDate, Instant endDate, String recipientId, NotificationStatus status, String subjectRegExp) {
+    public ResultPaginationDto<NotificationSearchRow, Instant> searchSentNotification(String senderId, Instant startDate, Instant endDate, String recipientId, NotificationStatus status, String subjectRegExp, Integer size, String nextPagesKey) {
         return null;
     }
 
@@ -56,7 +57,7 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
     }
 
     @Override
-    public List<NotificationSearchRow> searchReceivedNotification(String recipientId, Instant startDate, Instant endDate, String senderId, NotificationStatus status, String subjectRegExp) {
+    public ResultPaginationDto<NotificationSearchRow, Instant> searchReceivedNotification(String recipientId, Instant startDate, Instant endDate, String senderId, NotificationStatus status, String subjectRegExp, Integer size, String nextPagesKey) {
         return null;
     }
 
