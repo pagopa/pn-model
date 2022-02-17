@@ -4,22 +4,37 @@ import it.pagopa.pn.api.dto.notification.status.NotificationStatus;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.time.Instant;
 
 @EqualsAndHashCode
 @ToString
 @Getter
 public class InputSearchNotificationDto {
-    private String senderReceiverId;
+    @NotEmpty
+    private final String senderReceiverId;
+    
+    @NotNull
     private Instant startDate;
-    private Instant endDate;
-    private String filterId;
+    
+    @NotNull
+    private final Instant endDate;
+    
+    private final String filterId;
+    
     private NotificationStatus status;
-    private String subjectRegExp;
-    private Integer size;
-    private String nextPagesKey;
-    private boolean bySender;
+    
+    private final String subjectRegExp;
+
+    @Positive
+    @NotNull
+    private final Integer size;
+    
+    private final String nextPagesKey;
+    
+    private final boolean bySender;
     
     public void setStartDate(Instant startDate){
         this.startDate = startDate;
@@ -52,6 +67,8 @@ public class InputSearchNotificationDto {
         private Integer size;
         private String nextPagesKey;
         private boolean bySender;
+        
+        public Builder() {}
         
         public Builder bySender(boolean bySender) {
             this.bySender = bySender;
@@ -98,15 +115,10 @@ public class InputSearchNotificationDto {
             return this;
         }
         
-        //Return the finally consrcuted User object
         public InputSearchNotificationDto build() {
-            InputSearchNotificationDto searchDto =  new InputSearchNotificationDto(this);
-            validateUserObject(searchDto);
-            return searchDto;
+           return new InputSearchNotificationDto(this);
         }
         
-        private void validateUserObject(InputSearchNotificationDto searchDto) {
-        }
     }
     
 }
