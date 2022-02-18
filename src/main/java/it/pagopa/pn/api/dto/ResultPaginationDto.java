@@ -9,8 +9,8 @@ import java.util.List;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class ResultPaginationDto<T,S> {
+public class ResultPaginationDto<T> {
     private List<T> result;
     private boolean moreResult;
-    private List<S> nextPagesKey;
+    private List<String> nextPagesKey;
 }

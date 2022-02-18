@@ -35,25 +35,26 @@ public class InputSearchNotificationDto {
     private final String nextPagesKey;
     
     private final boolean bySender;
-    
+
+    public InputSearchNotificationDto(String senderReceiverId, Instant startDate, Instant endDate, String filterId, NotificationStatus status,
+                                      String subjectRegExp, Integer size, String nextPagesKey, boolean bySender) {
+        this.senderReceiverId = senderReceiverId;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.filterId = filterId;
+        this.status = status;
+        this.subjectRegExp = subjectRegExp;
+        this.size = size;
+        this.nextPagesKey = nextPagesKey;
+        this.bySender = bySender;
+    }
+
     public void setStartDate(Instant startDate){
         this.startDate = startDate;
     }
     
     public void setStatus(NotificationStatus status){
         this.status = status;
-    }
-    
-    private InputSearchNotificationDto(Builder searchDtoBuilder){
-        this.senderReceiverId = searchDtoBuilder.senderReceiverId;
-        this.startDate = searchDtoBuilder.startDate;
-        this.endDate = searchDtoBuilder.endDate;
-        this.filterId = searchDtoBuilder.filterId;
-        this.status = searchDtoBuilder.status;
-        this.subjectRegExp = searchDtoBuilder.subjectRegExp;
-        this.size = searchDtoBuilder.size;
-        this.nextPagesKey = searchDtoBuilder.nextPagesKey;
-        this.bySender = searchDtoBuilder.bySender;
     }
     
     public static class Builder
@@ -116,7 +117,8 @@ public class InputSearchNotificationDto {
         }
         
         public InputSearchNotificationDto build() {
-           return new InputSearchNotificationDto(this);
+           return new InputSearchNotificationDto(senderReceiverId, startDate, endDate, filterId, status,
+                   subjectRegExp, size, nextPagesKey, bySender);
         }
         
     }

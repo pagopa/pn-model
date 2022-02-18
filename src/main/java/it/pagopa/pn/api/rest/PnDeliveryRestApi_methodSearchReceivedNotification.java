@@ -13,7 +13,7 @@ import java.util.List;
 public interface PnDeliveryRestApi_methodSearchReceivedNotification {
 
     @GetMapping(PnDeliveryRestConstants.NOTIFICATIONS_RECEIVED_PATH)
-    ResultPaginationDto<NotificationSearchRow, Instant> searchReceivedNotification(
+    ResultPaginationDto<NotificationSearchRow> searchReceivedNotification(
             @RequestHeader(name = PnDeliveryRestConstants.USER_ID_HEADER ) String recipientId,
             @RequestParam(name = "startDate") Instant startDate,
             @RequestParam(name = "endDate") Instant endDate,
