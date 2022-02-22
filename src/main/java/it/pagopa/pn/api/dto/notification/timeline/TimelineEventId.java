@@ -214,7 +214,7 @@ public enum TimelineEventId {//NEW
                     eventId.getIun()
             );
         }
-    },
+    }
     ;
 
     public String buildEventId(EventId eventId) {
