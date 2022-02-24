@@ -1,6 +1,7 @@
 package it.pagopa.pn.api.dto.status;
 
 import it.pagopa.pn.api.dto.notification.timeline.TimelineElement;
+import it.pagopa.pn.api.dto.notification.timeline.TimelineInfoDto;
 import lombok.*;
 
 import java.util.Set;
@@ -13,6 +14,6 @@ import java.util.Set;
 @ToString
 public class RequestUpdateStatusDto {
     private String iun;
-    private Set<TimelineElement> currentTimeline;
-    private TimelineElement newTimelineElement;
+    private Set<TimelineInfoDto> currentTimeline;
+    private TimelineInfoDto newTimelineElement;
 }
