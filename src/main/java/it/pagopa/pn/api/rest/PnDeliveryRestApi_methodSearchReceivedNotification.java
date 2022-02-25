@@ -20,7 +20,8 @@ public interface PnDeliveryRestApi_methodSearchReceivedNotification {
             @RequestParam(name = "senderId", required = false) String senderId,
             @RequestParam(name = "status", required = false) NotificationStatus status,
             @RequestParam(name = "subjectRegExp", required = false) String subjectRegExp,
-             @RequestParam(name = "size", required = false) Integer size,
+            @RequestParam(name = "iunMatch", required = false) String iunMatch,
+            @RequestParam(name = "size", required = false) Integer size,
             @RequestParam(name = "nextPagesKey", required = false) String nextPagesKey
     );
 }
