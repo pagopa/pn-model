@@ -8,4 +8,6 @@ public class PnDeliveryPushRestConstants {
     private static final String DELIVERY_PUSH_PATH = "delivery-push";
 
     public static final String TIMELINE_BY_IUN = DELIVERY_PUSH_PATH + "/timelines/{iun}";
+
+    public static final String LEGALFACTS_BY_IUN = DELIVERY_PUSH_PATH + "/legalfacts/{iun}";
 }
