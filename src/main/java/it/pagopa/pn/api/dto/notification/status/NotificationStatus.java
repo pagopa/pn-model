@@ -1,11 +1,13 @@
 package it.pagopa.pn.api.dto.notification.status;
 
 public enum NotificationStatus {
-    RECEIVED,
+    IN_VALIDATION, 
+    ACCEPTED,
     DELIVERING,
     DELIVERED,
     VIEWED,
     EFFECTIVE_DATE,
     PAID,
-    UNREACHABLE
+    UNREACHABLE,
+    REFUSED
 }

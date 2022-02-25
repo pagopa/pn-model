@@ -37,7 +37,11 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
     }
 
 	@Override
-    public ResultPaginationDto<NotificationSearchRow> searchSentNotification(String senderId, Instant startDate, Instant endDate, String recipientId, NotificationStatus status, String subjectRegExp, Integer size, String nextPagesKey) {
+    public ResultPaginationDto<NotificationSearchRow>
+        searchSentNotification(String senderId, Instant startDate,
+                               Instant endDate, String recipientId,
+                               NotificationStatus status, String subjectRegExp, String iunMatch,
+                               Integer size, String nextPagesKey) {
         return null;
     }
 
@@ -57,7 +61,10 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
     }
 
     @Override
-    public ResultPaginationDto<NotificationSearchRow> searchReceivedNotification(String recipientId, Instant startDate, Instant endDate, String senderId, NotificationStatus status, String subjectRegExp, Integer size, String nextPagesKey) {
+    public ResultPaginationDto<NotificationSearchRow>
+        searchReceivedNotification(String recipientId, Instant startDate,
+                                   Instant endDate, String senderId, NotificationStatus status,
+                                   String subjectRegExp, String iunMatch, Integer size, String nextPagesKey) {
         return null;
     }
 
@@ -72,12 +79,14 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
     }
 
     @Override
-    public ResponseEntity<Resource> getReceivedNotificationDocument(String userId, String iun, int documentIndex, ServerHttpResponse response) {
+    public ResponseEntity<Resource> getReceivedNotificationDocument(String userId, String iun,
+                                                                    int documentIndex, ServerHttpResponse response) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Resource> getSentNotificationDocument(String paId, String iun, int documentIndex, ServerHttpResponse response) {
+    public ResponseEntity<Resource> getSentNotificationDocument(String paId, String iun,
+                                                                int documentIndex, ServerHttpResponse response) {
         return null;
     }
 

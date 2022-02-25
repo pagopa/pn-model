@@ -28,6 +28,8 @@ public class InputSearchNotificationDto {
     
     private final String subjectRegExp;
 
+    private final String iunMatch;
+
     @Positive
     @NotNull
     private final Integer size;
@@ -37,13 +39,14 @@ public class InputSearchNotificationDto {
     private final boolean bySender;
 
     public InputSearchNotificationDto(String senderReceiverId, Instant startDate, Instant endDate, String filterId, NotificationStatus status,
-                                      String subjectRegExp, Integer size, String nextPagesKey, boolean bySender) {
+                                      String subjectRegExp, String iunMatch, Integer size, String nextPagesKey, boolean bySender) {
         this.senderReceiverId = senderReceiverId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.filterId = filterId;
         this.status = status;
         this.subjectRegExp = subjectRegExp;
+        this.iunMatch = iunMatch;
         this.size = size;
         this.nextPagesKey = nextPagesKey;
         this.bySender = bySender;
@@ -65,6 +68,7 @@ public class InputSearchNotificationDto {
         private String filterId;
         private NotificationStatus status;
         private String subjectRegExp;
+        private String iunMatch;
         private Integer size;
         private String nextPagesKey;
         private boolean bySender;
@@ -106,6 +110,11 @@ public class InputSearchNotificationDto {
             return this;
         }
 
+        public Builder iunMatch(String iunMatch) {
+            this.iunMatch = iunMatch;
+            return this;
+        }
+
         public Builder size(Integer size) {
             this.size = size;
             return this;
@@ -118,7 +127,7 @@ public class InputSearchNotificationDto {
         
         public InputSearchNotificationDto build() {
            return new InputSearchNotificationDto(senderReceiverId, startDate, endDate, filterId, status,
-                   subjectRegExp, size, nextPagesKey, bySender);
+                   subjectRegExp, iunMatch, size, nextPagesKey, bySender);
         }
         
     }
