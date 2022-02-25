@@ -11,7 +11,7 @@ import lombok.*;
 @EqualsAndHashCode
 @Getter
 @ToString
-public class ScheduleRefinement implements TimelineElementDetails {//NEW
+public class ScheduleRefinement implements RecipientRelatedTimelineElementDetails {//NEW
 
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
     @Schema(description = "Codice Fiscale destinatario notifica digitale")

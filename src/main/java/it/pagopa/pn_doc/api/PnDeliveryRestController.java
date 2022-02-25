@@ -3,6 +3,7 @@ package it.pagopa.pn_doc.api;
 import it.pagopa.pn.api.dto.NewNotificationResponse;
 import it.pagopa.pn.api.dto.NotificationSearchRow;
 import it.pagopa.pn.api.dto.ResultPaginationDto;
+import it.pagopa.pn.api.dto.legalfacts.LegalFactType;
 import it.pagopa.pn.api.dto.legalfacts.LegalFactsListEntry;
 import it.pagopa.pn.api.dto.notification.Notification;
 import it.pagopa.pn.api.dto.notification.directaccesstoken.DirectAccessToken;
@@ -56,7 +57,7 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
     }
 
     @Override
-    public ResponseEntity<Resource> getReceivedNotificationLegalFact(String userId, String iun, String legalFactId) {
+    public ResponseEntity<Resource> getReceivedNotificationLegalFact(String userId, String iun, LegalFactType type, String legalFactId) {
         return null;
     }
 
@@ -74,7 +75,7 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
     }
 
     @Override
-    public ResponseEntity<Resource> getSentNotificationLegalFact(String paId, String iun, String legalFactId) {
+    public ResponseEntity<Resource> getSentNotificationLegalFact(String paId, String iun, LegalFactType type, String legalFactId) {
         return null;
     }
 

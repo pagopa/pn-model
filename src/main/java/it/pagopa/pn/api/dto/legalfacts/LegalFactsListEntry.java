@@ -15,8 +15,7 @@ import lombok.ToString;
 @ToString
 public class LegalFactsListEntry {
     private String iun;
-    private String legalFactId;
-    private LegalFactType type;
+    private LegalFactsListEntryId legalFactsId;
     private String taxId;
 
 }

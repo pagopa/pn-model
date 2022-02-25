@@ -15,7 +15,7 @@ import lombok.*;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class NotificationPathChooseDetails implements TimelineElementDetails {
+public class NotificationPathChooseDetails implements RecipientRelatedTimelineElementDetails {
 
     @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
     @Schema( description = "Codice fiscale destinatario")

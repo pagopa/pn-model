@@ -11,7 +11,7 @@ import lombok.*;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class DigitalFailureWorkflow implements TimelineElementDetails { //NEW
+public class DigitalFailureWorkflow implements RecipientRelatedTimelineElementDetails { //NEW
 
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
     @Schema(description = "Codice Fiscale destinatario notifica digitale")
