@@ -6,6 +6,7 @@ import it.pagopa.pn.api.dto.notification.NotificationJsonViews;
 import lombok.*;
 
 import java.time.Instant;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,7 +20,12 @@ public class NotificationStatusHistoryElement {
     @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
     private NotificationStatus status;
 
-    @Schema( description = "data e roa di raggiungimento dello stato di avanzamento")
+    @Schema( description = "data e ora di raggiungimento dello stato di avanzamento")
     @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
     private Instant activeFrom;
+
+    @Schema( description = "Eventi avvenuti nello stato")
+    @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
+    private List<String> relatedTimelineElements;
+
 }
