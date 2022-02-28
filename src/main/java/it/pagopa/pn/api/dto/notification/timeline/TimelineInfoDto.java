@@ -10,6 +10,7 @@ import java.time.Instant;
 @EqualsAndHashCode
 @ToString
 public class TimelineInfoDto {
+    private String elementId;
     private TimelineElementCategory category;
     private Instant timestamp;
 }
