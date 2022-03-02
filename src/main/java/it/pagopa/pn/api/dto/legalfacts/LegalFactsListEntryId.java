@@ -1,9 +1,8 @@
-package it.pagopa.pn.api.dto.notification.timeline;
+package it.pagopa.pn.api.dto.legalfacts;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.v3.oas.annotations.media.Schema;
 import it.pagopa.pn.api.dto.notification.NotificationJsonViews;
-import it.pagopa.pn.api.dto.notification.address.DigitalAddressInfo;
 import lombok.*;
 
 @NoArgsConstructor
@@ -12,13 +11,13 @@ import lombok.*;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class ScheduleDigitalWorkflow implements RecipientRelatedTimelineElementDetails {//NEW
+public class LegalFactsListEntryId {
 
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
-    @Schema(description = "Codice Fiscale destinatario notifica digitale")
-    private String taxId;
+    @Schema(description = "Chiave dell'atto opponibile a terzi generato durante il processo di consegna")
+    private String key;
 
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
-    @Schema(description = "Informazioni ultimo tentativo effettuato ")
-    private DigitalAddressInfo lastAttemptInfo;
+    @Schema(description = "Tipo dell'atto opponibile a terzi generato durante il processo di consegna")
+    private LegalFactType type;
 }

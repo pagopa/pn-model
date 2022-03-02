@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class SendPaperDetails implements TimelineElementDetails {
+public class SendPaperDetails implements RecipientRelatedTimelineElementDetails {
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
     @Schema(description = "Codice Fiscale destinatario notifica digitale")
     private String taxId;

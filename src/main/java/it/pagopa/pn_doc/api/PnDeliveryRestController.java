@@ -3,7 +3,6 @@ package it.pagopa.pn_doc.api;
 import it.pagopa.pn.api.dto.NewNotificationResponse;
 import it.pagopa.pn.api.dto.NotificationSearchRow;
 import it.pagopa.pn.api.dto.ResultPaginationDto;
-import it.pagopa.pn.api.dto.legalfacts.LegalFactsListEntry;
 import it.pagopa.pn.api.dto.notification.Notification;
 import it.pagopa.pn.api.dto.notification.directaccesstoken.DirectAccessToken;
 import it.pagopa.pn.api.dto.notification.status.NotificationStatus;
@@ -50,15 +49,6 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
         return null;
     }
 
-    @Override
-    public List<LegalFactsListEntry> getReceivedNotificationLegalFacts(String userId, String iun) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<Resource> getReceivedNotificationLegalFact(String userId, String iun, String legalFactId) {
-        return null;
-    }
 
     @Override
     public ResultPaginationDto<NotificationSearchRow>
@@ -68,15 +58,6 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
         return null;
     }
 
-    @Override
-    public List<LegalFactsListEntry> getSentNotificationLegalFacts(String paId, String iun) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<Resource> getSentNotificationLegalFact(String paId, String iun, String legalFactId) {
-        return null;
-    }
 
     @Override
     public ResponseEntity<Resource> getReceivedNotificationDocument(String userId, String iun,

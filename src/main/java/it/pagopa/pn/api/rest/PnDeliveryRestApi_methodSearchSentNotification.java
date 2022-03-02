@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.Instant;
-import java.util.List;
 
 public interface PnDeliveryRestApi_methodSearchSentNotification {
     @GetMapping(PnDeliveryRestConstants.SEND_NOTIFICATIONS_PATH)

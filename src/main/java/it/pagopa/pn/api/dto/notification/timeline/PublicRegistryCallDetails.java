@@ -14,7 +14,7 @@ import java.time.Instant;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class PublicRegistryCallDetails implements TimelineElementDetails {//NEW
+public class PublicRegistryCallDetails implements RecipientRelatedTimelineElementDetails {//NEW
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
     @Schema(description = "Codice Fiscale destinatario notifica digitale")
     @NotNull
