@@ -29,6 +29,10 @@ public class NotificationAttachment {
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
     private String contentType;
 
+    @Schema( description = "Titolo del documento allegato" )
+    @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
+    private String title;
+
     @Schema( description = "corpo dell'allegato" )
     @JsonView(value = { NotificationJsonViews.New.class })
     @IsBase64(groups = { NotificationJsonViews.New.class })
