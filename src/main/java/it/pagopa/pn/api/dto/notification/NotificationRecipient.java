@@ -9,6 +9,7 @@ import lombok.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,7 +21,7 @@ public class NotificationRecipient {
 
     @Schema( description = "Tipologia di destinatario: Persona Fisica (PF) o Persona Giuridica (PG)")
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class})
-    @NotBlank(groups = { NotificationJsonViews.New.class })
+    @NotNull(groups = { NotificationJsonViews.New.class })
     private NotificationRecipientType recipientType;
 
     @Schema( description = "Codice Fiscale del destinatario")
