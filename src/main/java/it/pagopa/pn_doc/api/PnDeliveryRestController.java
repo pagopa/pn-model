@@ -31,7 +31,7 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
     }
 
     @Override
-    public Notification getSentNotification(String paId, String iun) {
+    public Notification getSentNotification(String paId, String iun, boolean withTimeline) {
         return null;
     }
 
