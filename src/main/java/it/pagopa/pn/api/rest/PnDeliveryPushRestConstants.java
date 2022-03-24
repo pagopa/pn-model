@@ -12,4 +12,7 @@ public class PnDeliveryPushRestConstants {
     public static final String LEGAL_FACTS_BY_IUN = DELIVERY_PUSH_PATH + "/legalfacts/{iun}";
 
     public static final String LEGAL_FACT_BY_ID = DELIVERY_PUSH_PATH + "/legalfacts/{iun}/{type}/{id}";
+
+    public static final String NOTIFICATIONS_PAPER_FAILED_PATH = DELIVERY_PUSH_PATH + "/notifications/paper-failed";
+
 }

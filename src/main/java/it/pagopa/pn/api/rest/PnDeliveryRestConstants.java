@@ -23,7 +23,6 @@ public class PnDeliveryRestConstants {
     public static final String NOTIFICATION_RECEIVED_PATH = DELIVERY_PATH + "/notifications/received/{iun}";
     public static final String NOTIFICATION_RECEIVED_LEGALFACTS_PATH = DELIVERY_PATH + "/notifications/received/{iun}/legalfacts";
     public static final String NOTIFICATION_VIEWED_PATH = DELIVERY_PATH + "/notifications/received/{iun}/documents/{documentIndex}";
-    public static final String NOTIFICATIONS_PAPER_FAILED_PATH = DELIVERY_PATH + "/notifications/paper-failed";
 
     public static final String NOTIFICATION_UPDATE_STATUS_PATH = DELIVERY_PATH_PRIVATE + "/notifications/update-status";
 
