@@ -8,6 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.time.Instant;
+import java.util.List;
 
 @EqualsAndHashCode
 @ToString
@@ -25,6 +26,8 @@ public class InputSearchNotificationDto {
     private final String filterId;
     
     private NotificationStatus status;
+
+    private final List<String> groups;
     
     private final String subjectRegExp;
 
@@ -39,12 +42,13 @@ public class InputSearchNotificationDto {
     private final boolean bySender;
 
     public InputSearchNotificationDto(String senderReceiverId, Instant startDate, Instant endDate, String filterId, NotificationStatus status,
-                                      String subjectRegExp, String iunMatch, Integer size, String nextPagesKey, boolean bySender) {
+                                      List<String> groups, String subjectRegExp, String iunMatch, Integer size, String nextPagesKey, boolean bySender) {
         this.senderReceiverId = senderReceiverId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.filterId = filterId;
         this.status = status;
+        this.groups = groups;
         this.subjectRegExp = subjectRegExp;
         this.iunMatch = iunMatch;
         this.size = size;
@@ -72,7 +76,8 @@ public class InputSearchNotificationDto {
         private Integer size;
         private String nextPagesKey;
         private boolean bySender;
-        
+        private List<String> groups;
+
         public Builder() {}
         
         public Builder bySender(boolean bySender) {
@@ -124,10 +129,15 @@ public class InputSearchNotificationDto {
             this.nextPagesKey = nextPagesKey;
             return this;
         }
+
+        public Builder groups(List<String> groups) {
+            this.groups = groups;
+            return this;
+        }
         
         public InputSearchNotificationDto build() {
            return new InputSearchNotificationDto(senderReceiverId, startDate, endDate, filterId, status,
-                   subjectRegExp, iunMatch, size, nextPagesKey, bySender);
+                   groups, subjectRegExp, iunMatch, size, nextPagesKey, bySender);
         }
         
     }
