@@ -100,4 +100,8 @@ public class Notification {
     @NotNull( groups = { NotificationJsonViews.New.class })
     private ServiceLevelType physicalCommunicationType;
 
+    @Schema( description = "Gruppo di utenti che possono accedere alla notifica")
+    @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Sent.class })
+    private String group;
+
 }
