@@ -34,4 +34,7 @@ public class NotificationSearchRow {
     @Schema(name = "recipientId", description = "Identificativo opaco del destinatario")
     private String recipientId;
 
+    @Schema(name = "group", description = "Gruppo di utenti che possono accedere alla notifica")
+    private String group;
+
 }
