@@ -36,7 +36,7 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
     }
 
 	@Override
-    public ResultPaginationDto<NotificationSearchRow>
+    public ResultPaginationDto<NotificationSearchRow,String>
         searchSentNotification(String senderId, Instant startDate,
                                Instant endDate, String recipientId,
                                NotificationStatus status, String subjectRegExp, String iunMatch,
@@ -51,7 +51,7 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
 
 
     @Override
-    public ResultPaginationDto<NotificationSearchRow>
+    public ResultPaginationDto<NotificationSearchRow,String>
         searchReceivedNotification(String recipientId, Instant startDate,
                                    Instant endDate, String senderId, NotificationStatus status,
                                    String subjectRegExp, String iunMatch, Integer size, String nextPagesKey) {
