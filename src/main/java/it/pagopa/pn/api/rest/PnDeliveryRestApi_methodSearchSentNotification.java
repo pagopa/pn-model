@@ -17,6 +17,7 @@ public interface PnDeliveryRestApi_methodSearchSentNotification {
             @RequestParam(name = "endDate") Instant endDate,
             @RequestParam(name = "recipientId", required = false) String recipientId,
             @RequestParam(name = "status", required = false) NotificationStatus status,
+            @RequestParam(name = "groups", required = false) String[] groups,
             @RequestParam(name = "subjectRegExp", required = false) String subjectRegExp,
             @RequestParam(name = "iunMatch", required = false) String iunMatch,
             @RequestParam(name = "size", required = false) Integer size,

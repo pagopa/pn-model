@@ -39,7 +39,9 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
     public ResultPaginationDto<NotificationSearchRow,String>
         searchSentNotification(String senderId, Instant startDate,
                                Instant endDate, String recipientId,
-                               NotificationStatus status, String subjectRegExp, String iunMatch,
+                               NotificationStatus status,
+                               String[] groups,
+                               String subjectRegExp, String iunMatch,
                                Integer size, String nextPagesKey) {
         return null;
     }
