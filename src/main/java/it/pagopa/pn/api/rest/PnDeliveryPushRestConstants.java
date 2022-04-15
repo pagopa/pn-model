@@ -15,6 +15,4 @@ public class PnDeliveryPushRestConstants {
 
     public static final String NOTIFICATIONS_PAPER_FAILED_PATH = DELIVERY_PUSH_PATH + "/notifications/paper-failed";
 
-    public static final String PROCESS_ACTION = DELIVERY_PUSH_PATH + "/process-action";
-
 }

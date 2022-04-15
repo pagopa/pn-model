@@ -25,8 +25,4 @@ public class PnDeliveryPushRestController implements PnDeliveryPushRestApi {
     public ResponseEntity<Resource> getLegalFact(String iun, LegalFactType type, String legalFactId) {
         return null;
     }
-
-    @Override
-    public void processAction() {
-    }
 }

@@ -2,6 +2,5 @@ package it.pagopa.pn.api.rest;
 
 public interface PnDeliveryPushRestApi extends
         PnDeliveryPushRestApi_methodGetTimeline,
-        PnDeliveryPushRestApi_methodGetLegalFacts,
-        PnDeliveryPushRestApi_methodProcessAction
+        PnDeliveryPushRestApi_methodGetLegalFacts
 { }
