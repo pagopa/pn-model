@@ -11,7 +11,7 @@ public interface PnDeliveryRestApi_methodGetSentNotificationDocuments {
 
     @GetMapping( PnDeliveryRestConstants.NOTIFICATION_SENT_DOCUMENTS_PATH)
     ResponseEntity<Resource> getSentNotificationDocument(
-            @RequestHeader(name = PnDeliveryRestConstants.PA_ID_HEADER ) String paId,
+            @RequestHeader(name = PnDeliveryRestConstants.CX_ID_HEADER ) String paId,
     		@PathVariable("iun") String iun,
     		@PathVariable("documentIndex") int documentIndex,
             ServerHttpResponse response

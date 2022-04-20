@@ -15,13 +15,13 @@ public interface PnDeliveryRestApi_methodGetSentNotificationLegalFacts {
 
 	@GetMapping(PnDeliveryRestConstants.NOTIFICATION_SENT_LEGALFACTS_PATH)
     List<LegalFactsListEntry> getSentNotificationLegalFacts(
-            @RequestHeader(name = PnDeliveryRestConstants.PA_ID_HEADER ) String paId,
+            @RequestHeader(name = PnDeliveryRestConstants.CX_ID_HEADER ) String paId,
             @PathVariable( name = "iun") String iun
     );
 
     @GetMapping(PnDeliveryRestConstants.NOTIFICATION_RECEIVED_LEGALFACTS_PATH + "/{type}/{id}")
     ResponseEntity<Resource> getSentNotificationLegalFact(
-            @RequestHeader(name = PnDeliveryRestConstants.PA_ID_HEADER ) String paId,
+            @RequestHeader(name = PnDeliveryRestConstants.CX_ID_HEADER ) String paId,
             @PathVariable( name = "iun") String iun,
             @PathVariable( name = "type") LegalFactType type,
             @PathVariable( name = "id") String legalFactId
