@@ -15,8 +15,8 @@ import lombok.*;
 @ToString
 public class PublicRegistryResponseDetails implements RecipientRelatedTimelineElementDetails {//NEW
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
-    @Schema(description = "Codice Fiscale destinatario notifica digitale")
-    private String taxId;
+    @Schema(description = "Index destinatario notifica digitale")
+    private int recIndex;
 
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
     @Schema(description = "Indirizzo digitale ottenuto in risposta")

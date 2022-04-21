@@ -16,9 +16,9 @@ import java.time.Instant;
 @ToString
 public class PublicRegistryCallDetails implements RecipientRelatedTimelineElementDetails {//NEW
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
-    @Schema(description = "Codice Fiscale destinatario notifica digitale")
+    @Schema(description = "Index destinatario notifica digitale")
     @NotNull
-    private String taxId;
+    private int recIndex;
 
     @Schema(description = "Tipologia Domiciliazione")
     private DeliveryMode deliveryMode;

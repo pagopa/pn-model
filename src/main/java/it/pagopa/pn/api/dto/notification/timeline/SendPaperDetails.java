@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 public class SendPaperDetails implements RecipientRelatedTimelineElementDetails {
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
     @Schema(description = "Codice Fiscale destinatario notifica digitale")
-    private String taxId;
+    private int recIndex;
 
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
     @Schema(description = "indirizzo fisico di invio della notifica")

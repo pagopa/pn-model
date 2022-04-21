@@ -17,8 +17,8 @@ import java.time.Instant;
 @ToString
 public class GetAddressInfo implements RecipientRelatedTimelineElementDetails {//NEW
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
-    @Schema(description = "Codice Fiscale destinatario notifica digitale")
-    private String taxId;
+    @Schema(description = "IndexId destinatario notifica digitale")
+    private int recIndex;
 
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
     @Schema(description = "Sorgente indirizzo")

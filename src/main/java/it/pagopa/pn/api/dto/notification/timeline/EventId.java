@@ -12,7 +12,7 @@ import lombok.*;
 @ToString
 public class EventId {//NEW
     private String iun;
-    private String recipientId;
+    private int recIndex;
     private DigitalAddressSource source;
     private int index;
 }
