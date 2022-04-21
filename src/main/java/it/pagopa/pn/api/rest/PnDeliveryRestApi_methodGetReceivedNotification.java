@@ -12,7 +12,7 @@ public interface PnDeliveryRestApi_methodGetReceivedNotification {
 	@GetMapping(PnDeliveryRestConstants.NOTIFICATION_RECEIVED_PATH)
     @JsonView(value = NotificationJsonViews.Sent.class )
     Notification getReceivedNotification(
-            @RequestHeader(name = PnDeliveryRestConstants.USER_ID_HEADER ) String userId,
+            @RequestHeader(name = PnDeliveryRestConstants.CX_ID_HEADER ) String userId,
             @PathVariable( name = "iun") String iun
     );
 

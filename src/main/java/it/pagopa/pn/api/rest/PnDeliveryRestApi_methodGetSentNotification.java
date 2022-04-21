@@ -10,7 +10,7 @@ public interface PnDeliveryRestApi_methodGetSentNotification {
 	@GetMapping(PnDeliveryRestConstants.NOTIFICATION_SENT_PATH)
     @JsonView(value = NotificationJsonViews.Sent.class )
     Notification getSentNotification(
-            @RequestHeader(name = PnDeliveryRestConstants.PA_ID_HEADER ) String paId,
+            @RequestHeader(name = PnDeliveryRestConstants.CX_ID_HEADER ) String paId,
             @PathVariable( name = "iun") String iun,
             @RequestParam( name = "with_timeline", defaultValue = "true", required = false ) boolean timeline
     );

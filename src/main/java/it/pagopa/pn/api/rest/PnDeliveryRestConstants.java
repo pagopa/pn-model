@@ -4,8 +4,10 @@ public class PnDeliveryRestConstants {
 
     private PnDeliveryRestConstants() {}
 
-    public static final String PA_ID_HEADER = "X-PagoPA-PN-PA";
-    public static final String USER_ID_HEADER = "X-PagoPA-User-Id";
+    public static final String CX_ID_HEADER = "x-pagopa-pn-cx-id";
+    public static final String UID_HEADER = "x-pagopa-pn-uid";
+    public static final String CX_TYPE_HEADER = "x-pagopa-pn-cx-type";
+    public static final String CX_GROUPS_HEADER = "x-pagopa-pn-cx-groups";
 
 
     private static final String DELIVERY_PATH = "delivery";
