@@ -15,6 +15,6 @@ public class DigitalFailureWorkflow implements RecipientRelatedTimelineElementDe
 
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
     @Schema(description = "Index destinatario notifica digitale")
-    private String recIndex;
+    private int recIndex;
 
 }

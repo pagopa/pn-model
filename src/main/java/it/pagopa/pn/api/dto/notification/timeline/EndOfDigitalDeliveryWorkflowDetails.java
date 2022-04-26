@@ -16,7 +16,7 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class EndOfDigitalDeliveryWorkflowDetails implements RecipientRelatedTimelineElementDetails {
+public class EndOfDigitalDeliveryWorkflowDetails implements TimelineElementDetails {
 
     @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
     @Schema( description = "Codice Fiscale destinatario notifica digitale")

@@ -26,7 +26,7 @@ public enum TimelineElementCategory {
     SEND_ANALOG_DOMICILE(SendPaperDetails.class, ConstValue.SEND_ANALOG_DOMICILE_VALUE),
     SEND_PAPER_FEEDBACK(SendPaperFeedbackDetails.class, ConstValue.SEND_PAPER_FEEDBACK_VALUE),
     PAYMENT(null, ConstValue.PAYMENT_VALUE),
-    COMPLETELY_UNREACHABLE(CompletlyUnreachableDetails.class, ConstValue.COMPLETELY_UNREACHABLE_VALUE),
+    COMPLETELY_UNREACHABLE(CompletelyUnreachableDetails.class, ConstValue.COMPLETELY_UNREACHABLE_VALUE),
     REQUEST_REFUSED(RequestRefusedDetails.class, ConstValue.REQUEST_REFUSED_VALUE);
     
     private final Class<? extends TimelineElementDetails> detailsJavaClass;

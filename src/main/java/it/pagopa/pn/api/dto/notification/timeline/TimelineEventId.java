@@ -15,9 +15,9 @@ public enum TimelineEventId {//NEW
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_send_courtesy_message_%s_index_%d",
+                    "%s_send_courtesy_message_%d_index_%d",
                     eventId.getIun(),
-                    eventId.getRecipientId(),
+                    eventId.getRecIndex(),
                     eventId.getIndex()
             );
         }
@@ -26,9 +26,9 @@ public enum TimelineEventId {//NEW
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_get_address%s_source_%s_attempt_%d",
+                    "%s_get_address%d_source_%s_attempt_%d",
                     eventId.getIun(),
-                    eventId.getRecipientId(),
+                    eventId.getRecIndex(),
                     eventId.getSource(),
                     eventId.getIndex()
             );
@@ -39,9 +39,9 @@ public enum TimelineEventId {//NEW
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_send_digital_feedback_%s_attempt_%d",
+                    "%s_send_digital_feedback_%d_attempt_%d",
                     eventId.getIun(),
-                    eventId.getRecipientId(),
+                    eventId.getRecIndex(),
                     eventId.getIndex()
             );
         }
@@ -51,9 +51,9 @@ public enum TimelineEventId {//NEW
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_send_paper_feedback_%s_attempt_%d",
+                    "%s_send_paper_feedback_%d_attempt_%d",
                     eventId.getIun(),
-                    eventId.getRecipientId(),
+                    eventId.getRecIndex(),
                     eventId.getIndex()
             );
         }
@@ -63,9 +63,9 @@ public enum TimelineEventId {//NEW
         public String buildEventId(EventId eventId) {
             int sendAttempt = eventId.getIndex() + 1; //TODO Nell'invio verso external channel viene incrementato il numero di tentativi effettuati (in questo modo viene passato il tentativo che si sta effettuando) per preservare le logiche di extchannel attualmente presenti
             return String.format(
-                    "%s_send_digital_domicile%s_source_%s_attempt_%d",
+                    "%s_send_digital_domicile%d_source_%s_attempt_%d",
                     eventId.getIun(),
-                    eventId.getRecipientId(),
+                    eventId.getRecIndex(),
                     eventId.getSource(),
                     sendAttempt
             );
@@ -76,9 +76,9 @@ public enum TimelineEventId {//NEW
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_send_simple_registered_letter_%s",
+                    "%s_send_simple_registered_letter_%d",
                     eventId.getIun(),
-                    eventId.getRecipientId()
+                    eventId.getRecIndex()
             );
         }
     },
@@ -88,9 +88,9 @@ public enum TimelineEventId {//NEW
         public String buildEventId(EventId eventId) {
             int sendAttempt = eventId.getIndex() + 1; //TODO Nell'invio verso external channel viene incrementato il numero di tentativi effettuati (in questo modo viene passato il tentativo che si sta effettuando) per preservare le logiche di extchannel attualmente presenti
             return String.format(
-                    "%s_send_analog_domicile_%s_attempt_%d",
+                    "%s_send_analog_domicile_%d_attempt_%d",
                     eventId.getIun(),
-                    eventId.getRecipientId(),
+                    eventId.getRecIndex(),
                     sendAttempt
             );
         }
@@ -100,9 +100,9 @@ public enum TimelineEventId {//NEW
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_digital_success_workflow_%s",
+                    "%s_digital_success_workflow_%d",
                     eventId.getIun(),
-                    eventId.getRecipientId()
+                    eventId.getRecIndex()
             );
         }
     },
@@ -111,9 +111,9 @@ public enum TimelineEventId {//NEW
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_digital_failure_workflow_%s",
+                    "%s_digital_failure_workflow_%d",
                     eventId.getIun(),
-                    eventId.getRecipientId()
+                    eventId.getRecIndex()
             );
         }
     },
@@ -122,9 +122,9 @@ public enum TimelineEventId {//NEW
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_analog_success_workflow_%s",
+                    "%s_analog_success_workflow_%d",
                     eventId.getIun(),
-                    eventId.getRecipientId()
+                    eventId.getRecIndex()
             );
         }
     },
@@ -133,9 +133,9 @@ public enum TimelineEventId {//NEW
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_analog_failure_workflow_%s",
+                    "%s_analog_failure_workflow_%d",
                     eventId.getIun(),
-                    eventId.getRecipientId()
+                    eventId.getRecIndex()
             );
         }
     },
@@ -144,9 +144,9 @@ public enum TimelineEventId {//NEW
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_notification_viewed_%s",
+                    "%s_notification_viewed_%d",
                     eventId.getIun(),
-                    eventId.getRecipientId()
+                    eventId.getRecIndex()
             );
         }
     },
@@ -155,9 +155,9 @@ public enum TimelineEventId {//NEW
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_completely_unreachable_%s",
+                    "%s_completely_unreachable_%d",
                     eventId.getIun(),
-                    eventId.getRecipientId()
+                    eventId.getRecIndex()
             );
         }
     },
@@ -166,9 +166,9 @@ public enum TimelineEventId {//NEW
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_refinement_%s",
+                    "%s_refinement_%d",
                     eventId.getIun(),
-                    eventId.getRecipientId()
+                    eventId.getRecIndex()
             );
         }
     },
@@ -177,9 +177,9 @@ public enum TimelineEventId {//NEW
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_schedule_digital_workflow_%s",
+                    "%s_schedule_digital_workflow_%d",
                     eventId.getIun(),
-                    eventId.getRecipientId()
+                    eventId.getRecIndex()
             );
         }
     },
@@ -188,9 +188,9 @@ public enum TimelineEventId {//NEW
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_schedule_analog_workflow_%s",
+                    "%s_schedule_analog_workflow_%d",
                     eventId.getIun(),
-                    eventId.getRecipientId()
+                    eventId.getRecIndex()
             );
         }
     },
@@ -199,9 +199,9 @@ public enum TimelineEventId {//NEW
         @Override
         public String buildEventId(EventId eventId) {
             return String.format(
-                    "%s_schedule_refinement_workflow_%s",
+                    "%s_schedule_refinement_workflow_%d",
                     eventId.getIun(),
-                    eventId.getRecipientId()
+                    eventId.getRecIndex()
             );
         }
     },

@@ -21,7 +21,7 @@ import java.util.List;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class SendDigitalFailureDetails implements RecipientRelatedTimelineElementDetails {
+public class SendDigitalFailureDetails implements TimelineElementDetails {
 
     @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
     @Schema( description = "Codice Fiscale destinatario notifica digitale")

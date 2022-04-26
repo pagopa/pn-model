@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = NotificationViewedDetails.class, name = TimelineElementCategory.ConstValue.NOTIFICATION_VIEWED_VALUE),
         @JsonSubTypes.Type(value = SendPaperDetails.class, name = TimelineElementCategory.ConstValue.SEND_ANALOG_DOMICILE_VALUE),
         @JsonSubTypes.Type(value = SendPaperFeedbackDetails.class, name = TimelineElementCategory.ConstValue.SEND_PAPER_FEEDBACK_VALUE),
-        @JsonSubTypes.Type(value = CompletlyUnreachableDetails.class, name = TimelineElementCategory.ConstValue.COMPLETELY_UNREACHABLE_VALUE),
+        @JsonSubTypes.Type(value = CompletelyUnreachableDetails.class, name = TimelineElementCategory.ConstValue.COMPLETELY_UNREACHABLE_VALUE),
         @JsonSubTypes.Type(value = RequestRefusedDetails.class, name = TimelineElementCategory.ConstValue.REQUEST_REFUSED_VALUE)
 })
 public interface TimelineElementDetails {
