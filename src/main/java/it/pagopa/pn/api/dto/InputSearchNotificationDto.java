@@ -21,7 +21,7 @@ public class InputSearchNotificationDto {
     private Instant startDate;
     
     @NotNull
-    private final Instant endDate;
+    private Instant endDate;
     
     private final String filterId;
     
@@ -59,6 +59,8 @@ public class InputSearchNotificationDto {
     public void setStartDate(Instant startDate){
         this.startDate = startDate;
     }
+
+    public void setEndDate(Instant endDate) { this.endDate = endDate; }
     
     public void setStatus(NotificationStatus status){
         this.status = status;
