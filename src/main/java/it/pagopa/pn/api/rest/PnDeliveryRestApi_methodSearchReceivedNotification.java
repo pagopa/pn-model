@@ -13,7 +13,8 @@ public interface PnDeliveryRestApi_methodSearchReceivedNotification {
 
     @GetMapping(PnDeliveryRestConstants.NOTIFICATIONS_RECEIVED_PATH)
     ResultPaginationDto<NotificationSearchRow,String> searchReceivedNotification(
-            @RequestHeader(name = PnDeliveryRestConstants.CX_ID_HEADER ) String recipientId,
+            @RequestHeader(name = PnDeliveryRestConstants.CX_ID_HEADER) String recipientId,
+            @RequestHeader(name = PnDeliveryRestConstants.UID_HEADER) String userId,
             @RequestParam(name = "startDate") Instant startDate,
             @RequestParam(name = "endDate") Instant endDate,
             @RequestParam(name = "senderId", required = false) String senderId,
