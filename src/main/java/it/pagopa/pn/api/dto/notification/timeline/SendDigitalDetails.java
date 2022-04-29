@@ -14,10 +14,14 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 public class SendDigitalDetails implements RecipientRelatedTimelineElementDetails {
-
+    //TODO Da eliminare quando si passerà alla v2
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
-    @Schema(description = "Codice Fiscale destinatario notifica digitale")
+    @Schema(description = "Codice fiscale destinatario notifica digitale")
     private String taxId;
+    
+    @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
+    @Schema(description = "Index destinatario notifica digitale")
+    private int recIndex;
 
     @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
     @Schema(description = "indirizzo di invio della notifica")

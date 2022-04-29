@@ -19,17 +19,17 @@ public class SendDigitalFeedbackDetails extends SendDigitalDetails {
 
 
     public SendDigitalFeedbackDetails(String fc, DigitalAddress address, DigitalAddressSource addressSource, Integer retryNumber, DownstreamId downstreamId, List<String> errors) {
-        super(fc, address, addressSource, retryNumber, downstreamId);
+        super(fc, 0,  address, addressSource, retryNumber, downstreamId);
         this.errors = errors;
     }
 
     public SendDigitalFeedbackDetails(SendDigitalDetails sdd, List<String> errors) {
-        super(sdd.getTaxId(), sdd.getAddress(), sdd.getAddressSource(), sdd.getRetryNumber(), sdd.getDownstreamId());
+        super(sdd.getTaxId(), 0,  sdd.getAddress(), sdd.getAddressSource(), sdd.getRetryNumber(), sdd.getDownstreamId());
         this.errors = errors;
     }
 
     public SendDigitalFeedbackDetails(List<String> errors) {
-        super(null, null, null, null, null);
+        super(null, 0,  null, null, null, null);
         this.errors = errors;
     }
 

@@ -11,10 +11,14 @@ import lombok.*;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class CompletlyUnreachableDetails implements RecipientRelatedTimelineElementDetails{
+public class CompletelyUnreachableDetails implements RecipientRelatedTimelineElementDetails{
+    //TODO Da eliminare quando si passa alla v2
+    @JsonView(value = {NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class})
+    @Schema(description = "Codice Fiscale destinatario notifica digitale")
+    private String taxId;
 
     @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
-    @Schema( description = "Codice Fiscale destinatario notifica digitale")
-    private String taxId;
+    @Schema( description = "Index destinatario notifica digitale")
+    private int recIndex;
 
 }

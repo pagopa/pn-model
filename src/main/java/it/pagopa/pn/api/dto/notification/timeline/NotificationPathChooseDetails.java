@@ -1,7 +1,5 @@
 package it.pagopa.pn.api.dto.notification.timeline;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.v3.oas.annotations.media.Schema;
 import it.pagopa.pn.api.dto.notification.NotificationJsonViews;
@@ -9,13 +7,15 @@ import it.pagopa.pn.api.dto.notification.address.DigitalAddress;
 import it.pagopa.pn.api.dto.notification.address.PhysicalAddress;
 import lombok.*;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class NotificationPathChooseDetails implements RecipientRelatedTimelineElementDetails {
+public class NotificationPathChooseDetails implements TimelineElementDetails {
 
     @JsonView(value = { NotificationJsonViews.Sent.class, NotificationJsonViews.Received.class })
     @Schema( description = "Codice fiscale destinatario")
