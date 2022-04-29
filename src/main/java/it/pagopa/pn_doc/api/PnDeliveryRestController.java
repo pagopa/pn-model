@@ -54,8 +54,8 @@ public class PnDeliveryRestController implements PnDeliveryRestApi {
 
     @Override
     public ResultPaginationDto<NotificationSearchRow,String>
-        searchReceivedNotification(String recipientId, String userId, Instant startDate,
-                                   Instant endDate, String senderId, NotificationStatus status,
+        searchReceivedNotification(String currentRecipientId, Instant startDate,
+                                   Instant endDate, String delegatorRecipientId, String senderId, NotificationStatus status,
                                    String subjectRegExp, String iunMatch, Integer size, String nextPagesKey) {
         return null;
     }

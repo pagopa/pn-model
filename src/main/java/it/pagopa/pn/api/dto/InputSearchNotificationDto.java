@@ -15,13 +15,15 @@ import java.util.List;
 @Getter
 public class InputSearchNotificationDto {
     @NotEmpty
-    private final String senderReceiverId;
+    private String senderReceiverId;
     
     @NotNull
     private Instant startDate;
     
     @NotNull
     private Instant endDate;
+
+    private String delegator;
     
     private final String filterId;
     
@@ -41,11 +43,12 @@ public class InputSearchNotificationDto {
     
     private final boolean bySender;
 
-    public InputSearchNotificationDto(String senderReceiverId, Instant startDate, Instant endDate, String filterId, NotificationStatus status,
+    public InputSearchNotificationDto(String senderReceiverId, Instant startDate, Instant endDate, String delegator, String filterId, NotificationStatus status,
                                       List<String> groups, String subjectRegExp, String iunMatch, Integer size, String nextPagesKey, boolean bySender) {
         this.senderReceiverId = senderReceiverId;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.delegator = delegator;
         this.filterId = filterId;
         this.status = status;
         this.groups = groups;
@@ -54,6 +57,14 @@ public class InputSearchNotificationDto {
         this.size = size;
         this.nextPagesKey = nextPagesKey;
         this.bySender = bySender;
+    }
+
+    public String getSenderReceiverId() {
+        return senderReceiverId;
+    }
+
+    public void setSenderReceiverId(String senderReceiverId) {
+        this.senderReceiverId = senderReceiverId;
     }
 
     public void setStartDate(Instant startDate){
@@ -71,6 +82,7 @@ public class InputSearchNotificationDto {
         private String senderReceiverId;
         private Instant startDate;
         private Instant endDate;
+        private String delegator;
         private String filterId;
         private NotificationStatus status;
         private String subjectRegExp;
@@ -99,6 +111,11 @@ public class InputSearchNotificationDto {
 
         public Builder endDate(Instant endDate) {
             this.endDate = endDate;
+            return this;
+        }
+
+        public Builder delegator(String delegator) {
+            this.delegator = delegator;
             return this;
         }
 
@@ -138,7 +155,7 @@ public class InputSearchNotificationDto {
         }
         
         public InputSearchNotificationDto build() {
-           return new InputSearchNotificationDto(senderReceiverId, startDate, endDate, filterId, status,
+           return new InputSearchNotificationDto(senderReceiverId, startDate, endDate, delegator, filterId, status,
                    groups, subjectRegExp, iunMatch, size, nextPagesKey, bySender);
         }
         
