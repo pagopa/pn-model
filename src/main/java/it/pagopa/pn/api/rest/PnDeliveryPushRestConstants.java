@@ -6,10 +6,8 @@ public class PnDeliveryPushRestConstants {
     private PnDeliveryPushRestConstants() {}
 
     private static final String DELIVERY_PUSH_PATH = "delivery-push";
-
-    public static final String TIMELINE_BY_IUN = DELIVERY_PUSH_PATH + "/timelines/{iun}";
-
-    public static final String TIMELINE_AND_STATUS_HISTORY_BY_IUN = DELIVERY_PUSH_PATH + "/timeline-and-history/{iun}";
+    
+    public static final String TIMELINE_AND_STATUS_HISTORY_BY_IUN = DELIVERY_PUSH_PATH + "/timeline-and-history/{iun}/{numberOfRecipients}/{createdAt}";
 
     public static final String LEGAL_FACTS_BY_IUN = DELIVERY_PUSH_PATH + "/legalfacts/{iun}";
 
