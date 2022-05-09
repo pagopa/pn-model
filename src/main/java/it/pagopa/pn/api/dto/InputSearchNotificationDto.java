@@ -23,7 +23,7 @@ public class InputSearchNotificationDto {
     @NotNull
     private Instant endDate;
 
-    private String mandateId;
+    private String delegator;
     
     private final String filterId;
     
@@ -43,12 +43,12 @@ public class InputSearchNotificationDto {
     
     private final boolean bySender;
 
-    public InputSearchNotificationDto(String senderReceiverId, Instant startDate, Instant endDate, String mandateId, String filterId, NotificationStatus status,
+    public InputSearchNotificationDto(String senderReceiverId, Instant startDate, Instant endDate, String delegator, String filterId, NotificationStatus status,
                                       List<String> groups, String subjectRegExp, String iunMatch, Integer size, String nextPagesKey, boolean bySender) {
         this.senderReceiverId = senderReceiverId;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.mandateId = mandateId;
+        this.delegator = delegator;
         this.filterId = filterId;
         this.status = status;
         this.groups = groups;
@@ -82,7 +82,7 @@ public class InputSearchNotificationDto {
         private String senderReceiverId;
         private Instant startDate;
         private Instant endDate;
-        private String mandateId;
+        private String delegator;
         private String filterId;
         private NotificationStatus status;
         private String subjectRegExp;
@@ -114,8 +114,8 @@ public class InputSearchNotificationDto {
             return this;
         }
 
-        public Builder mandateId(String mandateId) {
-            this.mandateId = mandateId;
+        public Builder delegator(String delegator) {
+            this.delegator = delegator;
             return this;
         }
 
@@ -155,7 +155,7 @@ public class InputSearchNotificationDto {
         }
         
         public InputSearchNotificationDto build() {
-           return new InputSearchNotificationDto(senderReceiverId, startDate, endDate, mandateId, filterId, status,
+           return new InputSearchNotificationDto(senderReceiverId, startDate, endDate, delegator, filterId, status,
                    groups, subjectRegExp, iunMatch, size, nextPagesKey, bySender);
         }
         
