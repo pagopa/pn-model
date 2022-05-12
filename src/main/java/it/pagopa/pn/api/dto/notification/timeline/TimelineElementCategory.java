@@ -8,10 +8,8 @@ public enum TimelineElementCategory {
     PUBLIC_REGISTRY_CALL(PublicRegistryCallDetails.class, ConstValue.PUBLIC_REGISTRY_CALL_VALUE),//NEW
     PUBLIC_REGISTRY_RESPONSE(PublicRegistryResponseDetails.class, ConstValue.PUBLIC_REGISTRY_RESPONSE_VALUE),//NEW
     SCHEDULE_ANALOG_WORKFLOW(ScheduleAnalogWorkflow.class, ConstValue.SCHEDULE_ANALOG_WORKFLOW_VALUE),//NEW
-    SCHEDULE_DIGITAL_WORKFLOW(ScheduleDigitalWorkflow.class, ConstValue.SCHEDULE_DIGITAL_WORKFLOW_VALUE),//NEW
     SEND_DIGITAL_DOMICILE(SendDigitalDetails.class, ConstValue.SEND_DIGITAL_DOMICILE_VALUE),
     SEND_DIGITAL_DOMICILE_FEEDBACK(SendDigitalFeedbackDetails.class, ConstValue.SEND_DIGITAL_DOMICILE_FEEDBACK_VALUE),
-    SEND_DIGITAL_FEEDBACK(SendDigitalFeedback.class, ConstValue.SEND_DIGITAL_FEEDBACK_VALUE),//NEW
     SEND_DIGITAL_DOMICILE_FAILURE(SendDigitalFailureDetails.class, ConstValue.SEND_DIGITAL_DOMICILE_FAILURE_VALUE),
     REFINEMENT(RefinementDetails.class, ConstValue.REFINEMENT_VALUE),
     SCHEDULE_REFINEMENT(ScheduleRefinement.class, ConstValue.SCHEDULE_REFINEMENT_VALUE),//NEW
