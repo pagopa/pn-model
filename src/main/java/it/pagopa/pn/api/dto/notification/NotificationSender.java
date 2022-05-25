@@ -26,10 +26,5 @@ public class NotificationSender {
     @Schema( description = "Denominazione IPA della PA mittente")
     @JsonView(value = { NotificationJsonViews.New.class, NotificationJsonViews.Received.class})
     private String taxId;
-
-    //PN-631 RIMUOVERE: al momento in fase di generazione di una Notifica non e' prevista la valorizzazione del C.F. mittente
-    public String getTaxId(String paId) {
-		return "TaxId della pa " + paId;
-	}
     
 }
