@@ -19,9 +19,9 @@ import static it.pagopa.pn.api.dto.events.StandardEventHeader.*;
 
 public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements MomProducer<T> {
 
-    private final SqsClient sqsClient;
+    protected final SqsClient sqsClient;
     private final ObjectWriter objectWriter;
-    private final String queueUrl;
+    protected final String queueUrl;
 
     protected AbstractSqsMomProducer(SqsClient sqsClient, String topic, ObjectMapper objectMapper, Class<T> msgClass) {
         this.sqsClient = sqsClient;
@@ -61,7 +61,7 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
 
     }
 
-    private String toJson(Object obj) {
+    protected String toJson(Object obj) {
         try {
             return objectWriter.writeValueAsString(obj);
         } catch (JsonProcessingException exc) {
@@ -69,7 +69,7 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
         }
     }
 
-    private Map<String, MessageAttributeValue> getSqSHeader(StandardEventHeader header) {
+    protected Map<String, MessageAttributeValue> getSqSHeader(StandardEventHeader header) {
                
         Map<String, MessageAttributeValue> map = new HashMap<>();
         
