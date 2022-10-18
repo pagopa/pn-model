@@ -9,11 +9,15 @@ import lombok.*;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class PnDeliveryNotificationViewedEvent implements GenericEvent<StandardEventHeader, PnDeliveryNotificationViewedEvent.Payload> {
+public class PnDeliveryNotificationViewedEvent implements GenericFifoEvent<StandardEventHeader, PnDeliveryNotificationViewedEvent.Payload> {
 
     private StandardEventHeader header;
 
     private Payload payload;
+
+    private String messageDeduplicationId;
+
+    private String messageGroupId;
 
     @NoArgsConstructor
     @AllArgsConstructor
