@@ -11,11 +11,15 @@ import java.time.Instant;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class PnExtRegistryNotificationPaidEvent implements GenericEvent<StandardEventHeader, PnExtRegistryNotificationPaidEvent.Payload> {
+public class PnExtRegistryNotificationPaidEvent implements GenericFifoEvent<StandardEventHeader, PnExtRegistryNotificationPaidEvent.Payload> {
 
     private StandardEventHeader header;
 
     private Payload payload;
+
+    private String messageDeduplicationId;
+
+    private String messageGroupId;
 
     @NoArgsConstructor
     @AllArgsConstructor
