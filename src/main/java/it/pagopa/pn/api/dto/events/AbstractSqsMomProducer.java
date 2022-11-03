@@ -3,6 +3,7 @@ package it.pagopa.pn.api.dto.events;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import it.pagopa.pn.api.dto.exception.PayloadClassLoadingException;
 import software.amazon.awssdk.services.sqs.SqsClient;
 import software.amazon.awssdk.services.sqs.model.GetQueueUrlRequest;
 import software.amazon.awssdk.services.sqs.model.MessageAttributeValue;
@@ -36,7 +37,7 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
         try {
             return msgClass.getDeclaredField("payload").getType();
         } catch (NoSuchFieldException exc) {
-            throw new RuntimeException( "Preparing sqs producer " + this.getClass(), exc );
+            throw new PayloadClassLoadingException( "Preparing sqs producer " + this.getClass(), exc );
         }
     }
 

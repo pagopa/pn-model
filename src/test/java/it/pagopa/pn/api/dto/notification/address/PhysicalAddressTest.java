@@ -7,9 +7,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class PhysicalAddressTest {
+class PhysicalAddressTest {
     @Test
-    public void test1() {
+    void test1() {
         PhysicalAddress physicalAddress = new PhysicalAddress();
         physicalAddress.setAddress("via Ugo Bassi, 7");
         physicalAddress.setAt("Matteo Turra");
