@@ -1,10 +1,8 @@
 package it.pagopa.pn.api.dto.notification.address;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import it.pagopa.pn.api.dto.events.AbstractSqsMomProducer;
-import it.pagopa.pn.api.dto.events.MomProducer;
-import it.pagopa.pn.api.dto.events.PnDeliveryNewNotificationEvent;
-import it.pagopa.pn.api.dto.events.StandardEventHeader;
+import it.pagopa.pn.api.dto.events.*;
+import it.pagopa.pn.api.dto.exception.PayloadClassLoadingException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import software.amazon.awssdk.awscore.exception.AwsServiceException;
@@ -15,6 +13,7 @@ import software.amazon.awssdk.services.sqs.model.*;
 import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class AbstractSqsMomProducerTest {
@@ -37,6 +36,15 @@ class AbstractSqsMomProducerTest {
         assertDoesNotThrow(() -> producer.push(message));
     }
 
+    @Test
+    void failedInitializationTest() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        assertThrows(
+                PayloadClassLoadingException.class,
+                () -> new ProducerFailedTest(sqsClient, "aTopic", objectMapper)
+        );
+    }
+
     private PnDeliveryNewNotificationEvent buildMessage() {
         return PnDeliveryNewNotificationEvent.builder()
                 .header(StandardEventHeader.builder()
@@ -54,6 +62,26 @@ class AbstractSqsMomProducerTest {
 
         protected ProducerTest(SqsClient sqsClient, String topic, ObjectMapper objectMapper) {
             super(sqsClient, topic, objectMapper, PnDeliveryNewNotificationEvent.class);
+        }
+    }
+
+    private class ProducerFailedTest extends AbstractSqsMomProducer<EventWithoutPayload> {
+
+        protected ProducerFailedTest(SqsClient sqsClient, String topic, ObjectMapper objectMapper) {
+            super(sqsClient, topic, objectMapper, EventWithoutPayload.class);
+        }
+    }
+
+    private class EventWithoutPayload implements GenericEvent<StandardEventHeader, PnDeliveryNewNotificationEvent.Payload> {
+
+        @Override
+        public StandardEventHeader getHeader() {
+            return null;
+        }
+
+        @Override
+        public PnDeliveryNewNotificationEvent.Payload getPayload() {
+            return null;
         }
     }
 
