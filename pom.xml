@@ -12,7 +12,9 @@
 	<version>0.0.2-SNAPSHOT</version>
 	<name>pn-model</name>
 	<description>Modello dati Piattaforma Notifiche</description>
-
+	<scm>
+		<developerConnection>scm:git:git@github.com:pagopa/pn-model.git</developerConnection>
+	</scm>
 	<properties>
 		<jacoco.min.line.cover.ratio>0.01</jacoco.min.line.cover.ratio>
 	</properties>
@@ -133,6 +135,11 @@
 								</configuration>
 							</execution>
 						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-release-plugin</artifactId>
+						<version>3.0.0-M7</version>
 					</plugin>
 				</plugins>
 			</build>
