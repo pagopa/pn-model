@@ -5,9 +5,10 @@
 		<groupId>it.pagopa.pn</groupId>
 		<artifactId>pn-parent</artifactId>
 		<version>1.0.0</version>
+		<relativePath>../pn-parent</relativePath>
 	</parent>
 	<artifactId>pn-model</artifactId>
-	<version>1.0.0</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>pn-model</name>
 	<description>Modello dati Piattaforma Notifiche</description>
 	<scm>
