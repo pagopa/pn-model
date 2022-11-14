@@ -2,10 +2,8 @@ package it.pagopa.pn.api.dto.notification.address;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.pagopa.pn.api.dto.events.*;
-import it.pagopa.pn.api.dto.exception.PayloadClassLoadingException;
 import it.pagopa.pn.api.dto.exception.SQSSendMessageException;
 import it.pagopa.pn.model.LocalStackTestConfig;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +12,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.util.StringUtils;
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.awscore.client.builder.AwsClientBuilder;
 import software.amazon.awssdk.services.sqs.SqsClient;
@@ -115,11 +114,11 @@ class AbstractSqsMomProducerTestIT {
 
         private <C> C configureBuilder(AwsClientBuilder<?, C> builder) {
             String profileName = "default";
-            if( StringUtils.isNotBlank( profileName ) ) {
+            if(StringUtils.hasText( profileName ) ) {
                 builder.credentialsProvider( ProfileCredentialsProvider.create( profileName ));
             }
             String endpointUrl =System.getProperty("aws.endpoint-url");
-            if( StringUtils.isNotBlank( endpointUrl )) {
+            if(StringUtils.hasText( endpointUrl )) {
                 builder.endpointOverride( URI.create( endpointUrl ));
             }
 
