@@ -4,11 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import it.pagopa.pn.api.dto.exception.PayloadClassLoadingException;
+import it.pagopa.pn.api.dto.exception.SQSSendMessageException;
 import software.amazon.awssdk.services.sqs.SqsClient;
-import software.amazon.awssdk.services.sqs.model.GetQueueUrlRequest;
-import software.amazon.awssdk.services.sqs.model.MessageAttributeValue;
-import software.amazon.awssdk.services.sqs.model.SendMessageBatchRequest;
-import software.amazon.awssdk.services.sqs.model.SendMessageBatchRequestEntry;
+import software.amazon.awssdk.services.sqs.model.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.HashMap;
@@ -48,7 +46,7 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
     @Override
     public void push(List<T> msges) {
         
-        sqsClient.sendMessageBatch(SendMessageBatchRequest.builder()
+        SendMessageBatchResponse response = sqsClient.sendMessageBatch(SendMessageBatchRequest.builder()
                 .queueUrl(this.queueUrl)
                 .entries(msges.stream()
                         .map(msg -> SendMessageBatchRequestEntry.builder()
@@ -60,6 +58,18 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
                         .collect(Collectors.toList()))
                 .build());
 
+        // venivano ignorati silentemente eventuali errori di invio
+        if (response.hasFailed())
+        {
+            StringBuilder builder = new StringBuilder();
+            for (BatchResultErrorEntry fail :response.failed()) {
+                builder.append(fail.code());
+                builder.append("-");
+                builder.append(fail.message());
+                builder.append(";");
+            }
+            throw new SQSSendMessageException(builder.toString());
+        }
     }
 
     protected String toJson(Object obj) {
