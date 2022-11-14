@@ -3,6 +3,7 @@ package it.pagopa.pn.api.dto.notification.address;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.pagopa.pn.api.dto.events.*;
 import it.pagopa.pn.api.dto.exception.PayloadClassLoadingException;
+import it.pagopa.pn.api.dto.exception.SQSSendMessageException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import software.amazon.awssdk.awscore.exception.AwsServiceException;
@@ -34,6 +35,17 @@ class AbstractSqsMomProducerTest {
     void pushTest() {
         PnDeliveryNewNotificationEvent message = buildMessage();
         assertDoesNotThrow(() -> producer.push(message));
+    }
+
+
+    @Test
+    void pushTestFail() {
+        PnDeliveryNewNotificationEvent message = buildMessage();
+        SqsClientTestFail sqsClientFail = new SqsClientTestFail();
+        String topicName = "topic-test";
+        ObjectMapper objectMapper = new ObjectMapper();
+        ProducerTest producer = new ProducerTest(sqsClientFail, topicName, objectMapper);
+        assertThrows((SQSSendMessageException.class),() -> producer.push(message));
     }
 
     @Test
@@ -105,6 +117,35 @@ class AbstractSqsMomProducerTest {
         @Override
         public SendMessageBatchResponse sendMessageBatch(SendMessageBatchRequest sendMessageBatchRequest) throws      AwsServiceException, SdkClientException {
             return SendMessageBatchResponse.builder().build();
+        }
+    }
+
+
+    private static class SqsClientTestFail implements SqsClient {
+
+        @Override
+        public String serviceName() {
+            return "test";
+        }
+
+        @Override
+        public void close() {
+
+        }
+
+        @Override
+        public GetQueueUrlResponse getQueueUrl(GetQueueUrlRequest getQueueUrlRequest) throws  AwsServiceException, SdkClientException {
+            return GetQueueUrlResponse.builder().queueUrl("test-url").build();
+        }
+
+        @Override
+        public SendMessageBatchResponse sendMessageBatch(SendMessageBatchRequest sendMessageBatchRequest) throws      AwsServiceException, SdkClientException {
+            return SendMessageBatchResponse.builder()
+                    .failed(BatchResultErrorEntry.builder()
+                            .code("code1")
+                            .message("errore codice 1")
+                            .build())
+                    .build();
         }
     }
 }
