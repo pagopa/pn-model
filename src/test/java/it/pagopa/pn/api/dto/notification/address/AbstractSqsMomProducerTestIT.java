@@ -1,9 +1,11 @@
 package it.pagopa.pn.api.dto.notification.address;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.v3.oas.annotations.media.Schema;
 import it.pagopa.pn.api.dto.events.*;
 import it.pagopa.pn.api.dto.exception.SQSSendMessageException;
 import it.pagopa.pn.model.LocalStackTestConfig;
+import lombok.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -61,6 +63,31 @@ class AbstractSqsMomProducerTestIT {
 
     }
 
+
+    @Test
+    void pushTestGeneric() {
+        TestEvent message = buildMessageGeneric();
+        MomProducer<TestEvent> producer;
+        String topicName = "local-model-test-it";
+        ObjectMapper objectMapper = new ObjectMapper();
+        producer = new ProducerGenericTest(sqsClient, topicName, objectMapper);
+
+        assertDoesNotThrow(() -> producer.push(message));
+
+        GetQueueUrlResponse resqurl = sqsClient.getQueueUrl(GetQueueUrlRequest.builder()
+                .queueName("local-model-test-it")
+                .build());
+
+        System.out.println(resqurl.queueUrl());
+        ReceiveMessageResponse res = sqsClient.receiveMessage(ReceiveMessageRequest.builder()
+                .queueUrl(resqurl.queueUrl())
+                .build());
+
+        assertEquals("{\"paId\":\"pa-id-test\"}", res.messages().get(0).body());
+
+
+    }
+
     @Test
     void pushTestNoIUN() {
         PnDeliveryNewNotificationEvent message = buildMessageNOIUN();
@@ -82,6 +109,44 @@ class AbstractSqsMomProducerTestIT {
                 .build();
     }
 
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Builder(toBuilder = true)
+    @EqualsAndHashCode
+    @ToString
+    private static class TestEvent
+            implements GenericEvent<GenericEventHeader, TestEvent.Payload> {
+        private Payload payload;
+
+        private GenericEventHeader header;
+
+        @NoArgsConstructor
+        @AllArgsConstructor
+        @Getter
+        @Builder(toBuilder = true)
+        @EqualsAndHashCode
+        @ToString
+        public static class Payload {
+
+            @Schema(description = "Codice IPA della PA mittente")
+            private String paId;
+        }
+    }
+
+
+    private TestEvent buildMessageGeneric() {
+        return TestEvent.builder()
+                .header(GenericEventHeader.builder()
+                        .eventId("event-id-test")
+                        .createdAt(Instant.now())
+                        .eventType("event-type-test")
+                        .publisher("test")
+                        .build())
+                .payload(TestEvent.Payload.builder().paId("pa-id-test").build())
+                .build();
+    }
+
     private PnDeliveryNewNotificationEvent buildMessageNOIUN() {
         return PnDeliveryNewNotificationEvent.builder()
                 .header(StandardEventHeader.builder()
@@ -99,6 +164,15 @@ class AbstractSqsMomProducerTestIT {
 
         protected ProducerTest(SqsClient sqsClient, String topic, ObjectMapper objectMapper) {
             super(sqsClient, topic, objectMapper, PnDeliveryNewNotificationEvent.class);
+        }
+    }
+
+
+
+    private static class ProducerGenericTest extends AbstractSqsMomProducer<TestEvent> {
+
+        protected ProducerGenericTest(SqsClient sqsClient, String topic, ObjectMapper objectMapper) {
+            super(sqsClient, topic, objectMapper, TestEvent.class);
         }
     }
 

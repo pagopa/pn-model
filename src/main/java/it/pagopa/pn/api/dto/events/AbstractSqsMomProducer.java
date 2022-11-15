@@ -80,16 +80,20 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
         }
     }
 
-    protected Map<String, MessageAttributeValue> getSqSHeader(StandardEventHeader header) {
+    protected Map<String, MessageAttributeValue> getSqSHeader(GenericEventHeader header) {
                
         Map<String, MessageAttributeValue> map = new HashMap<>();
-        
-        map.put(PN_EVENT_HEADER_IUN, newStringAttributeValue(header.getIun()));
+
         map.put(PN_EVENT_HEADER_EVENT_ID, newStringAttributeValue(header.getEventId()));
         map.put(PN_EVENT_HEADER_EVENT_TYPE, newStringAttributeValue(header.getEventType()));
         map.put(PN_EVENT_HEADER_CREATED_AT, newStringAttributeValue(header.getCreatedAt().toString()));
         map.put(PN_EVENT_HEADER_PUBLISHER, newStringAttributeValue(header.getPublisher()));
-       
+        if (header instanceof StandardEventHeader)
+        {
+            map.put(PN_EVENT_HEADER_IUN, newStringAttributeValue(((StandardEventHeader)header).getIun()));
+        }
+
+
         return map;
     }
 
