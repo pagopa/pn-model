@@ -3,6 +3,7 @@ package it.pagopa.pn.api.dto.notification.address;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.pagopa.pn.api.dto.events.*;
 import it.pagopa.pn.api.dto.exception.PayloadClassLoadingException;
+import it.pagopa.pn.api.dto.exception.SQSSendMessageException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import software.amazon.awssdk.awscore.exception.AwsServiceException;
@@ -36,6 +37,17 @@ class AbstractSqsMomProducerTest {
         assertDoesNotThrow(() -> producer.push(message));
     }
 
+
+    @Test
+    void pushTestFail() {
+        PnDeliveryNewNotificationEvent message = buildMessage();
+        SqsClientTestFail sqsClientFail = new SqsClientTestFail();
+        String topicName = "topic-test";
+        ObjectMapper objectMapper = new ObjectMapper();
+        ProducerTest producer = new ProducerTest(sqsClientFail, topicName, objectMapper);
+        assertThrows((SQSSendMessageException.class),() -> producer.push(message));
+    }
+
     @Test
     void failedInitializationTest() {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -58,21 +70,21 @@ class AbstractSqsMomProducerTest {
     }
 
 
-    private class ProducerTest extends AbstractSqsMomProducer<PnDeliveryNewNotificationEvent> {
+    private static class ProducerTest extends AbstractSqsMomProducer<PnDeliveryNewNotificationEvent> {
 
         protected ProducerTest(SqsClient sqsClient, String topic, ObjectMapper objectMapper) {
             super(sqsClient, topic, objectMapper, PnDeliveryNewNotificationEvent.class);
         }
     }
 
-    private class ProducerFailedTest extends AbstractSqsMomProducer<EventWithoutPayload> {
+    private static class ProducerFailedTest extends AbstractSqsMomProducer<EventWithoutPayload> {
 
         protected ProducerFailedTest(SqsClient sqsClient, String topic, ObjectMapper objectMapper) {
             super(sqsClient, topic, objectMapper, EventWithoutPayload.class);
         }
     }
 
-    private class EventWithoutPayload implements GenericEvent<StandardEventHeader, PnDeliveryNewNotificationEvent.Payload> {
+    private static class EventWithoutPayload implements GenericEvent<StandardEventHeader, PnDeliveryNewNotificationEvent.Payload> {
 
         @Override
         public StandardEventHeader getHeader() {
@@ -85,7 +97,7 @@ class AbstractSqsMomProducerTest {
         }
     }
 
-    private class SqsClientTest implements SqsClient {
+    private static class SqsClientTest implements SqsClient {
 
         @Override
         public String serviceName() {
@@ -98,13 +110,42 @@ class AbstractSqsMomProducerTest {
         }
 
         @Override
-        public GetQueueUrlResponse getQueueUrl(GetQueueUrlRequest getQueueUrlRequest) throws QueueDoesNotExistException, AwsServiceException, SdkClientException, SqsException {
+        public GetQueueUrlResponse getQueueUrl(GetQueueUrlRequest getQueueUrlRequest) throws  AwsServiceException, SdkClientException {
             return GetQueueUrlResponse.builder().queueUrl("test-url").build();
         }
 
         @Override
-        public SendMessageBatchResponse sendMessageBatch(SendMessageBatchRequest sendMessageBatchRequest) throws TooManyEntriesInBatchRequestException, EmptyBatchRequestException, BatchEntryIdsNotDistinctException, BatchRequestTooLongException, InvalidBatchEntryIdException, software.amazon.awssdk.services.sqs.model.UnsupportedOperationException, AwsServiceException, SdkClientException, SqsException {
-            return null;
+        public SendMessageBatchResponse sendMessageBatch(SendMessageBatchRequest sendMessageBatchRequest) throws      AwsServiceException, SdkClientException {
+            return SendMessageBatchResponse.builder().build();
+        }
+    }
+
+
+    private static class SqsClientTestFail implements SqsClient {
+
+        @Override
+        public String serviceName() {
+            return "test";
+        }
+
+        @Override
+        public void close() {
+
+        }
+
+        @Override
+        public GetQueueUrlResponse getQueueUrl(GetQueueUrlRequest getQueueUrlRequest) throws  AwsServiceException, SdkClientException {
+            return GetQueueUrlResponse.builder().queueUrl("test-url").build();
+        }
+
+        @Override
+        public SendMessageBatchResponse sendMessageBatch(SendMessageBatchRequest sendMessageBatchRequest) throws      AwsServiceException, SdkClientException {
+            return SendMessageBatchResponse.builder()
+                    .failed(BatchResultErrorEntry.builder()
+                            .code("code1")
+                            .message("errore codice 1")
+                            .build())
+                    .build();
         }
     }
 }
