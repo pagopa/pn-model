@@ -22,7 +22,6 @@
 		<jacoco.min.line.cover.ratio>0.01</jacoco.min.line.cover.ratio>
 	</properties>
 
-
 	<dependencies>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
