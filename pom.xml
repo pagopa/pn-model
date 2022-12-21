@@ -8,14 +8,14 @@
 		<relativePath>../pn-parent</relativePath>
 	</parent>
 	<artifactId>pn-model</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<name>pn-model</name>
 	<description>Modello dati Piattaforma Notifiche</description>
 	<scm>
 		<connection>${git.conn}</connection>
 		<developerConnection>${git.devConn}</developerConnection>
 		<url>${git.url}</url>
-		<tag>v1.0.0</tag>
+		<tag>v1.0.1</tag>
 	</scm>
 
 	<properties>
