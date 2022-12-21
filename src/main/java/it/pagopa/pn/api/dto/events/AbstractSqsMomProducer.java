@@ -22,6 +22,7 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
     private final ObjectWriter objectWriter;
     protected final String queueUrl;
 
+
     protected AbstractSqsMomProducer(SqsClient sqsClient, String topic, ObjectMapper objectMapper, Class<T> msgClass) {
         this.sqsClient = sqsClient;
         Class<?> payloadClass = getPayloadClass(msgClass);
