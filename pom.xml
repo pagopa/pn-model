@@ -4,45 +4,24 @@
 	<parent>
 		<groupId>it.pagopa.pn</groupId>
 		<artifactId>pn-parent</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1</version>
 		<relativePath>../pn-parent</relativePath>
 	</parent>
 	<artifactId>pn-model</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<name>pn-model</name>
 	<description>Modello dati Piattaforma Notifiche</description>
 	<scm>
 		<connection>${git.conn}</connection>
 		<developerConnection>${git.devConn}</developerConnection>
 		<url>${git.url}</url>
-		<tag>v1.0.0</tag>
+		<tag>v1.0.1</tag>
 	</scm>
 
 	<properties>
 		<jacoco.min.line.cover.ratio>0.01</jacoco.min.line.cover.ratio>
-		<awspring.version>2.3.2</awspring.version>
-		<testcontainers.version>1.16.2</testcontainers.version>
 	</properties>
 
-
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>io.awspring.cloud</groupId>
-				<artifactId>spring-cloud-aws-dependencies</artifactId>
-				<version>${awspring.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.testcontainers</groupId>
-				<artifactId>testcontainers-bom</artifactId>
-				<version>${testcontainers.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<dependencies>
 		<dependency>
@@ -58,10 +37,6 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.validation</groupId>
@@ -120,7 +95,7 @@
 				<dependency>
 					<groupId>org.springdoc</groupId>
 					<artifactId>springdoc-openapi-webflux-ui</artifactId>
-					<version>1.5.10</version>
+					<version>1.5.13</version>
 				</dependency>
 			</dependencies>
 			<build>
