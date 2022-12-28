@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static it.pagopa.pn.api.dto.events.StandardEventHeader.*;
 
@@ -55,7 +54,7 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
                             .messageAttributes(getSqSHeader(msg.getHeader()))
                             .build()
                         )
-                        .collect(Collectors.toList()))
+                        .toList())
                 .build());
 
         // venivano ignorati silentemente eventuali errori di invio
@@ -88,9 +87,9 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
         map.put(PN_EVENT_HEADER_EVENT_TYPE, newStringAttributeValue(header.getEventType()));
         map.put(PN_EVENT_HEADER_CREATED_AT, newStringAttributeValue(header.getCreatedAt().toString()));
         map.put(PN_EVENT_HEADER_PUBLISHER, newStringAttributeValue(header.getPublisher()));
-        if (header instanceof StandardEventHeader)
+        if (header instanceof StandardEventHeader standardEventHeader)
         {
-            map.put(PN_EVENT_HEADER_IUN, newStringAttributeValue(((StandardEventHeader)header).getIun()));
+            map.put(PN_EVENT_HEADER_IUN, newStringAttributeValue(standardEventHeader.getIun()));
         }
 
 
