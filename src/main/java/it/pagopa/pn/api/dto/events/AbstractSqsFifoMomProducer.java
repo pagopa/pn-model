@@ -6,7 +6,6 @@ import software.amazon.awssdk.services.sqs.model.SendMessageBatchRequest;
 import software.amazon.awssdk.services.sqs.model.SendMessageBatchRequestEntry;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public abstract class AbstractSqsFifoMomProducer<T extends GenericFifoEvent> extends AbstractSqsMomProducer<T>  {
 
@@ -28,7 +27,7 @@ public abstract class AbstractSqsFifoMomProducer<T extends GenericFifoEvent> ext
                             .messageDeduplicationId(msg.getMessageDeduplicationId())
                             .build()
                         )
-                        .collect(Collectors.toList()))
+                        .toList())
                 .build());
 
     }
