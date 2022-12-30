@@ -1,7 +1,6 @@
 package it.pagopa.pn.api.dto.notification.address;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.v3.oas.annotations.media.Schema;
 import it.pagopa.pn.api.dto.events.*;
 import it.pagopa.pn.api.dto.exception.SQSSendMessageException;
 import it.pagopa.pn.model.LocalStackTestConfig;
@@ -129,7 +128,7 @@ class AbstractSqsMomProducerTestIT {
         @ToString
         public static class Payload {
 
-            @Schema(description = "Codice IPA della PA mittente")
+            //Codice IPA della PA mittente
             private String paId;
         }
     }
