@@ -5,7 +5,6 @@
  */
 package it.pagopa.pn.api.dto.events;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import it.pagopa.pn.api.dto.notification.address.PhysicalAddress;
 import lombok.*;
 
@@ -24,37 +23,37 @@ import javax.validation.constraints.NotNull;
 @ToString
 public class PnExtChnPaperEventPayload {
 
-    @Schema( description = "Codice opaco utilizzato dal software client per correlare la risposta alla richiesta" )
+    //@Schema( description = "Codice opaco utilizzato dal software client per correlare la risposta alla richiesta" )
     private String requestCorrelationId;
 
-    @Schema( description = "Identificativo univoco della richiesta" )
+    //@Schema( description = "Identificativo univoco della richiesta" )
     @NotEmpty
     private String iun;
     
-    @Schema( description = "Indirizzo fisico destinatario" )
+    //@Schema( description = "Indirizzo fisico destinatario" )
     @NotNull
     private PhysicalAddress destinationAddress;
     
-    @Schema( description = "Tipologia comunicazione" )
+    //@Schema( description = "Tipologia comunicazione" )
     @NotNull
     private CommunicationType communicationType;
     
-    @Schema( description = "Livello Servizio" )
+    //@Schema( description = "Livello Servizio" )
     @NotNull
     private ServiceLevelType serviceLevel;
     
-    @Schema( description = "Denominazione Mittente" )
+    //@Schema( description = "Denominazione Mittente" )
     @NotEmpty
     private String senderDenomination;
     
-    @Schema( description = "Denominazione Destinatario" )
+    //@Schema( description = "Denominazione Destinatario" )
     @NotEmpty
     private String recipientDenomination;
 
-    @Schema( description = "E' richiesta investigazione indirizzo fisico alternativo" )
+    //@Schema( description = "E' richiesta investigazione indirizzo fisico alternativo" )
     private boolean investigation;
 
-    @Schema( description = "Link di accesso rapido" )
+    //@Schema( description = "Link di accesso rapido" )
     @NotEmpty
     private String accessUrl;
 }

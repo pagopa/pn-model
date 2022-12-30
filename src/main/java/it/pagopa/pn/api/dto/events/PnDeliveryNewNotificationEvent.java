@@ -1,6 +1,5 @@
 package it.pagopa.pn.api.dto.events;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 @NoArgsConstructor
@@ -24,7 +23,7 @@ public class PnDeliveryNewNotificationEvent implements GenericEvent<StandardEven
     @ToString
     public static class Payload {
 
-        @Schema(description = "Codice IPA della PA mittente")
+        //Codice IPA della PA mittente
         private String paId;
     }
 }
