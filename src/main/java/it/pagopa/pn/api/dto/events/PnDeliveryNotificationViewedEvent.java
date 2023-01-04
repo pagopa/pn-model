@@ -26,10 +26,8 @@ public class PnDeliveryNotificationViewedEvent implements GenericFifoEvent<Stand
     @ToString
     public static class Payload {
 
-        //@Schema( description = "Codice IUN notifica")
         private String iun;
-        
-        //@Schema( description = "Indice del reicipient")
         private int recipientIndex;
+        private NotificationViewDelegateInfo delegateInfo;
     }
 }
