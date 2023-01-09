@@ -1,10 +1,12 @@
 package it.pagopa.pn.api.dto.events;
 
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
 @Builder
+@EqualsAndHashCode
 public class NotificationViewDelegateInfo {
     private String internalId;
     private String operatorUuid;
