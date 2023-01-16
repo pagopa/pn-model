@@ -79,9 +79,9 @@ public class PnDeliveryPaymentEvent implements GenericFifoEvent<StandardEventHea
     }
 
     public enum PaymentType {
-        PF("PAGOPA"),
+        PAGOPA("PAGOPA"),
 
-        PG("F24");
+        F24("F24");
 
         private final String value;
 
