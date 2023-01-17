@@ -13,5 +13,6 @@ class EventPublisherTests {
         assertNotNull(EventPublisher.DELIVERY_PUSH);
         assertNotNull(EventPublisher.EXTERNAL_CHANNELS);
         assertNotNull(EventPublisher.EXTERNAL_REGISTRY);
+        assertNotNull(EventPublisher.KAFKA_BRIDGE);
     }
 }
