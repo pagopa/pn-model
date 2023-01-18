@@ -15,5 +15,11 @@ class PnOnboardInstitutionPayloadTest {
 
         assertThat(payload.isActive()).isTrue();
         assertThat(payload.getInstitutionId()).isEqualTo(payload.getPk());
+
+        payload.setStatus(PnOnboardInstitutionPayload.STATUS_SUSPENDED);
+        assertThat(payload.isActive()).isFalse();
+
+        payload.setStatus(null);
+        assertThat(payload.isActive()).isFalse();
     }
 }
