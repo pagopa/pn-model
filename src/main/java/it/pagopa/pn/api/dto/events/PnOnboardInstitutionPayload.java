@@ -10,7 +10,7 @@ public class PnOnboardInstitutionPayload {
     public static final String STATUS_ACTIVE = "ACTIVE";
     public static final String STATUS_SUSPENDED = "SUSPENDED";
 
-    private String pk;
+    private String id;
     private String status;
     private Instant lastUpdate;
 
@@ -23,7 +23,7 @@ public class PnOnboardInstitutionPayload {
     private String digitalAddress;
 
     public String getInstitutionId() {
-        return this.pk;
+        return this.id;
     }
 
     public boolean isActive() {
