@@ -10,11 +10,11 @@ class PnOnboardInstitutionPayloadTest {
     @Test
     void additionMethodsAreNotNull() {
         PnOnboardInstitutionPayload payload = new PnOnboardInstitutionPayload();
-        payload.setPk("the-pk");
+        payload.setId("the-pk");
         payload.setStatus(PnOnboardInstitutionPayload.STATUS_ACTIVE);
 
         assertThat(payload.isActive()).isTrue();
-        assertThat(payload.getInstitutionId()).isEqualTo(payload.getPk());
+        assertThat(payload.getInstitutionId()).isEqualTo(payload.getId());
 
         payload.setStatus(PnOnboardInstitutionPayload.STATUS_SUSPENDED);
         assertThat(payload.isActive()).isFalse();
