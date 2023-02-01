@@ -9,7 +9,8 @@ public enum EventType implements IEventType {
     SEND_COURTESY_EMAIL ( PnExtChnEmailEvent.class ),
     SEND_PAPER_REQUEST ( PnExtChnPaperEvent.class ),
     SEND_PAPER_RESPONSE ( PnExtChnProgressStatusEvent.class ),
-    SEND_ONBOARDING_REQUEST (PnOnboardingInstitutionEvent.class);
+    SEND_ONBOARDING_REQUEST (PnOnboardingInstitutionEvent.class),
+    MANDATE_EXPIRED (PnMandateExpiredEvent.class);
     
     private final Class<?> eventClass;
 
