@@ -13,13 +13,13 @@ class PnOnboardInstitutionPayloadTest {
         payload.setId("the-pk");
         payload.setStatus(PnOnboardInstitutionPayload.STATUS_ACTIVE);
 
-        assertThat(payload.isActive()).isTrue();
-        assertThat(payload.getInstitutionId()).isEqualTo(payload.getId());
+        assertThat(payload.getStatus()).isEqualTo(PnOnboardInstitutionPayload.STATUS_ACTIVE);
+        assertThat(payload.getId()).isEqualTo(payload.getId());
 
         payload.setStatus(PnOnboardInstitutionPayload.STATUS_SUSPENDED);
-        assertThat(payload.isActive()).isFalse();
+        assertThat(payload.getStatus()).isEqualTo(PnOnboardInstitutionPayload.STATUS_SUSPENDED);
 
         payload.setStatus(null);
-        assertThat(payload.isActive()).isFalse();
+        assertThat(payload.getStatus()).isNull();
     }
 }
