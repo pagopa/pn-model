@@ -22,11 +22,4 @@ public class PnOnboardInstitutionPayload {
     private String externalId;
     private String digitalAddress;
 
-    public String getInstitutionId() {
-        return this.id;
-    }
-
-    public boolean isActive() {
-        return this.status != null && this.status.equals(STATUS_ACTIVE);
-    }
 }
