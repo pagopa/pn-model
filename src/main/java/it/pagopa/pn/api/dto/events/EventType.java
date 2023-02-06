@@ -4,6 +4,7 @@ public enum EventType implements IEventType {
     NEW_NOTIFICATION( PnDeliveryNewNotificationEvent.class ),
     NOTIFICATION_VIEWED( PnDeliveryNotificationViewedEvent.class ),
     NOTIFICATION_PAID( PnExtRegistryNotificationPaidEvent.class ),
+    SEND_IO_MESSAGE_REQUEST( PnExtRegistryIOSentMessageEvent.class ),
     SEND_PEC_REQUEST( PnExtChnPecEvent.class ),
     SEND_PEC_RESPONSE( PnExtChnProgressStatusEvent.class ),
     SEND_COURTESY_EMAIL ( PnExtChnEmailEvent.class ),
