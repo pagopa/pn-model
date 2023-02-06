@@ -11,6 +11,7 @@ class EventTypeTests {
     void testEnum() {
         assertNotNull(EventType.NEW_NOTIFICATION);
         assertNotNull(EventType.NOTIFICATION_PAID);
+        assertNotNull(EventType.SEND_IO_MESSAGE_REQUEST);
         assertNotNull(EventType.NOTIFICATION_VIEWED);
         assertNotNull(EventType.SEND_COURTESY_EMAIL);
         assertNotNull(EventType.SEND_PAPER_REQUEST);
