@@ -55,6 +55,13 @@ public class PnDeliveryPaymentEvent implements GenericFifoEvent<StandardEventHea
         //@Schema( description = "Numero della posizione debitoria. Obbligatorio in caso PaymentType PAGOPA")
         private String noticeCode;
 
+        //@Schema( description = "Canale sorgente info di pagamento")
+        @NotNull
+        private String paymentSourceChannel;
+
+        //@Schema( description = "Importo di pagamento in eurocent")
+        private int amount;
+
     }
 
     public enum RecipientType {
