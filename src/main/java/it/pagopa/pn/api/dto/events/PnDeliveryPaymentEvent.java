@@ -60,7 +60,7 @@ public class PnDeliveryPaymentEvent implements GenericFifoEvent<StandardEventHea
         private String paymentSourceChannel;
 
         //@Schema( description = "Importo di pagamento in eurocent")
-        private int amount;
+        private Integer amount;
 
     }
 
