@@ -42,6 +42,10 @@ public class PnMandateEvent implements GenericEvent<StandardEventHeader, PnManda
         private Instant validTo;
 
         private Set<String> groups;
+
+        private Set<String> removedGroups;
+
+        private Set<String> addedGroups;
     }
 
 }
