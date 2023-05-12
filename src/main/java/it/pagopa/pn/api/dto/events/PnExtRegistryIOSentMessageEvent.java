@@ -2,13 +2,15 @@ package it.pagopa.pn.api.dto.events;
 
 import lombok.*;
 
+import java.time.Instant;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class PnDeliveryNotificationViewedEvent implements GenericFifoEvent<StandardEventHeader, PnDeliveryNotificationViewedEvent.Payload> {
+public class PnExtRegistryIOSentMessageEvent implements GenericFifoEvent<StandardEventHeader, PnExtRegistryIOSentMessageEvent.Payload> {
 
     private StandardEventHeader header;
 
@@ -27,7 +29,11 @@ public class PnDeliveryNotificationViewedEvent implements GenericFifoEvent<Stand
     public static class Payload {
 
         private String iun;
-        private int recipientIndex;
-        private NotificationViewDelegateInfo delegateInfo;
+
+        private int recIndex;
+
+        private String internalId;
+
+        private Instant sendDate;
     }
 }

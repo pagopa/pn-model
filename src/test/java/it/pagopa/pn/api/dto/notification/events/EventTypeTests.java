@@ -11,11 +11,13 @@ class EventTypeTests {
     void testEnum() {
         assertNotNull(EventType.NEW_NOTIFICATION);
         assertNotNull(EventType.NOTIFICATION_PAID);
+        assertNotNull(EventType.SEND_IO_MESSAGE_REQUEST);
         assertNotNull(EventType.NOTIFICATION_VIEWED);
         assertNotNull(EventType.SEND_COURTESY_EMAIL);
         assertNotNull(EventType.SEND_PAPER_REQUEST);
         assertNotNull(EventType.SEND_PAPER_RESPONSE);
         assertNotNull(EventType.SEND_PEC_REQUEST);
         assertNotNull(EventType.SEND_PEC_RESPONSE);
+        assertNotNull(EventType.SEND_ONBOARDING_REQUEST);
     }
 }
