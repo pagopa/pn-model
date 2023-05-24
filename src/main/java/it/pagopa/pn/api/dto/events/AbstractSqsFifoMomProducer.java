@@ -20,7 +20,7 @@ public abstract class AbstractSqsFifoMomProducer<T extends GenericFifoEvent> ext
 
     @Override
     public void push(List<T> msges) {
-        log.debug("Inserting data in SQS {}", topic);
+        log.debug("Inserting data {} in SQS {}", msges, topic);
         SendMessageBatchResponse response = sqsClient.sendMessageBatch(SendMessageBatchRequest.builder()
                 .queueUrl(this.queueUrl)
                 .entries(msges.stream()
