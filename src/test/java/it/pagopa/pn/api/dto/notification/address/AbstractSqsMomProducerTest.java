@@ -70,7 +70,7 @@ class AbstractSqsMomProducerTest {
     }
 
 
-    private static class ProducerTest extends AbstractSqsMomProducer<PnDeliveryNewNotificationEvent> {
+    static class ProducerTest extends AbstractSqsMomProducer<PnDeliveryNewNotificationEvent> {
 
         protected ProducerTest(SqsClient sqsClient, String topic, ObjectMapper objectMapper) {
             super(sqsClient, topic, objectMapper, PnDeliveryNewNotificationEvent.class);
@@ -121,7 +121,7 @@ class AbstractSqsMomProducerTest {
     }
 
 
-    private static class SqsClientTestFail implements SqsClient {
+    static class SqsClientTestFail implements SqsClient {
 
         @Override
         public String serviceName() {
