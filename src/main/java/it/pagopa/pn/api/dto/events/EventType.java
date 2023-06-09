@@ -12,6 +12,7 @@ public enum EventType implements IEventType {
     SEND_PAPER_RESPONSE ( PnDeliveryPaymentEvent.class ),
     SEND_ONBOARDING_REQUEST (PnOnboardingInstitutionEvent.class),
     MANDATE_ACCEPTED (PnMandateEvent.class),
+    MANDATE_UPDATED (PnMandateEvent.class),
     MANDATE_REVOKED (PnMandateEvent.class),
     MANDATE_REJECTED (PnMandateEvent.class),
     MANDATE_EXPIRED (PnMandateEvent.class);
