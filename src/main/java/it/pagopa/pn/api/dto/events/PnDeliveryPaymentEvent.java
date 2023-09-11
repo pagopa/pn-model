@@ -49,11 +49,21 @@ public class PnDeliveryPaymentEvent implements GenericFifoEvent<StandardEventHea
         @NotNull
         private Instant paymentDate;
 
+        //@Schema( description = "indica se la data di pagamento é incerta")
+        private boolean uncertainPaymentDate;
+
         //@Schema( description = "Codice fiscale dell'ente creditore. Obbligatorio in caso PaymentType PAGOPA")
         private String creditorTaxId;
 
         //@Schema( description = "Numero della posizione debitoria. Obbligatorio in caso PaymentType PAGOPA")
         private String noticeCode;
+
+        //@Schema( description = "Canale sorgente info di pagamento")
+        @NotNull
+        private String paymentSourceChannel;
+
+        //@Schema( description = "Importo di pagamento in eurocent")
+        private Integer amount;
 
     }
 

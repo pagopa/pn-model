@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import it.pagopa.pn.api.dto.exception.PayloadClassLoadingException;
 import it.pagopa.pn.api.dto.exception.SQSSendMessageException;
+import lombok.extern.slf4j.Slf4j;
 import software.amazon.awssdk.services.sqs.SqsClient;
 import software.amazon.awssdk.services.sqs.model.*;
 
@@ -15,17 +16,20 @@ import java.util.Map;
 
 import static it.pagopa.pn.api.dto.events.StandardEventHeader.*;
 
+@Slf4j
 public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements MomProducer<T> {
 
     protected final SqsClient sqsClient;
     private final ObjectWriter objectWriter;
     protected final String queueUrl;
+    protected final String topic;
 
     protected AbstractSqsMomProducer(SqsClient sqsClient, String topic, ObjectMapper objectMapper, Class<T> msgClass) {
         this.sqsClient = sqsClient;
         Class<?> payloadClass = getPayloadClass(msgClass);
         this.objectWriter = objectMapper.writerFor(payloadClass);
 
+        this.topic = topic;
         this.queueUrl = getQueueUrl(sqsClient, topic);
     }
 
@@ -44,7 +48,7 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
 
     @Override
     public void push(List<T> msges) {
-        
+        log.debug("Inserting data {} in SQS {}", msges, topic);
         SendMessageBatchResponse response = sqsClient.sendMessageBatch(SendMessageBatchRequest.builder()
                 .queueUrl(this.queueUrl)
                 .entries(msges.stream()
@@ -69,6 +73,7 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
             }
             throw new SQSSendMessageException(builder.toString());
         }
+        log.info("Inserted data in SQS {}", this.topic);
     }
 
     protected String toJson(Object obj) {

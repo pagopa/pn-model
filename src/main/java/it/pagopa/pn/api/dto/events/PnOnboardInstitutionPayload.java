@@ -7,9 +7,6 @@ import java.time.Instant;
 @Data
 public class PnOnboardInstitutionPayload {
 
-    public static final String STATUS_ACTIVE = "ACTIVE";
-    public static final String STATUS_SUSPENDED = "SUSPENDED";
-
     private String id;
     private String status;
     private Instant lastUpdate;
@@ -21,5 +18,7 @@ public class PnOnboardInstitutionPayload {
     private String zipCode;
     private String externalId;
     private String digitalAddress;
+    private String ipaCode;
+    private String sdiCode;
 
 }
