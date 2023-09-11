@@ -5,10 +5,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Builder
 @Getter
 @EqualsAndHashCode
 @ToString
-public class PnF24PdfSetReadyEvent implements GenericEventBridgeEvent<PnF24PdfSetReadyEventDetail> {
-    private PnF24PdfSetReadyEventDetail detail;
+public class PnF24MetadataValidationEndEventPayload {
+    private String setId;
+    private String status;
+    private List<PnF24MetadataValidationIssue> errors;
 }
