@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @EqualsAndHashCode
 @ToString
-public class PnF24PdfSetReadyEventDetail {
+public class PnF24PdfSetReadyEventPayload {
     private String requestId;
     private String status;
     private List<PnF24PdfSetReadyEventItem> generatedPdfsUrls;
