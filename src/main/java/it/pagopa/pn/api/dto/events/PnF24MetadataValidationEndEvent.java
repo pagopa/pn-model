@@ -6,7 +6,7 @@ import lombok.*;
 @Getter
 @EqualsAndHashCode
 @ToString
-public class PnF24AsyncEvent implements GenericEventBridgeEvent<PnF24AsyncEvent.Detail> {
+public class PnF24MetadataValidationEndEvent implements GenericEventBridgeEvent<PnF24MetadataValidationEndEvent.Detail> {
     private Detail detail;
 
     @NoArgsConstructor
@@ -17,7 +17,7 @@ public class PnF24AsyncEvent implements GenericEventBridgeEvent<PnF24AsyncEvent.
     @EqualsAndHashCode
     public static class Detail {
         String cxId;
-        PnF24PdfSetReadyEventPayload pdfSetReady;
+        String clientId;
         PnF24MetadataValidationEndEventPayload metadataValidationEnd;
     }
 }
