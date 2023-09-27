@@ -17,6 +17,7 @@ public class PnF24PdfSetReadyEvent implements GenericEventBridgeEvent<PnF24PdfSe
     @EqualsAndHashCode
     public static class Detail {
         String cxId;
+        String clientId;
         PnF24PdfSetReadyEventPayload pdfSetReady;
     }
 }
