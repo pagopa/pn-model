@@ -21,4 +21,8 @@ public class PnOnboardInstitutionPayload {
     private String ipaCode;
     private String sdiCode;
 
+    private String rootId;
+    private String rootDescription;
+    private String rootIpaCode;
+
 }
