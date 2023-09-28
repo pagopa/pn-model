@@ -16,7 +16,6 @@ public class PnF24MetadataValidationEndEvent implements GenericEventBridgeEvent<
     @ToString
     @EqualsAndHashCode
     public static class Detail {
-        String cxId;
         String clientId;
         PnF24MetadataValidationEndEventPayload metadataValidationEnd;
     }
