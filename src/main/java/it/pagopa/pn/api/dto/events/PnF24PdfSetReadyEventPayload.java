@@ -1,9 +1,6 @@
 package it.pagopa.pn.api.dto.events;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
@@ -11,6 +8,8 @@ import java.util.List;
 @Getter
 @EqualsAndHashCode
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class PnF24PdfSetReadyEventPayload {
     private String requestId;
     private String status;
