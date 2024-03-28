@@ -6,8 +6,8 @@ import lombok.*;
 @Getter
 @EqualsAndHashCode
 @ToString
-public class PnAttachmentsConfigEvent implements GenericEvent<GenericEventHeader, PnConfigAttachmentsEventPayload> {
+public class PnAttachmentsConfigEvent implements GenericEvent<GenericEventHeader, PnAttachmentsConfigEventPayload> {
 
     private GenericEventHeader header;
-    private PnConfigAttachmentsEventPayload payload;
+    private PnAttachmentsConfigEventPayload payload;
 }

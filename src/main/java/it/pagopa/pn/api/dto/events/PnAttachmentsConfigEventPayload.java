@@ -10,8 +10,9 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class PnConfigAttachmentsEventPayload {
+public class PnAttachmentsConfigEventPayload {
 
     private String configKey;
-    private List<PnConfigAttachmentsEventItem> configs;
+    private String configType;
+    private List<PnAttachmentsConfigEventItem> configs;
 }
