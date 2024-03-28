@@ -10,7 +10,7 @@ import java.time.Instant;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class PnConfigAttachmentsEventItem {
+public class PnAttachmentsConfigEventItem {
 
     private Instant startValidity;
     private Instant endValidity;
