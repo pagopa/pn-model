@@ -12,10 +12,11 @@ public class PnF24MetadataValidationEndEvent implements GenericEventBridgeEvent<
     @NoArgsConstructor
     @AllArgsConstructor
     @Getter
+    @Setter
     @Builder(toBuilder = true)
     @ToString
     @EqualsAndHashCode
-    public static class Detail {
+    public static class Detail  implements DetailedTypePayload  {
         String clientId;
         PnF24MetadataValidationEndEventPayload metadataValidationEnd;
     }
