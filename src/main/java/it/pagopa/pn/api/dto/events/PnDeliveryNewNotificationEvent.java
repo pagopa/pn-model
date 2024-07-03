@@ -22,8 +22,7 @@ public class PnDeliveryNewNotificationEvent implements GenericEvent<StandardEven
     @EqualsAndHashCode
     @ToString
     public static class Payload {
-
-        //Codice IPA della PA mittente
         private String paId;
+        private String iun;
     }
 }
