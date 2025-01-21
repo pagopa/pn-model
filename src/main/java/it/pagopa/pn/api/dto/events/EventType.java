@@ -16,7 +16,8 @@ public enum EventType implements IEventType {
     MANDATE_REVOKED (PnMandateEvent.class),
     MANDATE_REJECTED (PnMandateEvent.class),
     MANDATE_EXPIRED (PnMandateEvent.class),
-    SEND_ATTACHMENTS_CONFIG (PnAttachmentsConfigEvent.class);
+    SEND_ATTACHMENTS_CONFIG (PnAttachmentsConfigEvent.class),
+    PREPARE_PAPERCHANNEL_TO_DELAYER (PnPreparePaperchannelToDelayerEvent.class);
     
     private final Class<?> eventClass;
 
