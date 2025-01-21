@@ -20,5 +20,6 @@ class EventTypeTests {
         assertNotNull(EventType.SEND_PEC_RESPONSE);
         assertNotNull(EventType.SEND_ONBOARDING_REQUEST);
         assertNotNull(EventType.SEND_ATTACHMENTS_CONFIG);
+        assertNotNull(EventType.PREPARE_PAPERCHANNEL_TO_DELAYER);
     }
 }
