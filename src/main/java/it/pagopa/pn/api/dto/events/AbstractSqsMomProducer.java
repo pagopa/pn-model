@@ -48,15 +48,21 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
 
     @Override
     public void push(List<T> msges) {
+        push(msges, null);
+    }
+
+    @Override
+    public void push(List<T> msges, Integer delaySeconds) {
         log.debug("Inserting data {} in SQS {}", msges, topic);
         SendMessageBatchResponse response = sqsClient.sendMessageBatch(SendMessageBatchRequest.builder()
                 .queueUrl(this.queueUrl)
                 .entries(msges.stream()
                         .map(msg -> SendMessageBatchRequestEntry.builder()
-                            .messageBody(toJson(msg.getPayload()))
-                            .id(msg.getHeader().getEventId())
-                            .messageAttributes(getSqSHeader(msg.getHeader()))
-                            .build()
+                                .messageBody(toJson(msg.getPayload()))
+                                .id(msg.getHeader().getEventId())
+                                .messageAttributes(getSqSHeader(msg.getHeader()))
+                                .delaySeconds(delaySeconds)
+                                .build()
                         )
                         .toList())
                 .build());

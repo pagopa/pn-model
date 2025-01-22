@@ -1,10 +1,12 @@
 package it.pagopa.pn.api.dto.notification.address;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.pagopa.pn.api.dto.events.*;
 import it.pagopa.pn.api.dto.exception.SQSSendMessageException;
 import it.pagopa.pn.model.LocalStackTestConfig;
 import lombok.*;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,15 +19,15 @@ import org.springframework.util.StringUtils;
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.awscore.client.builder.AwsClientBuilder;
 import software.amazon.awssdk.services.sqs.SqsClient;
-import software.amazon.awssdk.services.sqs.model.GetQueueUrlRequest;
-import software.amazon.awssdk.services.sqs.model.GetQueueUrlResponse;
-import software.amazon.awssdk.services.sqs.model.ReceiveMessageRequest;
-import software.amazon.awssdk.services.sqs.model.ReceiveMessageResponse;
+import software.amazon.awssdk.services.sqs.model.*;
 
 import java.net.URI;
+import java.time.Duration;
 import java.time.Instant;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
 @ExtendWith(SpringExtension.class)
 @Import(LocalStackTestConfig.class)
@@ -40,7 +42,13 @@ class AbstractSqsMomProducerTestIT {
     public void init() {
         String topicName = "local-model-test-it";
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         producer = new ProducerTest(sqsClient, topicName, objectMapper);
+    }
+
+    @AfterEach
+    public void cleanup() {
+        sqsClient.purgeQueue(PurgeQueueRequest.builder().queueUrl("local-model-test-it").build());
     }
 
     @Test
@@ -84,6 +92,60 @@ class AbstractSqsMomProducerTestIT {
 
         assertEquals("{\"paId\":\"pa-id-test\"}", res.messages().get(0).body());
 
+    }
+
+    @Test
+    void pushTestGenericWithDelaySecondsNull() {
+        TestEvent message = buildMessageGeneric();
+        MomProducer<TestEvent> producer;
+        String topicName = "local-model-test-it";
+        ObjectMapper objectMapper = new ObjectMapper();
+        producer = new ProducerGenericTest(sqsClient, topicName, objectMapper);
+
+        assertDoesNotThrow(() -> producer.push(message, null));
+
+        GetQueueUrlResponse resqurl = sqsClient.getQueueUrl(GetQueueUrlRequest.builder()
+                .queueName("local-model-test-it")
+                .build());
+
+        System.out.println(resqurl.queueUrl());
+
+        ReceiveMessageResponse res = sqsClient.receiveMessage(ReceiveMessageRequest.builder()
+                .queueUrl(resqurl.queueUrl())
+                .build());
+
+        assertEquals("{\"paId\":\"pa-id-test\"}", res.messages().get(0).body());
+
+    }
+
+    @Test
+    void pushTestGenericWithDelaySecondsNotNull() {
+        TestEvent message = buildMessageGeneric();
+        MomProducer<TestEvent> producer;
+        String topicName = "local-model-test-it";
+        var delayaSeconds = 1;
+        ObjectMapper objectMapper = new ObjectMapper();
+        producer = new ProducerGenericTest(sqsClient, topicName, objectMapper);
+
+        assertDoesNotThrow(() -> producer.push(message, delayaSeconds));
+
+        GetQueueUrlResponse resqurl = sqsClient.getQueueUrl(GetQueueUrlRequest.builder()
+                .queueName("local-model-test-it")
+                .build());
+
+        System.out.println(resqurl.queueUrl());
+
+        await().atMost(3, SECONDS)
+                .pollInterval(Duration.ofMillis(500))
+                .untilAsserted(() -> {
+                    ReceiveMessageResponse res = sqsClient.receiveMessage(ReceiveMessageRequest.builder()
+                            .queueUrl(resqurl.queueUrl())
+                            .build());
+
+                    assertNotEquals(0, res.messages().size());
+
+                    assertEquals("{\"paId\":\"pa-id-test\"}", res.messages().get(0).body());
+                });
 
     }
 

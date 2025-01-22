@@ -36,6 +36,18 @@ class AbstractSqsFifoMomProducerTest {
         assertDoesNotThrow(() -> producer.push(message));
     }
 
+    @Test
+    void pushTestWithDelaySecondsNull() {
+        PnDeliveryNotificationViewedEvent message = buildMessage();
+        assertDoesNotThrow(() -> producer.push(message, null));
+    }
+
+    @Test
+    void pushTestWithDelaySecondsNotNull() {
+        PnDeliveryNotificationViewedEvent message = buildMessage();
+        assertDoesNotThrow(() -> producer.push(message, 1));
+    }
+
 
     @Test
     void pushTestFail() {
