@@ -49,4 +49,10 @@ public abstract class AbstractSqsFifoMomProducer<T extends GenericFifoEvent> ext
         }
         log.info("Inserted data in SQS {}", this.topic);
     }
+
+    @Override
+    public void push(List<T> msges, Integer delaySeconds) {
+        log.warn("FIFO queues don't support timers on individual messages, delaySeconds ignored");
+        push(msges);
+    }
 }
