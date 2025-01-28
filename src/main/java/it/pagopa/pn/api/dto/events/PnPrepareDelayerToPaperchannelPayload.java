@@ -10,6 +10,6 @@ public class PnPrepareDelayerToPaperchannelPayload {
 
     private String requestId;
     private String iun;
-    private int attemptRetry;
+    private int attempt;
     private String clientId;
 }
