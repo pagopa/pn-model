@@ -29,5 +29,7 @@ public class PnDeliveryNotificationViewedEvent implements GenericFifoEvent<Stand
         private String iun;
         private int recipientIndex;
         private NotificationViewDelegateInfo delegateInfo;
+        private String sourceChannel;
+        private String sourceChannelDetails;
     }
 }
