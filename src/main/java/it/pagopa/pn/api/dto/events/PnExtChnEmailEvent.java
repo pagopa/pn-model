@@ -2,7 +2,7 @@ package it.pagopa.pn.api.dto.events;
 
 import lombok.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 @Builder
 @Getter
