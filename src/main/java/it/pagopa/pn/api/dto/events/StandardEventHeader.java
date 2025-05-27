@@ -3,7 +3,7 @@ package it.pagopa.pn.api.dto.events;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 
 @NoArgsConstructor
 @AllArgsConstructor
