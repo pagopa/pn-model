@@ -24,13 +24,17 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
     protected final String queueUrl;
     protected final String topic;
 
-    protected AbstractSqsMomProducer(SqsClient sqsClient, String topic, ObjectMapper objectMapper, Class<T> msgClass) {
+    public AbstractSqsMomProducer(SqsClient sqsClient, String topic, String queueUrl, ObjectMapper objectMapper, Class<T> msgClass) {
         this.sqsClient = sqsClient;
         Class<?> payloadClass = getPayloadClass(msgClass);
         this.objectWriter = objectMapper.writerFor(payloadClass);
 
         this.topic = topic;
-        this.queueUrl = getQueueUrl(sqsClient, topic);
+        this.queueUrl = queueUrl == null ? getQueueUrl(sqsClient, topic) : queueUrl;
+    }
+
+    protected AbstractSqsMomProducer(SqsClient sqsClient, String topic, ObjectMapper objectMapper, Class<T> msgClass) {
+        this(sqsClient, topic, null, objectMapper, msgClass);
     }
 
     @NotNull
