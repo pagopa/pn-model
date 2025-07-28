@@ -15,5 +15,8 @@ public class PnPreparePaperchannelToDelayerPayload {
     private String tenderId;
     private String recipientId;
     private String unifiedDeliveryDriver;
+    private Integer attempt;
+    private String notificationSentAt;
+    private String prepareRequestDate;
     private PnAddressItem recipientNormalizedAddress;
 }
