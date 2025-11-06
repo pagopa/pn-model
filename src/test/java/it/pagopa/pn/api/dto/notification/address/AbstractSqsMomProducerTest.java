@@ -12,6 +12,7 @@ import software.amazon.awssdk.services.sqs.SqsClient;
 import software.amazon.awssdk.services.sqs.model.*;
 
 import java.time.Instant;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -23,11 +24,12 @@ class AbstractSqsMomProducerTest {
 
     SqsClient sqsClient;
 
+    final ObjectMapper objectMapper = new ObjectMapper();
+
     @BeforeEach
-    public void init() {
+    void init() {
         sqsClient = new SqsClientTest();
         String topicName = "topic-test";
-        ObjectMapper objectMapper = new ObjectMapper();
         producer = new ProducerTest(sqsClient, topicName, objectMapper);
     }
 
@@ -43,14 +45,21 @@ class AbstractSqsMomProducerTest {
         PnDeliveryNewNotificationEvent message = buildMessage();
         SqsClientTestFail sqsClientFail = new SqsClientTestFail();
         String topicName = "topic-test";
-        ObjectMapper objectMapper = new ObjectMapper();
         ProducerTest producer = new ProducerTest(sqsClientFail, topicName, objectMapper);
-        assertThrows((SQSSendMessageException.class),() -> producer.push(message));
+        assertThrows((SdkClientException.class),() -> producer.push(message));
+    }
+
+    @Test
+    void pushBatchTestFail() {
+        PnDeliveryNewNotificationEvent message = buildMessage();
+        SqsClientTestFail sqsClientFail = new SqsClientTestFail();
+        String topicName = "topic-test";
+        ProducerTest producer = new ProducerTest(sqsClientFail, topicName, objectMapper);
+        assertThrows((SQSSendMessageException.class),() -> producer.push(List.of(message)));
     }
 
     @Test
     void failedInitializationTest() {
-        ObjectMapper objectMapper = new ObjectMapper();
         assertThrows(
                 PayloadClassLoadingException.class,
                 () -> new ProducerFailedTest(sqsClient, "aTopic", objectMapper)
@@ -118,6 +127,11 @@ class AbstractSqsMomProducerTest {
         public SendMessageBatchResponse sendMessageBatch(SendMessageBatchRequest sendMessageBatchRequest) throws      AwsServiceException, SdkClientException {
             return SendMessageBatchResponse.builder().build();
         }
+
+        @Override
+        public  SendMessageResponse sendMessage(SendMessageRequest sendMessageRequest) throws InvalidMessageContentsException, software.amazon.awssdk.services.sqs.model.UnsupportedOperationException, AwsServiceException, SdkClientException, SqsException {
+            return SendMessageResponse.builder().build();
+        }
     }
 
 
@@ -146,6 +160,11 @@ class AbstractSqsMomProducerTest {
                             .message("errore codice 1")
                             .build())
                     .build();
+        }
+
+        @Override
+        public  SendMessageResponse sendMessage(SendMessageRequest sendMessageRequest) throws InvalidMessageContentsException, software.amazon.awssdk.services.sqs.model.UnsupportedOperationException, AwsServiceException, SdkClientException, SqsException {
+            throw SdkClientException.create("error");
         }
     }
 }

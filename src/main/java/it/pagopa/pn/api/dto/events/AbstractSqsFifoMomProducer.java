@@ -1,13 +1,9 @@
 package it.pagopa.pn.api.dto.events;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import it.pagopa.pn.api.dto.exception.SQSSendMessageException;
 import lombok.extern.slf4j.Slf4j;
 import software.amazon.awssdk.services.sqs.SqsClient;
-import software.amazon.awssdk.services.sqs.model.BatchResultErrorEntry;
-import software.amazon.awssdk.services.sqs.model.SendMessageBatchRequest;
-import software.amazon.awssdk.services.sqs.model.SendMessageBatchRequestEntry;
-import software.amazon.awssdk.services.sqs.model.SendMessageBatchResponse;
+import software.amazon.awssdk.services.sqs.model.*;
 
 import java.util.List;
 
@@ -18,35 +14,26 @@ public abstract class AbstractSqsFifoMomProducer<T extends GenericFifoEvent> ext
         super(sqsClient, topic, objectMapper, msgClass);
     }
 
+    protected AbstractSqsFifoMomProducer(SqsClient sqsClient, String topic, ObjectMapper objectMapper, Class<T> msgClass, int retriesForBatch) {
+        super(sqsClient, topic, objectMapper, msgClass, retriesForBatch);
+    }
+
     @Override
     public void push(List<T> msges) {
-        log.debug("Inserting data {} in SQS {}", msges, topic);
-        SendMessageBatchResponse response = sqsClient.sendMessageBatch(SendMessageBatchRequest.builder()
-                .queueUrl(this.queueUrl)
-                .entries(msges.stream()
-                        .map(msg -> SendMessageBatchRequestEntry.builder()
-                            .messageBody(toJson(msg.getPayload()))
-                            .id(msg.getHeader().getEventId())
-                            .messageAttributes(getSqSHeader(msg.getHeader()))
-                            .messageGroupId(msg.getMessageGroupId())
-                            .messageDeduplicationId(msg.getMessageDeduplicationId())
-                            .build()
-                        )
-                        .toList())
-                .build());
+        log.debug("Inserting data {} in SQS {} with sendMessageBatch", msges, topic);
 
-        // venivano ignorati silentemente eventuali errori di invio
-        if (response.hasFailed())
-        {
-            StringBuilder builder = new StringBuilder();
-            for (BatchResultErrorEntry fail :response.failed()) {
-                builder.append(fail.code());
-                builder.append("-");
-                builder.append(fail.message());
-                builder.append(";");
-            }
-            throw new SQSSendMessageException(builder.toString());
-        }
+        List<SendMessageBatchRequestEntry> entries = msges.stream()
+                .map(msg -> SendMessageBatchRequestEntry.builder()
+                        .messageBody(toJson(msg.getPayload()))
+                        .id(msg.getHeader().getEventId())
+                        .messageAttributes(getSqSHeader(msg.getHeader()))
+                        .messageGroupId(msg.getMessageGroupId())
+                        .messageDeduplicationId(msg.getMessageDeduplicationId())
+                        .build()
+                )
+                .toList();
+
+        pushInBatch(entries, 1);
         log.info("Inserted data in SQS {}", this.topic);
     }
 
@@ -54,5 +41,26 @@ public abstract class AbstractSqsFifoMomProducer<T extends GenericFifoEvent> ext
     public void push(List<T> msges, Integer delaySeconds) {
         log.warn("FIFO queues don't support timers on individual messages, delaySeconds ignored");
         push(msges);
+    }
+
+    @Override
+    public void push(T message) {
+        log.debug("Inserting data {} in SQS {} with sendMessage", message, topic);
+        SendMessageRequest request = SendMessageRequest.builder()
+                .queueUrl(this.queueUrl)
+                .messageBody(toJson(message.getPayload()))
+                .messageAttributes(getSqSHeader(message.getHeader()))
+                .messageGroupId(message.getMessageGroupId())
+                .messageDeduplicationId(message.getMessageDeduplicationId())
+                .build();
+
+        sqsClient.sendMessage(request);
+        log.info("Inserted data in SQS {}", this.topic);
+    }
+
+    @Override
+    public void push(T message, Integer delaySeconds) {
+        log.warn("FIFO queues don't support timers on individual messages, delaySeconds ignored");
+        push(message);
     }
 }

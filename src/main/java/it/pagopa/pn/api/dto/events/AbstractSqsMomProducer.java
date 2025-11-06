@@ -13,16 +13,22 @@ import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static it.pagopa.pn.api.dto.events.StandardEventHeader.*;
 
 @Slf4j
 public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements MomProducer<T> {
 
+    // n di tentativi dopo che la sendMessageBatch fallisce per alcuni messaggi
+    protected static final Integer N_RETRY_ATTEMPTS = 0;
+
     protected final SqsClient sqsClient;
     private final ObjectWriter objectWriter;
     protected final String queueUrl;
     protected final String topic;
+    protected int retriesForBatch = N_RETRY_ATTEMPTS;
 
     protected AbstractSqsMomProducer(SqsClient sqsClient, String topic, String queueUrl, ObjectMapper objectMapper, Class<T> msgClass) {
         this.sqsClient = sqsClient;
@@ -35,6 +41,11 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
 
     protected AbstractSqsMomProducer(SqsClient sqsClient, String topic, ObjectMapper objectMapper, Class<T> msgClass) {
         this(sqsClient, topic, null, objectMapper, msgClass);
+    }
+
+    protected AbstractSqsMomProducer(SqsClient sqsClient, String topic, ObjectMapper objectMapper, Class<T> msgClass, int retriesForBatch) {
+        this(sqsClient, topic, null, objectMapper, msgClass);
+        this.retriesForBatch = retriesForBatch;
     }
 
     @NotNull
@@ -57,32 +68,80 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
 
     @Override
     public void push(List<T> msges, Integer delaySeconds) {
-        log.debug("Inserting data {} in SQS {}", msges, topic);
+        log.debug("Inserting data {} in SQS {} with sendMessageBatch", msges, topic);
+
+        List<SendMessageBatchRequestEntry> entries = msges.stream()
+                .map(msg -> SendMessageBatchRequestEntry.builder()
+                        .messageBody(toJson(msg.getPayload()))
+                        .id(msg.getHeader().getEventId())
+                        .messageAttributes(getSqSHeader(msg.getHeader()))
+                        .delaySeconds(delaySeconds)
+                        .build()
+                )
+                .toList();
+
+        pushInBatch(entries, 1);
+        log.info("Inserted data in SQS {}", this.topic);
+    }
+
+    protected void pushInBatch(List<SendMessageBatchRequestEntry> entries, int attempt) {
+
         SendMessageBatchResponse response = sqsClient.sendMessageBatch(SendMessageBatchRequest.builder()
                 .queueUrl(this.queueUrl)
-                .entries(msges.stream()
-                        .map(msg -> SendMessageBatchRequestEntry.builder()
-                                .messageBody(toJson(msg.getPayload()))
-                                .id(msg.getHeader().getEventId())
-                                .messageAttributes(getSqSHeader(msg.getHeader()))
-                                .delaySeconds(delaySeconds)
-                                .build()
-                        )
-                        .toList())
+                .entries(entries)
                 .build());
 
-        // venivano ignorati silentemente eventuali errori di invio
-        if (response.hasFailed())
-        {
-            StringBuilder builder = new StringBuilder();
-            for (BatchResultErrorEntry fail :response.failed()) {
-                builder.append(fail.code());
-                builder.append("-");
-                builder.append(fail.message());
-                builder.append(";");
+        if(response.hasFailed()) {
+            if(attempt <= N_RETRY_ATTEMPTS) {
+                log.warn("Some messages failed to be sent to SQS {}, attempt {}/{}", this.topic, attempt + 1, N_RETRY_ATTEMPTS);
+                Set<String> failedIds = response.failed().stream()
+                        .map(BatchResultErrorEntry::id)
+                        .collect(Collectors.toSet());
+                entries = entries.stream()
+                        .filter(entry -> failedIds.contains(entry.id()))
+                        .toList();
+
+                doBackoff(attempt);
+                pushInBatch(entries, attempt + 1);
             }
-            throw new SQSSendMessageException(builder.toString());
+            else {
+                log.warn("Some messages failed to be sent to SQS {}, retries terminated {}/{}", this.topic, attempt + 1, N_RETRY_ATTEMPTS);
+                StringBuilder builder = new StringBuilder();
+                for (BatchResultErrorEntry fail :response.failed()) {
+                    builder.append(fail.code());
+                    builder.append("-");
+                    builder.append(fail.message());
+                    builder.append(";");
+                }
+                throw new SQSSendMessageException(builder.toString());
+            }
         }
+    }
+
+    private void doBackoff(int attempt) {
+        try {
+            Thread.sleep(200L * (attempt + 1));
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    @Override
+    public void push(T message) {
+        push(message, null);
+    }
+
+    @Override
+    public void push(T message, Integer delaySeconds) {
+        log.debug("Inserting data {} in SQS {} with sendMessage", message, topic);
+        SendMessageRequest request = SendMessageRequest.builder()
+                .queueUrl(this.queueUrl)
+                .messageBody(toJson(message.getPayload()))
+                .messageAttributes(getSqSHeader(message.getHeader()))
+                .delaySeconds(delaySeconds)
+                .build();
+
+        sqsClient.sendMessage(request);
         log.info("Inserted data in SQS {}", this.topic);
     }
 
