@@ -26,10 +26,11 @@ class AbstractSqsMomProducerTest {
 
     final ObjectMapper objectMapper = new ObjectMapper();
 
+    final String topicName = "topic-test";
+
     @BeforeEach
     void init() {
         sqsClient = new SqsClientTest();
-        String topicName = "topic-test";
         producer = new ProducerTest(sqsClient, topicName, objectMapper);
     }
 
@@ -37,6 +38,21 @@ class AbstractSqsMomProducerTest {
     void pushTest() {
         PnDeliveryNewNotificationEvent message = buildMessage();
         assertDoesNotThrow(() -> producer.push(message));
+    }
+
+    @Test
+    void pushBatchTest() {
+        PnDeliveryNewNotificationEvent message = buildMessage();
+        PnDeliveryNewNotificationEvent messageTwo = buildMessage();
+        assertDoesNotThrow(() -> producer.push(List.of(message, messageTwo)));
+    }
+
+    @Test
+    void pushBatchWithRetriesTest() {
+        MomProducer<PnDeliveryNewNotificationEvent> producerRetrievable = new ProducerTest(sqsClient, topicName, objectMapper, 1);
+        PnDeliveryNewNotificationEvent message = buildMessage();
+        PnDeliveryNewNotificationEvent messageTwo = buildMessage();
+        assertDoesNotThrow(() -> producerRetrievable.push(List.of(message, messageTwo)));
     }
 
 
@@ -67,11 +83,12 @@ class AbstractSqsMomProducerTest {
     }
 
     private PnDeliveryNewNotificationEvent buildMessage() {
+        Instant now = Instant.now();
         return PnDeliveryNewNotificationEvent.builder()
                 .header(StandardEventHeader.builder()
-                        .iun("test-iun")
-                        .eventId("event-id-test")
-                        .createdAt(Instant.now())
+                        .iun("test-iun-".concat(String.valueOf(now.toEpochMilli())))
+                        .eventId("event-id-test".concat(String.valueOf(now.toEpochMilli())))
+                        .createdAt(now)
                         .eventType("event-type-test")
                         .build())
                 .payload(PnDeliveryNewNotificationEvent.Payload.builder().paId("pa-id-test").build())
@@ -83,6 +100,10 @@ class AbstractSqsMomProducerTest {
 
         protected ProducerTest(SqsClient sqsClient, String topic, ObjectMapper objectMapper) {
             super(sqsClient, topic, objectMapper, PnDeliveryNewNotificationEvent.class);
+        }
+
+        protected ProducerTest(SqsClient sqsClient, String topic, ObjectMapper objectMapper, int retriesForBatch) {
+            super(sqsClient, topic, objectMapper, PnDeliveryNewNotificationEvent.class, retriesForBatch);
         }
     }
 
