@@ -60,27 +60,24 @@ class AbstractSqsMomProducerTest {
     void pushTestFail() {
         PnDeliveryNewNotificationEvent message = buildMessage();
         SqsClientTestFail sqsClientFail = new SqsClientTestFail();
-        String topicName = "topic-test";
-        ProducerTest producer = new ProducerTest(sqsClientFail, topicName, objectMapper);
-        assertThrows((SdkClientException.class),() -> producer.push(message));
+        ProducerTest producerFailed = new ProducerTest(sqsClientFail, topicName, objectMapper);
+        assertThrows((SdkClientException.class),() -> producerFailed.push(message));
     }
 
     @Test
     void pushBatchTestFail() {
         PnDeliveryNewNotificationEvent message = buildMessage();
         SqsClientTestFail sqsClientFail = new SqsClientTestFail();
-        String topicName = "topic-test";
-        ProducerTest producer = new ProducerTest(sqsClientFail, topicName, objectMapper);
-        assertThrows((SQSSendMessageException.class),() -> producer.push(List.of(message)));
+        ProducerTest producerFailed = new ProducerTest(sqsClientFail, topicName, objectMapper);
+        assertThrows((SQSSendMessageException.class),() -> producerFailed.push(List.of(message)));
     }
 
     @Test
     void pushBatchWithRetriesTestFail() {
         PnDeliveryNewNotificationEvent message = buildMessage();
         SqsClientTestFail sqsClientFail = new SqsClientTestFail();
-        String topicName = "topic-test";
-        ProducerTest producer = new ProducerTest(sqsClientFail, topicName, objectMapper, 1);
-        assertThrows((SQSSendMessageException.class),() -> producer.push(List.of(message)));
+        ProducerTest producerRetriable = new ProducerTest(sqsClientFail, topicName, objectMapper, 1);
+        assertThrows((SQSSendMessageException.class),() -> producerRetriable.push(List.of(message)));
     }
 
     @Test

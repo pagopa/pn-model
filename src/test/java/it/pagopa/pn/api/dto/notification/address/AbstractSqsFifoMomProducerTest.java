@@ -24,11 +24,11 @@ class AbstractSqsFifoMomProducerTest {
     SqsClient sqsClient;
 
     final ObjectMapper objectMapper = new ObjectMapper();
+    final String topicName = "topic-test";
 
     @BeforeEach
     void init() {
         sqsClient = new SqsClientTest();
-        String topicName = "topic-test";
         producer = new ProducerTest(sqsClient, topicName, objectMapper);
     }
 
@@ -46,7 +46,7 @@ class AbstractSqsFifoMomProducerTest {
 
     @Test
     void pushBatchWithRetriesTest() {
-        var producerRetrievable = new ProducerTest(sqsClient, "topic-test", objectMapper, 1);
+        var producerRetrievable = new ProducerTest(sqsClient, topicName, objectMapper, 1);
         PnDeliveryNotificationViewedEvent message = buildMessage();
         assertDoesNotThrow(() -> producerRetrievable.push(List.of(message)));
     }
@@ -68,18 +68,16 @@ class AbstractSqsFifoMomProducerTest {
     void pushTestFail() {
         PnDeliveryNotificationViewedEvent message = buildMessage();
         SqsClientTestFail sqsClientFail = new SqsClientTestFail();
-        String topicName = "topic-test";
-        ProducerTest producer = new ProducerTest(sqsClientFail, topicName, objectMapper);
-        assertThrows((SdkClientException.class),() -> producer.push(message));
+        ProducerTest producerFailed = new ProducerTest(sqsClientFail, topicName, objectMapper);
+        assertThrows((SdkClientException.class),() -> producerFailed.push(message));
     }
 
     @Test
     void pushBatchTestFail() {
         PnDeliveryNotificationViewedEvent message = buildMessage();
         SqsClientTestFail sqsClientFail = new SqsClientTestFail();
-        String topicName = "topic-test";
-        ProducerTest producer = new ProducerTest(sqsClientFail, topicName, objectMapper);
-        assertThrows((SQSSendMessageException.class),() -> producer.push(List.of(message)));
+        ProducerTest producerFailed = new ProducerTest(sqsClientFail, topicName, objectMapper);
+        assertThrows((SQSSendMessageException.class),() -> producerFailed.push(List.of(message)));
     }
 
     private PnDeliveryNotificationViewedEvent buildMessage() {
