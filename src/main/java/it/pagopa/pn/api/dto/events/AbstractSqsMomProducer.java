@@ -108,6 +108,8 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
                 log.warn("Some messages failed to be sent to SQS {}, retries terminated {}/{}", this.topic, attempt + 1, N_RETRY_ATTEMPTS);
                 StringBuilder builder = new StringBuilder();
                 for (BatchResultErrorEntry fail :response.failed()) {
+                    builder.append(fail.id());
+                    builder.append("-");
                     builder.append(fail.code());
                     builder.append("-");
                     builder.append(fail.message());
