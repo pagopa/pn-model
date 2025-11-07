@@ -92,8 +92,8 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
                 .build());
 
         if(response.hasFailed()) {
-            if(attempt <= N_RETRY_ATTEMPTS) {
-                log.warn("Some messages failed to be sent to SQS {}, attempt {}/{}", this.topic, attempt + 1, N_RETRY_ATTEMPTS);
+            if(attempt <= retriesForBatch) {
+                log.warn("Some messages failed to be sent to SQS {}, attempt {}/{}", this.topic, attempt, retriesForBatch);
                 Set<String> failedIds = response.failed().stream()
                         .map(BatchResultErrorEntry::id)
                         .collect(Collectors.toSet());
@@ -105,7 +105,7 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
                 pushInBatch(entries, attempt + 1);
             }
             else {
-                log.warn("Some messages failed to be sent to SQS {}, retries terminated {}/{}", this.topic, attempt + 1, N_RETRY_ATTEMPTS);
+                log.warn("Some messages failed to be sent to SQS {}, retries terminated {}/{}", this.topic, attempt, retriesForBatch);
                 StringBuilder builder = new StringBuilder();
                 for (BatchResultErrorEntry fail :response.failed()) {
                     builder.append(fail.id());

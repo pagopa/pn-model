@@ -75,6 +75,15 @@ class AbstractSqsMomProducerTest {
     }
 
     @Test
+    void pushBatchWithRetriesTestFail() {
+        PnDeliveryNewNotificationEvent message = buildMessage();
+        SqsClientTestFail sqsClientFail = new SqsClientTestFail();
+        String topicName = "topic-test";
+        ProducerTest producer = new ProducerTest(sqsClientFail, topicName, objectMapper, 1);
+        assertThrows((SQSSendMessageException.class),() -> producer.push(List.of(message)));
+    }
+
+    @Test
     void failedInitializationTest() {
         assertThrows(
                 PayloadClassLoadingException.class,
@@ -111,6 +120,10 @@ class AbstractSqsMomProducerTest {
 
         protected ProducerFailedTest(SqsClient sqsClient, String topic, ObjectMapper objectMapper) {
             super(sqsClient, topic, objectMapper, EventWithoutPayload.class);
+        }
+
+        protected ProducerFailedTest(SqsClient sqsClient, String topic, ObjectMapper objectMapper, int retriesForBatch) {
+            super(sqsClient, topic, objectMapper, EventWithoutPayload.class, retriesForBatch);
         }
     }
 

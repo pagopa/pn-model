@@ -39,6 +39,19 @@ class AbstractSqsFifoMomProducerTest {
     }
 
     @Test
+    void pushBatchTest() {
+        PnDeliveryNotificationViewedEvent message = buildMessage();
+        assertDoesNotThrow(() -> producer.push(List.of(message)));
+    }
+
+    @Test
+    void pushBatchWithRetriesTest() {
+        var producerRetrievable = new ProducerTest(sqsClient, "topic-test", objectMapper, 1);
+        PnDeliveryNotificationViewedEvent message = buildMessage();
+        assertDoesNotThrow(() -> producerRetrievable.push(List.of(message)));
+    }
+
+    @Test
     void pushTestWithDelaySecondsNull() {
         PnDeliveryNotificationViewedEvent message = buildMessage();
         assertDoesNotThrow(() -> producer.push(message, null));
@@ -88,6 +101,10 @@ class AbstractSqsFifoMomProducerTest {
 
         protected ProducerTest(SqsClient sqsClient, String topic, ObjectMapper objectMapper) {
             super(sqsClient, topic, objectMapper, PnDeliveryNotificationViewedEvent.class);
+        }
+
+        protected ProducerTest(SqsClient sqsClient, String topic, ObjectMapper objectMapper, int retriesForBatch) {
+            super(sqsClient, topic, objectMapper, PnDeliveryNotificationViewedEvent.class, retriesForBatch);
         }
     }
 
