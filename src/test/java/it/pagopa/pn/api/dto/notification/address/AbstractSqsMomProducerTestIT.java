@@ -24,6 +24,7 @@ import software.amazon.awssdk.services.sqs.model.*;
 import java.net.URI;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.List;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.jupiter.api.Assertions.*;
@@ -39,7 +40,7 @@ class AbstractSqsMomProducerTestIT {
     SqsClient sqsClient;
 
     @BeforeEach
-    public void init() {
+    void init() {
         String topicName = "local-model-test-it";
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
@@ -47,7 +48,7 @@ class AbstractSqsMomProducerTestIT {
     }
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         sqsClient.purgeQueue(PurgeQueueRequest.builder().queueUrl("local-model-test-it").build());
     }
 
@@ -152,7 +153,14 @@ class AbstractSqsMomProducerTestIT {
     @Test
     void pushTestNoIUN() {
         PnDeliveryNewNotificationEvent message = buildMessageNOIUN();
-        assertThrows((SQSSendMessageException.class), () -> producer.push(message));
+        assertThrows((SqsException.class), () -> producer.push(message));
+
+    }
+
+    @Test
+    void pushBatchTestNoIUN() {
+        PnDeliveryNewNotificationEvent message = buildMessageNOIUN();
+        assertThrows((SQSSendMessageException.class), () -> producer.push(List.of(message)));
 
     }
 

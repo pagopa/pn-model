@@ -12,6 +12,7 @@ import software.amazon.awssdk.services.sqs.SqsClient;
 import software.amazon.awssdk.services.sqs.model.*;
 
 import java.time.Instant;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -23,11 +24,13 @@ class AbstractSqsMomProducerTest {
 
     SqsClient sqsClient;
 
+    final ObjectMapper objectMapper = new ObjectMapper();
+
+    final String topicName = "topic-test";
+
     @BeforeEach
-    public void init() {
+    void init() {
         sqsClient = new SqsClientTest();
-        String topicName = "topic-test";
-        ObjectMapper objectMapper = new ObjectMapper();
         producer = new ProducerTest(sqsClient, topicName, objectMapper);
     }
 
@@ -37,20 +40,48 @@ class AbstractSqsMomProducerTest {
         assertDoesNotThrow(() -> producer.push(message));
     }
 
+    @Test
+    void pushBatchTest() {
+        PnDeliveryNewNotificationEvent message = buildMessage();
+        PnDeliveryNewNotificationEvent messageTwo = buildMessage();
+        assertDoesNotThrow(() -> producer.push(List.of(message, messageTwo)));
+    }
+
+    @Test
+    void pushBatchWithRetriesTest() {
+        MomProducer<PnDeliveryNewNotificationEvent> producerRetrievable = new ProducerTest(sqsClient, topicName, objectMapper, 1);
+        PnDeliveryNewNotificationEvent message = buildMessage();
+        PnDeliveryNewNotificationEvent messageTwo = buildMessage();
+        assertDoesNotThrow(() -> producerRetrievable.push(List.of(message, messageTwo)));
+    }
+
 
     @Test
     void pushTestFail() {
         PnDeliveryNewNotificationEvent message = buildMessage();
         SqsClientTestFail sqsClientFail = new SqsClientTestFail();
-        String topicName = "topic-test";
-        ObjectMapper objectMapper = new ObjectMapper();
-        ProducerTest producer = new ProducerTest(sqsClientFail, topicName, objectMapper);
-        assertThrows((SQSSendMessageException.class),() -> producer.push(message));
+        ProducerTest producerFailed = new ProducerTest(sqsClientFail, topicName, objectMapper);
+        assertThrows((SdkClientException.class),() -> producerFailed.push(message));
+    }
+
+    @Test
+    void pushBatchTestFail() {
+        PnDeliveryNewNotificationEvent message = buildMessage();
+        SqsClientTestFail sqsClientFail = new SqsClientTestFail();
+        ProducerTest producerFailed = new ProducerTest(sqsClientFail, topicName, objectMapper);
+        assertThrows((SQSSendMessageException.class),() -> producerFailed.push(List.of(message)));
+    }
+
+    @Test
+    void pushBatchWithRetriesTestFail() {
+        PnDeliveryNewNotificationEvent message = buildMessage();
+        SqsClientTestFail sqsClientFail = new SqsClientTestFail();
+        ProducerTest producerRetriable = new ProducerTest(sqsClientFail, topicName, objectMapper, 1);
+        assertThrows((SQSSendMessageException.class),() -> producerRetriable.push(List.of(message)));
     }
 
     @Test
     void failedInitializationTest() {
-        ObjectMapper objectMapper = new ObjectMapper();
         assertThrows(
                 PayloadClassLoadingException.class,
                 () -> new ProducerFailedTest(sqsClient, "aTopic", objectMapper)
@@ -58,11 +89,12 @@ class AbstractSqsMomProducerTest {
     }
 
     private PnDeliveryNewNotificationEvent buildMessage() {
+        Instant now = Instant.now();
         return PnDeliveryNewNotificationEvent.builder()
                 .header(StandardEventHeader.builder()
-                        .iun("test-iun")
-                        .eventId("event-id-test")
-                        .createdAt(Instant.now())
+                        .iun("test-iun-".concat(String.valueOf(now.toEpochMilli())))
+                        .eventId("event-id-test".concat(String.valueOf(now.toEpochMilli())))
+                        .createdAt(now)
                         .eventType("event-type-test")
                         .build())
                 .payload(PnDeliveryNewNotificationEvent.Payload.builder().paId("pa-id-test").build())
@@ -75,12 +107,20 @@ class AbstractSqsMomProducerTest {
         protected ProducerTest(SqsClient sqsClient, String topic, ObjectMapper objectMapper) {
             super(sqsClient, topic, objectMapper, PnDeliveryNewNotificationEvent.class);
         }
+
+        protected ProducerTest(SqsClient sqsClient, String topic, ObjectMapper objectMapper, int retriesForBatch) {
+            super(sqsClient, topic, objectMapper, PnDeliveryNewNotificationEvent.class, retriesForBatch);
+        }
     }
 
     private static class ProducerFailedTest extends AbstractSqsMomProducer<EventWithoutPayload> {
 
         protected ProducerFailedTest(SqsClient sqsClient, String topic, ObjectMapper objectMapper) {
             super(sqsClient, topic, objectMapper, EventWithoutPayload.class);
+        }
+
+        protected ProducerFailedTest(SqsClient sqsClient, String topic, ObjectMapper objectMapper, int retriesForBatch) {
+            super(sqsClient, topic, objectMapper, EventWithoutPayload.class, retriesForBatch);
         }
     }
 
@@ -118,6 +158,11 @@ class AbstractSqsMomProducerTest {
         public SendMessageBatchResponse sendMessageBatch(SendMessageBatchRequest sendMessageBatchRequest) throws      AwsServiceException, SdkClientException {
             return SendMessageBatchResponse.builder().build();
         }
+
+        @Override
+        public  SendMessageResponse sendMessage(SendMessageRequest sendMessageRequest) throws InvalidMessageContentsException, software.amazon.awssdk.services.sqs.model.UnsupportedOperationException, AwsServiceException, SdkClientException, SqsException {
+            return SendMessageResponse.builder().build();
+        }
     }
 
 
@@ -146,6 +191,11 @@ class AbstractSqsMomProducerTest {
                             .message("errore codice 1")
                             .build())
                     .build();
+        }
+
+        @Override
+        public  SendMessageResponse sendMessage(SendMessageRequest sendMessageRequest) throws InvalidMessageContentsException, software.amazon.awssdk.services.sqs.model.UnsupportedOperationException, AwsServiceException, SdkClientException, SqsException {
+            throw SdkClientException.create("error");
         }
     }
 }
