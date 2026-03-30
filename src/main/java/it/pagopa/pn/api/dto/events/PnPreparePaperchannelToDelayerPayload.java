@@ -19,4 +19,5 @@ public class PnPreparePaperchannelToDelayerPayload {
     private String notificationSentAt;
     private String prepareRequestDate;
     private PnAddressItem recipientNormalizedAddress;
+    private paperDeliveryCommunicationType communicationType;
 }
