@@ -17,5 +17,6 @@ class EventPublisherTests {
         assertNotNull(EventPublisher.MANDATE);
         assertNotNull(EventPublisher.F24);
         assertNotNull(EventPublisher.RADD_ALT);
+        assertNotNull(EventPublisher.NOTIFICATION_COST_SERVICE);
     }
 }
