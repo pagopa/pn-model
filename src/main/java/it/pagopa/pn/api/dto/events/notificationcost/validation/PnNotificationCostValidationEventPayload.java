@@ -16,5 +16,6 @@ public class PnNotificationCostValidationEventPayload {
     private String iun;
     @NotNull
     private ValidationStatus status;
-
+    @NotNull
+    private UpdateNotificationCostResult updateResults;
 }
