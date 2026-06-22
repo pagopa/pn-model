@@ -26,7 +26,7 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
 
     protected final SqsClient sqsClient;
     private final ObjectWriter objectWriter;
-    protected final String queueUrl;
+    private volatile String queueUrl;
     protected final String topic;
     protected int retriesForBatch = N_RETRY_ATTEMPTS;
 
@@ -36,7 +36,7 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
         this.objectWriter = objectMapper.writerFor(payloadClass);
 
         this.topic = topic;
-        this.queueUrl = queueUrl == null ? getQueueUrl(sqsClient, topic) : queueUrl;
+        this.queueUrl = queueUrl;
     }
 
     protected AbstractSqsMomProducer(SqsClient sqsClient, String topic, ObjectMapper objectMapper, Class<T> msgClass) {
@@ -57,8 +57,17 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
         }
     }
 
-    private String getQueueUrl(SqsClient sqsClient, String topic) {
-        return sqsClient.getQueueUrl(GetQueueUrlRequest.builder().queueName(topic).build()).queueUrl();
+    protected String getQueueUrl() {
+        if (this.queueUrl == null) {
+            synchronized (this) {
+                // Double-check nel caso in cui un altro thread lo abbia valorizzato
+                // mentre questo thread aspettava il lock
+                if (this.queueUrl == null) {
+                    this.queueUrl = sqsClient.getQueueUrl(GetQueueUrlRequest.builder().queueName(topic).build()).queueUrl();
+                }
+            }
+        }
+        return this.queueUrl;
     }
 
     @Override
@@ -87,7 +96,7 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
     protected void pushInBatch(List<SendMessageBatchRequestEntry> entries, int attempt) {
 
         SendMessageBatchResponse response = sqsClient.sendMessageBatch(SendMessageBatchRequest.builder()
-                .queueUrl(this.queueUrl)
+                .queueUrl(getQueueUrl())
                 .entries(entries)
                 .build());
 
@@ -137,7 +146,7 @@ public abstract class AbstractSqsMomProducer<T extends GenericEvent> implements 
     public void push(T message, Integer delaySeconds) {
         log.debug("Inserting data {} in SQS {} with sendMessage", message, topic);
         SendMessageRequest request = SendMessageRequest.builder()
-                .queueUrl(this.queueUrl)
+                .queueUrl(getQueueUrl())
                 .messageBody(toJson(message.getPayload()))
                 .messageAttributes(getSqSHeader(message.getHeader()))
                 .delaySeconds(delaySeconds)
