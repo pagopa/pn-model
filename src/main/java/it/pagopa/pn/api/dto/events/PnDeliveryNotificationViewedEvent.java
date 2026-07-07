@@ -8,7 +8,8 @@ import lombok.*;
 @Builder(toBuilder = true)
 @EqualsAndHashCode
 @ToString
-public class PnDeliveryNotificationViewedEvent implements GenericFifoEvent<StandardEventHeader, PnDeliveryNotificationViewedEvent.Payload> {
+public class PnDeliveryNotificationViewedEvent implements GenericFifoEvent<StandardEventHeader, PnDeliveryNotificationViewedEvent.Payload>,
+        GenericEventBridgeEvent<PnDeliveryNotificationViewedEvent.Payload> {
 
     private StandardEventHeader header;
 
@@ -17,6 +18,11 @@ public class PnDeliveryNotificationViewedEvent implements GenericFifoEvent<Stand
     private String messageDeduplicationId;
 
     private String messageGroupId;
+
+    @Override
+    public Payload getDetail() {
+        return payload;
+    }
 
     @NoArgsConstructor
     @AllArgsConstructor
