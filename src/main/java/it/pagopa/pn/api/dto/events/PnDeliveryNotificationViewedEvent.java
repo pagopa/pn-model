@@ -2,6 +2,8 @@ package it.pagopa.pn.api.dto.events;
 
 import lombok.*;
 
+import java.time.Instant;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -35,6 +37,7 @@ public class PnDeliveryNotificationViewedEvent implements GenericFifoEvent<Stand
         private String iun;
         private int recipientIndex;
         private NotificationViewDelegateInfo delegateInfo;
+        private Instant viewedDate;
         private String sourceChannel;
         private String sourceChannelDetails;
     }
