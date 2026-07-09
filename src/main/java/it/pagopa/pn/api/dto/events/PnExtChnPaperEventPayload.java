@@ -8,8 +8,8 @@ package it.pagopa.pn.api.dto.events;
 import it.pagopa.pn.api.dto.notification.address.PhysicalAddress;
 import lombok.*;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 /**
  *
