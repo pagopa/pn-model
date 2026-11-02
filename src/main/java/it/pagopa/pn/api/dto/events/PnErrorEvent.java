@@ -42,6 +42,6 @@ public class PnErrorEvent implements GenericEvent<StandardEventHeader, PnErrorEv
     @EqualsAndHashCode
     public static class Detail {
         String clientId;
-        Payload PnErrorEventPayload;
+        Payload pnErrorEventPayload;
     }
 }
