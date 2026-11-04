@@ -21,7 +21,7 @@ public enum EventType implements IEventType {
     PREPARE_DELAYER_TO_PAPERCHANNEL (PnPrepareDelayerToPaperchannelEvent.class),
     NOTICE_PAYMENT (PnNoticePaymentEvent.class),
     NOTICE_PAYMENT_PAID(PnNoticePaymentPaidEvent.class),
-    ERROR_EVENT (PnErrorEvent.class);
+    ERROR_EVENT (PnErrorEvent.class),
     PT_DELEGATION_CHANGED (PnPtDelegationEvent.class);
     
     private final Class<?> eventClass;
