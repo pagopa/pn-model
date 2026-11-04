@@ -22,5 +22,8 @@ class EventTypeTests {
         assertNotNull(EventType.SEND_ATTACHMENTS_CONFIG);
         assertNotNull(EventType.PREPARE_PAPERCHANNEL_TO_DELAYER);
         assertNotNull(EventType.PREPARE_DELAYER_TO_PAPERCHANNEL);
+        assertNotNull(EventType.NOTICE_PAYMENT);
+        assertNotNull(EventType.NOTICE_PAYMENT_PAID);
+        assertNotNull(EventType.ERROR_EVENT);
     }
 }
