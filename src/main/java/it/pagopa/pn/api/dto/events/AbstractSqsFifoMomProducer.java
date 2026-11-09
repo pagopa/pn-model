@@ -47,7 +47,7 @@ public abstract class AbstractSqsFifoMomProducer<T extends GenericFifoEvent> ext
     public void push(T message) {
         log.debug("Inserting data {} in SQS {} with sendMessage", message, topic);
         SendMessageRequest request = SendMessageRequest.builder()
-                .queueUrl(this.queueUrl)
+                .queueUrl(getQueueUrl())
                 .messageBody(toJson(message.getPayload()))
                 .messageAttributes(getSqSHeader(message.getHeader()))
                 .messageGroupId(message.getMessageGroupId())

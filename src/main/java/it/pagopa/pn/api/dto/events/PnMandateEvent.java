@@ -2,7 +2,7 @@ package it.pagopa.pn.api.dto.events;
 
 import lombok.*;
 
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 import java.time.Instant;
 import java.util.Set;
 
