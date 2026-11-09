@@ -10,9 +10,9 @@ import java.time.Instant;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-public class PnErrorEvent implements GenericEvent<StandardEventHeader, PnErrorEvent.Payload>, GenericEventBridgeEvent<PnErrorEvent.Detail> {
+public class PnErrorEvent implements GenericEvent<GenericEventHeader, PnErrorEvent.Payload>, GenericEventBridgeEvent<PnErrorEvent.Detail> {
 
-    private StandardEventHeader header;
+    private GenericEventHeader header;
 
     private PnErrorEvent.Payload payload;
 
