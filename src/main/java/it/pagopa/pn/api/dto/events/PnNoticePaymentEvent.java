@@ -3,6 +3,7 @@ package it.pagopa.pn.api.dto.events;
 import lombok.*;
 
 import java.time.Instant;
+import java.time.LocalDate;
 
 @Getter
 @Builder
@@ -43,7 +44,7 @@ public class PnNoticePaymentEvent implements GenericEvent<GenericEventHeader, Pn
 
         private Instant paymentDateTime;
 
-        private Instant dueDate;
+        private LocalDate dueDate;
 
         private Integer totalNotice;
 
