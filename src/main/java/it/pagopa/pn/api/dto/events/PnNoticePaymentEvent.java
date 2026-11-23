@@ -30,40 +30,55 @@ public class PnNoticePaymentEvent implements GenericEvent<GenericEventHeader, Pn
     @AllArgsConstructor
     public static class Payload {
 
+        @ToString.Exclude
         private String modelType;
 
+        @ToString.Exclude
         private String iuv;
 
+        @ToString.Exclude
         private String iur;
 
         private String noticeCode;
 
         private String creditorTaxId;
 
+        @ToString.Exclude
         private String creditorCompanyName;
 
+        @ToString.Exclude
         private Instant paymentDateTime;
 
+        @ToString.Exclude
         private LocalDate dueDate;
 
+        @ToString.Exclude
         private Integer totalNotice;
 
+        @ToString.Exclude
         private String paymentSourceChannel;
 
+        @ToString.Exclude
         private Integer amount;
 
+        @ToString.Exclude
         private String paymentMethod;
 
+        @ToString.Exclude
         private String fee;
 
         private String paymentId;
 
+        @ToString.Exclude
         private Instant pagopaPersistedTimestamp;
 
+        @ToString.Exclude
         private Instant pagopaPublishedTimestamp;
 
+        @ToString.Exclude
         private Instant sendIngestionTimestamp;
 
+        @ToString.Exclude
         private String kafkaPartition;
     }
 
